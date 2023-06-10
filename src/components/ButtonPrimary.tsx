@@ -1,10 +1,12 @@
 "use client"
 
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 
-export function ButtonPrimary() {
+type ButtonPrimaryTypes = ButtonProps & {}
+
+export function ButtonPrimary({ ...rest }: ButtonPrimaryTypes) {
   return (
-    <Button w="12rem" h="3.4rem" borderRadius="xl" bg="#112126ff" color="white" textTransform="uppercase">
+    <Button w="12rem" h="3.4rem" borderRadius="xl" bg="#112126ff" color="white" textTransform="uppercase" {...rest}>
       Contato
     </Button>
   )

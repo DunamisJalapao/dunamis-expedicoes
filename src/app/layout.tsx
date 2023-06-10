@@ -8,7 +8,6 @@ export const metadata = {
   description: 'A sua agência de turismo',
 }
 
-
 export default function RootLayout({
   children,
 }: {

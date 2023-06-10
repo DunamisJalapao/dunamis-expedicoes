@@ -1,10 +1,12 @@
 "use client"
 
-import { Flex } from "@chakra-ui/react";
+import { Flex, FlexProps } from "@chakra-ui/react";
 
-export function Itineraries() {
+type ItinerariesType = FlexProps & {}
+
+export function Itineraries({ ...rest }) {
   return (
-    <Flex w="100vw" h="100vh" bg="pink.100">
+    <Flex w="100vw" h="100vh" bg="pink.100" {...rest}>
 
     </Flex>
   )

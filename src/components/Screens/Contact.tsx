@@ -1,10 +1,12 @@
 "use client"
 
-import { Flex } from "@chakra-ui/react";
+import { Flex, FlexProps } from "@chakra-ui/react";
 
-export function Contact() {
+type ContactType = FlexProps & {}
+
+export function Contact({ ...rest }: ContactType) {
   return (
-    <Flex w="100vw" h="100vh" bg="green.100">
+    <Flex w="100vw" h="100vh" bg="green.100" {...rest}>
 
     </Flex>
   )

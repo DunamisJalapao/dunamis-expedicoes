@@ -10,28 +10,33 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
   return (
     <Flex
       w="100vw"
-      h="80vh"
-      flexDir="column"
-      align="center"
-      justify="space-between"
-      bgImage="/bg.jpeg"
-      bgSize="cover"
-      bgPos="center"
-      px="220px"
-      py="13px"
+      h="100vh"
       {...rest}
     >
-      <Header />
+      <Flex
+        w="full"
+        h="80vh"
+        bgImage="/bg.jpeg"
+        bgSize="cover"
+        bgPos="center"
+        flexDir="column"
+        align="center"
+        justify="space-between"
+        px="220px"
+        py="13px"
+      >
+        <Header />
+        <TabsHome
+          w="80%"
+          mb="-10vh"
+          zIndex={99999}
+          h="30%"
+          bg="white"
+          borderRadius="xl"
+          shadow="2xl"
+        />
+      </Flex>
 
-      <TabsHome
-        w="80%"
-        mb="-10vh"
-        zIndex={99999}
-        h="30%"
-        bg="white"
-        borderRadius="xl"
-        shadow="2xl"
-      />
     </Flex>
   )
 }

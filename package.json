@@ -14,6 +14,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@next/font": "^13.4.4",
+    "@portabletext/react": "^3.0.2",
     "@sanity/ui": "^1.5.0",
     "@svgr/webpack": "^8.0.1",
     "@types/node": "20.2.5",

@@ -1,14 +1,9 @@
-import { Attractivie, Photos } from "@/types";
+import { About, Attractivie, Photos } from "@/types";
 import { createClient, groq } from "next-sanity";
+import config from "../../sanity.config";
 
 export async function getAttractivies(): Promise<Attractivie[]> {
-  const client = createClient({
-    projectId: "6ofi8cxt",
-    dataset: "production",
-    apiVersion: "2023-03-04",
-  });
-
-  return client.fetch(
+  return createClient(config).fetch(
     groq`*[_type == "attractivies"]{
       _id,
       _createdAt,
@@ -21,13 +16,7 @@ export async function getAttractivies(): Promise<Attractivie[]> {
 }
 
 export async function getPhotos(): Promise<Photos[]> {
-  const client = createClient({
-    projectId: "6ofi8cxt",
-    dataset: "production",
-    apiVersion: "2023-03-04",
-  });
-
-  return client.fetch(
+  return createClient(config).fetch(
     groq`*[_type == "photos"]{
       _id,
       _createdAt,
@@ -35,6 +24,17 @@ export async function getPhotos(): Promise<Photos[]> {
         "url": asset->url,
         "dimensions": asset->metadata.dimensions,
       },
+    }`
+  );
+}
+
+export async function getAbout(): Promise<About[]> {
+  return createClient(config).fetch(
+    groq`*[_type == "about"]{
+      _id,
+      _createdAt,
+      "image": image.asset->url,
+      description,
     }`
   );
 }

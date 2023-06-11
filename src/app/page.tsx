@@ -1,6 +1,6 @@
 "use client"
 import { Header } from '@/components/Header'
-import { About } from '@/components/Screens/About'
+import { AboutScreen } from '@/components/Screens/About'
 import { Contact } from '@/components/Screens/Contact'
 import { Footer } from '@/components/Screens/Footer'
 import { HomeScreen } from '@/components/Screens/Home'
@@ -17,12 +17,11 @@ export default function Home() {
       overflowX="hidden"
     >
       <HomeScreen id="container-home" />
-      <About id="container-about" />
+      <AboutScreen id="container-about" />
       <Places id="container-places" />
       <Gallery id="container-gallery" />
       <Contact id="container-contact" />
       <Footer />
-
     </Flex>
   )
 }

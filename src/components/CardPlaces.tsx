@@ -1,30 +1,45 @@
 "use client"
-import { Flex, Icon, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, FlexProps, Icon, Image, Text } from "@chakra-ui/react";
 import IconPin from '../../public/assets/icon-pin.svg';
+import { Attractivie } from "@/types";
+import Color, { useColor } from "color-thief-react";
+import Link from "next/link";
 
-export function CardPlaces() {
+type CardPlacesType = FlexProps & {
+  card: Attractivie
+};
+
+export function CardPlaces({ card, ...rest }: CardPlacesType) {
   return (
-    <Flex
-      w="300px"
-      h="350px"
-      bg="white"
-      boxShadow="lg"
-      flexDir="column"
-      overflow="auto"
-      borderRadius="15px"
+    <Link href={card.url ? card.url : 'javascript:void(0)'} target={card.url ? "_blank" : undefined}>
+      <Flex
+        w="300px"
+        h="350px"
+        bg="white"
+        boxShadow="lg"
+        flexDir="column"
+        overflow="auto"
+        borderRadius="15px"
+        {...rest}
+      >
+        <Flex w="full" h="65%">
 
-    >
-      <Flex w="full" h="65%" bg="yellow.100">
-        <Image src="" />
-      </Flex>
-      <Flex flexDir="column" h="35%" py={4} px={3}>
-        <Text fontFamily="var(--font-lemonMilk)">Dunas do Jalapão</Text>
-        <Flex align="center" gap={2}>
-          <Icon as={IconPin} />
-          <Text color="#7C7C7C">Mateiros - TO</Text>
+          <Color src={card.image} format="rgbString" crossOrigin="anonymous">
+            {({ data, loading, error }) => (
+              <Image src={card.image} boxShadow={`0px 20px 40px -27px ${data}`} />
+            )}
+          </Color>
         </Flex>
-      </Flex>
+        <Flex flexDir="column" h="35%" py={4} px={3}>
+          <Text fontFamily="var(--font-lemonMilk)">{card.attractivie}</Text>
+          <Flex align="center" gap={2}>
+            <Icon as={IconPin} />
+            <Text color="#7C7C7C">{card.region}</Text>
+          </Flex>
+        </Flex>
 
-    </Flex>
+      </Flex>
+    </Link>
+
   )
 }

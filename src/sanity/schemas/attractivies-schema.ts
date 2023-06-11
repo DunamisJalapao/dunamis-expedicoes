@@ -26,6 +26,11 @@ const attractivie = {
         },
       ],
     },
+    {
+      name: "url",
+      title: "Link de uma foto do perfil",
+      type: "url",
+    },
   ],
 };
 

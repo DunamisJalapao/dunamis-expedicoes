@@ -43,7 +43,7 @@ export function Header() {
       >
         <Flex ml="auto" mr="auto" textTransform="uppercase" gap={16} fontSize="20px" fontWeight="bold" align="center" color="white" justify="space-around">
           <Link href="#" onClick={() => handleLinkClick('container-home')}> <Text>Início</Text> </Link>
-          <Link href="#" onClick={() => handleLinkClick('container-itineraries')}> <Text>Roteiros</Text> </Link>
+          <Link href="#" onClick={() => handleLinkClick('container-gallery')}> <Text>Roteiros</Text> </Link>
           <Link href="#" onClick={() => handleLinkClick('container-about')}> <Text>Sobre Nós</Text> </Link>
           <Link href="#" onClick={() => handleLinkClick('container-pack')}> <Text>Pacotes</Text> </Link>
         </Flex>

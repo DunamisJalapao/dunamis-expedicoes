@@ -4,9 +4,10 @@ import { About } from '@/components/Screens/About'
 import { Contact } from '@/components/Screens/Contact'
 import { Footer } from '@/components/Screens/Footer'
 import { HomeScreen } from '@/components/Screens/Home'
-import { Itineraries } from '@/components/Screens/Itineraries'
+import { Gallery } from '@/components/Screens/Gallery'
 import { Places } from '@/components/Screens/Places'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Modal } from '@chakra-ui/react'
+import { ModalGallery } from '@/components/ModalGallery'
 
 export default function Home() {
 
@@ -18,9 +19,10 @@ export default function Home() {
       <HomeScreen id="container-home" />
       <About id="container-about" />
       <Places id="container-places" />
-      <Itineraries id="container-itineraries" />
+      <Gallery id="container-gallery" />
       <Contact id="container-contact" />
       <Footer />
+
     </Flex>
   )
 }

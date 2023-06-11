@@ -6,9 +6,15 @@ const photos = {
     {
       name: "images",
       type: "array", // supports drag'n'drop of multiple files
+      options: {
+        layout: "grid",
+      },
       of: [
         {
           type: "image",
+          options: {
+            hotspot: true,
+          },
         },
       ],
     },

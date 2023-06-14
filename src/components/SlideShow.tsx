@@ -25,7 +25,7 @@ export function SlideShow({ photos }: SlideShowProps) {
           if (mouseOver) return
           timeout = setTimeout(() => {
             slider.next()
-          }, 2000)
+          }, 6000)
         }
         slider.on("created", () => {
           slider.container.addEventListener("mouseover", () => {
@@ -51,7 +51,7 @@ export function SlideShow({ photos }: SlideShowProps) {
       ref={sliderRef}
     >
       {photos.map((photo, index) => (
-        <Flex className='keen-slider__slide' bgImage={photo} bgSize="cover" />
+        <Flex className='keen-slider__slide' bgImage={photo} bgSize="cover" bgPos="center" />
       ))}
     </Flex>
   )

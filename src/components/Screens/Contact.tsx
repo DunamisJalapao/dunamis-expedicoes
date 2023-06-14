@@ -26,7 +26,9 @@ export function Contact({ ...rest }: ContactType) {
         justify="center"
         color="white"
         fontFamily="var(--font-lato)"
-        fontSize="46px"
+        fontSize={{ base: "24px", md: "46px" }}
+        textAlign="center"
+        px={4}
         gap={10}
       >
         <Text>Algum Duvida?</Text>

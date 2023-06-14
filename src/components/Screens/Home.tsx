@@ -1,6 +1,6 @@
 "use client"
 
-import { Flex, FlexProps, Image } from "@chakra-ui/react";
+import { Box, Flex, FlexProps, Image, keyframes, useMediaQuery } from "@chakra-ui/react";
 import { Header } from "../Header";
 import { TabsHome } from "../TabsHome";
 import { getPhotos } from '@/sanity/sanity-utils';
@@ -11,6 +11,13 @@ type HomeScreenType = FlexProps & {}
 
 export function HomeScreen({ ...rest }: HomeScreenType) {
   const [photosGallery, setphotosGallery] = useState<string[]>([] as string[]);
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
+
+  const animateArrow = keyframes`
+    0%   { transform:translate(0,-10px) rotate(45deg); opacity: 0;  }
+    50%  { opacity: 1;  }
+    100% { transform:translate(0,10px) rotate(45deg); opacity: 0; }
+  `
 
   const photosMemo = async () => {
     const response = await getPhotos();
@@ -35,7 +42,7 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
     >
       <Flex
         w="full"
-        h="80vh"
+        h={{ base: "100vh", md: "80vh" }}
         pos="relative"
       >
         {photosGallery.length > 0 &&
@@ -49,14 +56,52 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
           h="full"
           flexDir="column"
           align="center"
-          px="220px"
+          px={{ base: "20px", md: "220px" }}
           py="13px"
 
           justify="space-between"
         >
           <Header />
-          <TabsHome />
+          {!isMobile &&
+            <TabsHome />
+          }
         </Flex>
+
+        <Box
+          position="absolute"
+          left="50%"
+          bottom="10px"
+          display="block"
+          textAlign="center"
+          fontSize="20px"
+          zIndex={100}
+          textDecoration="none"
+          textShadow={0}
+          width="25px"
+          height="25px"
+          borderBottom="4px solid #fff"
+          borderRight="4px solid #fff"
+          boxShadow="lg"
+          animation={`${animateArrow} 3s ease-in-out infinite`}
+        />
+        <Box
+          position="absolute"
+          left="50%"
+          bottom="25px"
+          display="block"
+          textAlign="center"
+          fontSize="20px"
+          zIndex={100}
+          textDecoration="none"
+          textShadow={0}
+          width="25px"
+          height="25px"
+          borderBottom="4px solid #fff"
+          borderRight="4px solid #fff"
+          boxShadow="lg"
+          animation={`${animateArrow} 3s ease-in-out infinite`}
+        />
+
       </Flex>
 
     </Flex >

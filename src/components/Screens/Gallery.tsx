@@ -39,10 +39,10 @@ export function Gallery({ ...rest }: ItinerariesType) {
   }, [])
 
   return (
-    <Flex w="100vw" h="100vh"  {...rest}>
-      <Flex w="full" h="full" py={10} flexDir="column" bg="#F8F8F8">
+    <Flex w={{ base: "full", md: "100vw" }} h={{ base: "full", md: "100vh" }}   {...rest}>
+      <Flex w="full" h="full" pt={{ base: 4, md: 10 }} pb={{ base: 8, md: 10 }} flexDir="column" bg="#F8F8F8" gap={5}>
 
-        <Flex px={20} flexDir="column" fontWeight="bold">
+        <Flex px={{ base: 5, md: 20 }} flexDir="column" fontWeight="bold">
           <Text fontFamily="var(--font-lato)" fontSize="5xl">Galeria</Text>
           <Text>Pequeno parágrafo para a galeria</Text>
         </Flex>
@@ -51,8 +51,8 @@ export function Gallery({ ...rest }: ItinerariesType) {
           <Flex w="full" gap={2} animation={animationToRight}>
             {photosGallery.map((photos, index) => (
               <Flex
-                minW="350px"
-                h="250px"
+                minW={{ base: "150px", md: "350px" }}
+                h={{ base: '150px', md: "250px" }}
                 bgImage={photos}
                 bgSize="cover"
                 rounded="xl"
@@ -67,8 +67,8 @@ export function Gallery({ ...rest }: ItinerariesType) {
           >
             {photosGallery.map((photos, index) => (
               <Flex
-                minW="350px"
-                h="250px"
+                minW={{ base: "150px", md: "350px" }}
+                h={{ base: '150px', md: "250px" }}
                 bgImage={photos}
                 bgSize="cover"
                 rounded="xl"

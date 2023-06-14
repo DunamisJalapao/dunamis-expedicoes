@@ -1,37 +1,29 @@
 "use client"
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, Icon, Image, Text, useDisclosure, useMediaQuery } from "@chakra-ui/react";
 import { ButtonPrimary } from "./ButtonPrimary";
 import Link from "next/link";
 import { useCallback } from "react";
+import { NavBar } from "./NavBar";
+import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useBreakpointValue } from "@chakra-ui/react";
+import { CgMenuRight } from 'react-icons/cg';
+import { useUtils } from "@/hooks/utils";
 
 export function Header() {
-
-  function smoothScroll(target: string) {
-    const element = document.getElementById(target);
-    window.scrollTo({
-      top: element!.offsetTop,
-      behavior: 'smooth',
-    });
-  }
-
-  const handleLinkClick = (target: string) => {
-    setTimeout(() => {
-      smoothScroll(target);
-    }, 100);
-  };
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const { isOpen, onToggle } = useUtils();
   return (
     <Flex
       w="full"
       h="5rem"
       bg="rgba(255,255,255,0.2)"
+      boxShadow="lg"
       borderRadius="2xl"
       backdropFilter='auto'
       backdropBlur='8px'
-      px={"4rem"}
+      px={{ base: "0.5rem", md: "4rem" }}
       align="center"
     >
-      <Flex w="50%">
-
+      <Flex w={{ base: "25%", md: "50%" }}>
         <Image
           src="/assets/logo.png"
           w="5rem"
@@ -41,15 +33,35 @@ export function Header() {
       <Flex
         w="full"
       >
-        <Flex ml="auto" mr="auto" textTransform="uppercase" gap={16} fontSize="20px" fontWeight="bold" align="center" color="white" justify="space-around">
-          <Link href="#" onClick={() => handleLinkClick('container-home')}> <Text>Início</Text> </Link>
-          <Link href="#" onClick={() => handleLinkClick('container-about')}> <Text>Sobre Nós</Text> </Link>
-          <Link href="#" onClick={() => handleLinkClick('container-pack')}> <Text>Atrativos</Text> </Link>
-          <Link href="/gallery"> <Text>Galeria</Text> </Link>
-        </Flex>
-
-        <ButtonPrimary />
+        {isMobile ?
+          <Flex w="full" justify="right" onClick={() => onToggle(true)}>
+            <Icon color="white" fontSize="4xl" as={CgMenuRight} />
+          </Flex>
+          :
+          <>
+            <NavBar />
+            <ButtonPrimary />
+          </>
+        }
       </Flex>
+
+      <Drawer isOpen={isOpen} size="full" placement="left" onClose={() => onToggle(false)}>
+        <DrawerOverlay>
+          <DrawerContent bg="#112126ff" p="4">
+            <DrawerCloseButton color="white" mt={6} />
+            <DrawerHeader>Navegação</DrawerHeader>
+            <DrawerBody>
+              <Flex flexDir="column" h="full" align="center">
+                <NavBar />
+                <Flex mt="auto" flexDir="column" color="#ffffff4b" align="center" fontFamily="var(--font-lato)" gap={2}>
+                  <Image w="25%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
+                  <Text fontSize="sm">© Todos os direitos reservados</Text>
+                </Flex>
+              </Flex>
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
     </Flex >
   )
 }

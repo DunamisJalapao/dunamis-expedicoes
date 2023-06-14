@@ -1,23 +1,56 @@
 "use client"
 
-import { Divider, Flex, Icon, Text, Image, Box } from "@chakra-ui/react";
+import { Divider, Flex, Icon, Text, Image, Box, useMediaQuery } from "@chakra-ui/react";
 import { FaWhatsapp, FaInstagram, FaFacebookF } from 'react-icons/fa';
 import { TfiTwitter } from 'react-icons/tfi'
 
 import LogoPNG from '../../../public/assets/logo.png';
+import { NavBar } from "../NavBar";
+
+// ARRUMAR O FOOTER QUE NEM O DO VERCEL
 
 export function Footer() {
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
+
+  if (isMobile) {
+    return (
+      <Flex w="full" h="full" px={4} py={6} align="center" justify="center" flexDir="column" gap={10} color="#0000006c" textAlign="center">
+        <Image w="35%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
+        <NavBar textAlign="left" isFooter={true} color="black" />
+        <Flex flexDir="column" fontFamily="var(--font-lato)">
+          <Text>© Todos os direitos reservados</Text>
+          <Text>Dunamis Expedições</Text>
+        </Flex>
+        <Flex w="50%" fontSize="xl" justify="space-between" color="#0000006c">
+          <Flex p={1} pr={3} borderRight="2px solid #00000022" >
+            <Icon as={FaWhatsapp} />
+          </Flex>
+          <Flex p={1} pr={3} borderRight="2px solid #00000022">
+            <Icon as={FaInstagram} />
+          </Flex>
+          <Flex p={1} pr={3} borderRight="2px solid #00000022">
+            <Icon as={FaFacebookF} />
+          </Flex>
+          <Flex p={1} pr={3} borderRight="2px solid #00000022">
+            <Icon as={TfiTwitter} />
+          </Flex>
+        </Flex>
+        <Flex flex={1} flexDir="column" >
+          <Text>Design and Develop</Text>
+          <Text>João Vitor Soares</Text>
+        </Flex>
+      </Flex>
+    )
+  }
+
   return (
-    <Flex w="100vw" h="30vh" px={60} align="center" justify="center" flexDir="column" gap={5}>
+    <Flex w={{ base: "full", md: "100vw" }} h={{ base: "full", md: "30vh" }} px={{ base: 4, md: 60 }} py={{ base: 12, md: 0 }} align="center" justify="center" flexDir="column" gap={5}>
       <Flex w="full" textTransform="uppercase" gap={16} fontSize="20px" fontWeight="bold" align="center" color="black" justify="space-between">
-        <Flex w="50%" justify="space-between">
-          <Text>Início</Text>
-          <Text>Sobre Nós</Text>
-          <Text>Roteiros</Text>
-          <Text>Pacotes</Text>
+        <Flex display={{ base: 'none', md: 'inherit' }} w="50%" justify="space-between">
+          <NavBar color="black" />
         </Flex>
 
-        <Flex w="20%" justify="space-between">
+        <Flex w={{ base: "full", md: "20%" }} justify="space-between">
           <Flex p={3} border="2px solid #112126ff" borderRadius="50%">
             <Icon as={FaWhatsapp} color="whatsapp.600" />
           </Flex>
@@ -35,17 +68,17 @@ export function Footer() {
 
       <Divider w="110%" bg="black" orientation="horizontal" />
 
-      <Flex w="full" align="center" justify="space-between" fontWeight="bold">
-        <Flex flex={1} flexDir="column">
+      <Flex flexDir={{ base: "column", md: "row" }} w="full" align="center" justify="space-between" fontWeight="bold">
+        <Flex flex={1} flexDir="column" textAlign={{ base: "center", md: "inherit" }}>
           <Text>© Todos os direitos reservados</Text>
           <Text>Dunamis Expedições</Text>
         </Flex>
 
-        <Flex flex={1} justify="center" w="full">
+        <Flex flex={1} order={{ base: "-1", md: "inherit" }} justify="center" w="full">
           <Image w="25%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
         </Flex>
 
-        <Flex flex={1} flexDir="column" textAlign="right">
+        <Flex flex={1} flexDir="column" textAlign={{ base: "center", md: "right" }}>
           <Text>Design and Develop</Text>
           <Text>João Vitor Soares</Text>
         </Flex>

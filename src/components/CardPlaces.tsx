@@ -13,11 +13,11 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
   return (
     <Link href={card.url ? card.url : 'javascript:void(0)'} target={card.url ? "_blank" : undefined}>
       <Flex
-        w="300px"
-        h="350px"
+        w={{ base: "full", md: "300px" }}
+        h={{ base: "250px", md: "350px" }}
         bg="white"
         boxShadow="lg"
-        flexDir="column"
+        flexDir={"column"}
         overflow="auto"
         borderRadius="15px"
         {...rest}

@@ -21,11 +21,11 @@ export function Places({ ...rest }: PackType) {
   }, [])
 
   return (
-    <Flex w="100vw" h="100vh" bg="white" {...rest}>
-      <Flex w="full" h="full" py={50} justify="center" flexDir="column" gap={10}>
-        <Text align="center" fontSize="4xl" color="#112126ff" fontWeight="bold" fontFamily="var(--font-lato)">Encontre os lugares <br /> para se apaixonar</Text>
-        <Flex w="full" h="full" justify="center">
-          <SimpleGrid columns={4} spacingX='20px' spacingY="0px">
+    <Flex w={{ base: "full", md: "100vw" }} h={{ base: "full", md: "100vh" }} bg="white" {...rest}>
+      <Flex w="full" h="full" py={{ base: 5, md: 50 }} justify="center" flexDir="column" gap={10}>
+        <Text align="center" fontSize={{ base: "2xl", md: "5xl" }} color="#112126ff" fontWeight="bold" fontFamily="var(--font-lato)">Encontre os lugares <br /> para se apaixonar</Text>
+        <Flex w="full" h="full" justify="center" px={{ base: 5, md: 0 }}>
+          <SimpleGrid columns={{ base: 1, md: 4 }} spacingX='20px' spacingY={{ base: '20px', md: "0px" }}>
             {dataCard.map(card => (
               <CardPlaces card={card} />
             ))}

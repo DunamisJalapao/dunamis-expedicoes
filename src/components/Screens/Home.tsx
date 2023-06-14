@@ -62,46 +62,47 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
           justify="space-between"
         >
           <Header />
-          {!isMobile &&
+          {!isMobile ?
             <TabsHome />
+            :
+            <>
+              <Box
+                position="absolute"
+                left="50%"
+                bottom="10px"
+                display="block"
+                textAlign="center"
+                fontSize="20px"
+                zIndex={100}
+                textDecoration="none"
+                textShadow={0}
+                width="25px"
+                height="25px"
+                borderBottom="4px solid #fff"
+                borderRight="4px solid #fff"
+                boxShadow="lg"
+                animation={`${animateArrow} 3s ease-in-out infinite`}
+              />
+              <Box
+                position="absolute"
+                left="50%"
+                bottom="25px"
+                display="block"
+                textAlign="center"
+                fontSize="20px"
+                zIndex={100}
+                textDecoration="none"
+                textShadow={0}
+                width="25px"
+                height="25px"
+                borderBottom="4px solid #fff"
+                borderRight="4px solid #fff"
+                boxShadow="lg"
+                animation={`${animateArrow} 3s ease-in-out infinite`}
+              />
+            </>
           }
         </Flex>
-
-        <Box
-          position="absolute"
-          left="50%"
-          bottom="10px"
-          display="block"
-          textAlign="center"
-          fontSize="20px"
-          zIndex={100}
-          textDecoration="none"
-          textShadow={0}
-          width="25px"
-          height="25px"
-          borderBottom="4px solid #fff"
-          borderRight="4px solid #fff"
-          boxShadow="lg"
-          animation={`${animateArrow} 3s ease-in-out infinite`}
-        />
-        <Box
-          position="absolute"
-          left="50%"
-          bottom="25px"
-          display="block"
-          textAlign="center"
-          fontSize="20px"
-          zIndex={100}
-          textDecoration="none"
-          textShadow={0}
-          width="25px"
-          height="25px"
-          borderBottom="4px solid #fff"
-          borderRight="4px solid #fff"
-          boxShadow="lg"
-          animation={`${animateArrow} 3s ease-in-out infinite`}
-        />
-
       </Flex>
 
     </Flex >

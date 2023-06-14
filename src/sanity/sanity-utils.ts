@@ -15,9 +15,10 @@ export async function getAttractivies(): Promise<Attractivie[]> {
   );
 }
 
-export async function getPhotos(): Promise<Photos[]> {
+export async function getPhotos(isSliced = true): Promise<Photos[]> {
+  let slicedValue = "[0...10]";
   return createClient(config).fetch(
-    groq`*[_type == "photos"]{
+    groq`*[_type == "photos"]${isSliced ? slicedValue : ""}{
       _id,
       _createdAt,
       "images": images[]{

@@ -17,11 +17,11 @@ export function CardPacks() {
       boxShadow="xl"
     >
       <Flex flexDir="column">
-        <Text fontSize="sm" color="#2E5C2E" textTransform="uppercase">Nome</Text>
+        <Text fontSize="sm" fontFamily="var(--font-lemonMilk)" color="#2E5C2E" textTransform="uppercase">Nome</Text>
         <Text color="#FF5A00" fontSize="2xl" fontWeight="bold">Jalapão Flash</Text>
       </Flex>
       <Flex flexDir="column">
-        <Text color="#2E5C2E" textTransform="uppercase">Informações</Text>
+        <Text color="#2E5C2E" fontFamily="var(--font-lemonMilk)" textTransform="uppercase">Informações</Text>
         <Flex align="center" gap={2}>
           <Icon as={IconChecked} />
           <Text>3 dias e 2 noites</Text>
@@ -36,7 +36,7 @@ export function CardPacks() {
         </Flex>
       </Flex>
 
-      <Text color="#FF5A00" textAlign="center">% Desconto á vista</Text>
+      <Text color="#FF5A00" fontSize="xs" fontFamily="var(--font-lemonMilk)" textAlign="center">% Desconto á vista</Text>
     </Flex>
   )
 }

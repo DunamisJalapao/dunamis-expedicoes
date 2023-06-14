@@ -40,7 +40,7 @@ export function Gallery({ ...rest }: ItinerariesType) {
 
   return (
     <Flex w="100vw" h="100vh"  {...rest}>
-      <Flex w="full" h="full" py={10} flexDir="column">
+      <Flex w="full" h="full" py={10} flexDir="column" bg="#F8F8F8">
 
         <Flex px={20} flexDir="column" fontWeight="bold">
           <Text fontFamily="var(--font-lato)" fontSize="5xl">Galeria</Text>

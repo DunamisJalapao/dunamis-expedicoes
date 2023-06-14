@@ -13,6 +13,8 @@ import IconHospedagem from '../../public/assets/icon-hospedagem.svg';
 import IconFrota from '../../public/assets/icon-frota.svg';
 import IconPhotos from '../../public/assets/icon-photos.svg';
 import { CardVantagens } from "./CardVantagens";
+import { useState } from "react";
+
 
 type TabsHome = FlexProps & {};
 
@@ -49,65 +51,87 @@ const vantagensData = [
   },
 ]
 
-export function TabsHome({ ...rest }: TabsHome) {
-  return (
-    <Flex {...rest}>
-
-      <Tabs w="full" variant="enclosed" isFitted>
-        <TabList>
-          <Tab>Vamos lá?</Tab>
-          <Tab>Pacotes</Tab>
-          <Tab>Vantagens</Tab>
-        </TabList>
-
-
-        <TabPanels mt={5}>
-          <TabPanel>
-            <Flex w="full" h="full" justify="space-around" gap={10}>
-              <Flex flexDir="column" gap={2}>
-                <Flex align="center" gap={3}>
-                  <Icon as={IconPin} />
-                  <Text>Pacotes</Text>
-                </Flex>
-                <Input />
-              </Flex>
-              <Flex flexDir="column" gap={2}>
-                <Flex align="center" gap={3}>
-                  <Icon as={IconCalendar} />
-                  <Text>Quando começa?</Text>
-                </Flex>
-                <Input />
-              </Flex>
-              <Flex flexDir="column" gap={2}>
-                <Flex align="center" gap={3}>
-                  <Icon as={IconPersons} />
-                  <Text>Quantas pessoas?</Text>
-                </Flex>
-                <Input />
-              </Flex>
-              <ButtonPrimary mt={8} borderRadius="lg" h="3.1em" />
-            </Flex>
-          </TabPanel>
-          <TabPanel>
-            <Flex w="full" align="center" justify="space-around" gap={4}>
-              <CardPacks />
-              <CardPacks />
-              <CardPacks />
-              <CardPacks />
-            </Flex>
-          </TabPanel>
-          <TabPanel>
-            <SimpleGrid columns={3} spacing={2}>
-              {vantagensData.map((vantagem, _) => (
-                <GridItem key={_}>
-                  <CardVantagens {...vantagem} />
-                </GridItem>
-              ))}
-            </SimpleGrid>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+const TabOne = () => (
+  <Flex w="full" justify="space-around" gap={10}>
+    <Flex flexDir="column" gap={2}>
+      <Flex align="center" gap={3}>
+        <Icon as={IconPin} />
+        <Text>Pacotes</Text>
+      </Flex>
+      <Input />
     </Flex>
+    <Flex flexDir="column" gap={2}>
+      <Flex align="center" gap={3}>
+        <Icon as={IconCalendar} />
+        <Text>Quando começa?</Text>
+      </Flex>
+      <Input />
+    </Flex>
+    <Flex flexDir="column" gap={2}>
+      <Flex align="center" gap={3}>
+        <Icon as={IconPersons} />
+        <Text>Quantas pessoas?</Text>
+      </Flex>
+      <Input />
+    </Flex>
+    <ButtonPrimary mt={8} borderRadius="lg" h="3.1em" />
+  </Flex>
+)
 
+const TabTwo = () => (
+  <Flex w="full" align="center" justify="space-around" gap={4}>
+    <CardPacks />
+    <CardPacks />
+    <CardPacks />
+    <CardPacks />
+  </Flex>
+)
+
+const TabThree = () => (
+  <SimpleGrid columns={3} spacing={2}>
+    {vantagensData.map((vantagem, _) => (
+      <GridItem key={_}>
+        <CardVantagens {...vantagem} />
+      </GridItem>
+    ))}
+  </SimpleGrid>
+)
+
+const objDisplays = [
+  <TabOne />,
+  <TabTwo />,
+  <TabThree />
+]
+
+export function TabsHome({ ...rest }: TabsHome) {
+  const [dataTabs, setDataTabs] = useState(0);
+  const objWidth = [
+    '30%',
+    '50%',
+    '50%'
+  ]
+
+  return (
+    <Flex
+      flexDir="column"
+      w="80%"
+      mb="-15vh"
+      h={objWidth[dataTabs]}
+      bg="white"
+      borderRadius="xl"
+      overflow="auto"
+      shadow="2xl"
+      transition="0.2s ease"
+    >
+      <Flex justify="center" h="70px" userSelect="none" cursor="pointer">
+        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(0)}>Vamos lá?</Flex>
+        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(1)}>Pacotes</Flex>
+        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(2)}>Vantagens</Flex>
+      </Flex>
+
+      <Flex h="full" align="center">
+        {objDisplays[dataTabs]}
+      </Flex>
+    </Flex >
   )
 }

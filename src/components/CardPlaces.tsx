@@ -22,14 +22,28 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
         borderRadius="15px"
         {...rest}
       >
-        <Flex w="full" h="65%">
 
-          <Color src={card.image} format="rgbString" crossOrigin="anonymous">
-            {({ data, loading, error }) => (
-              <Image src={card.image} boxShadow={`0px 20px 40px -27px ${data}`} />
-            )}
-          </Color>
-        </Flex>
+
+        <Color src={card.image} format="rgbString" crossOrigin="anonymous">
+          {({ data, loading, error }) => (
+            <Flex
+              w="full"
+              h="65%"
+              overflow="hidden"
+              boxShadow={`0px 30px 40px -27px ${data}`}
+
+            >
+              <Image
+                src={card.image}
+                objectFit="cover"
+                transition="transform .2s ease"
+                _hover={{
+                  transform: 'scale(1.05)'
+                }}
+              />
+            </Flex>
+          )}
+        </Color>
         <Flex flexDir="column" h="35%" py={4} px={3}>
           <Text fontFamily="var(--font-lemonMilk)">{card.attractivie}</Text>
           <Flex align="center" gap={2}>

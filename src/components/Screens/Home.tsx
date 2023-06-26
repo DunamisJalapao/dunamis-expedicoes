@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Flex, FlexProps, Image, keyframes, useMediaQuery } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, FlexProps, Image, keyframes, useMediaQuery } from "@chakra-ui/react";
 import { Header } from "../Header";
 import { TabsHome } from "../TabsHome";
 import { getPhotos } from '@/sanity/sanity-utils';
@@ -45,9 +45,12 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
         h={{ base: "100vh", md: "80vh" }}
         pos="relative"
       >
-        {photosGallery.length > 0 &&
-          <SlideShow photos={photosGallery} />
-        }
+        <AspectRatio w="full" ratio={1}>
+          <video autoPlay muted loop id="myVideo">
+            <source src="/video_bg.mp4" type="video/mp4" />
+          </video>
+        </AspectRatio>
+
         <Flex
           pos="absolute"
           top={0}

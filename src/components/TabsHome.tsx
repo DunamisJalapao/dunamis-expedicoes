@@ -51,6 +51,30 @@ const vantagensData = [
   },
 ]
 
+const roteirosData = [
+  {
+    title: 'ROTEIRO 3 DIAS',
+    duration: '3 dias e 2 noites',
+    foods: 'Alimento incluso',
+    hotel: 'Hospedagem inclusa',
+    doc: '/roteiro3dias.pdf'
+  },
+  {
+    title: 'ROTEIRO 4 DIAS',
+    duration: '4 dias e 3 noites',
+    foods: 'Alimento incluso',
+    hotel: 'Hospedagem inclusa',
+    doc: '/roteiro4dias.pdf'
+  },
+  {
+    title: 'ROTEIRO 5 DIAS',
+    duration: '5 dias e 4 noites',
+    foods: 'Alimento incluso',
+    hotel: 'Hospedagem inclusa',
+    doc: '/roteiro5dias.pdf'
+  },
+]
+
 const TabOne = () => (
   <Flex w="full" justify="space-around" gap={10}>
     <Flex flexDir="column" gap={2}>
@@ -80,10 +104,9 @@ const TabOne = () => (
 
 const TabTwo = () => (
   <Flex w="full" align="center" justify="space-around" gap={4}>
-    <CardPacks />
-    <CardPacks />
-    <CardPacks />
-    <CardPacks />
+    {roteirosData.map(roteiro => (
+      <CardPacks {...roteiro} />
+    ))}
   </Flex>
 )
 

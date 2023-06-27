@@ -1,8 +1,9 @@
-import { Flex, FlexProps, Tab, TabList, TabPanel, TabPanels, Tabs, Icon, Box, Text, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
+import { Flex, FlexProps, Tab, TabList, TabPanel, TabPanels, Tabs, Icon, Box, Text, Grid, GridItem, SimpleGrid, Wrap, WrapItem } from "@chakra-ui/react";
 import IconPin from '../../public/assets/icon-pin.svg'
 import IconCalendar from '../../public/assets/icon-calendar.svg'
 import IconPersons from '../../public/assets/icon-persons.svg'
 import { Input } from "./Forms/Input";
+import { Select } from "./Forms/Select";
 import { ButtonPrimary } from "./ButtonPrimary";
 import { CardPacks } from "./CardPacks";
 
@@ -14,6 +15,7 @@ import IconFrota from '../../public/assets/icon-frota.svg';
 import IconPhotos from '../../public/assets/icon-photos.svg';
 import { CardVantagens } from "./CardVantagens";
 import { useState } from "react";
+import { DatePicker } from "./Forms/DatePicker";
 
 
 type TabsHome = FlexProps & {};
@@ -23,11 +25,6 @@ const vantagensData = [
     icon: IconRoteiro,
     title: 'Roteiros Personalizados',
     description: 'Trecho pensados com carinho para que você possa ter sempre a melhor experiência possível '
-  },
-  {
-    icon: IconGuide,
-    title: 'Guias Experientes',
-    description: 'Nossos guias são nativos, proporcionando uma experiência incrível para sua expedição. '
   },
   {
     icon: IconFrota,
@@ -75,21 +72,45 @@ const roteirosData = [
   },
 ]
 
+
+
 const TabOne = () => (
+  <Flex w="full" align="center" justify="center" gap={10}>
+    {roteirosData.map(roteiro => (
+      <CardPacks {...roteiro} />
+    ))}
+  </Flex>
+)
+
+const TabTwo = () => (
+  <Wrap spacing="10px" justify="center" px={4}>
+    {vantagensData.map((vantagem, _) => (
+      <WrapItem key={_}>
+        <CardVantagens  {...vantagem} />
+      </WrapItem>
+    ))}
+  </Wrap>
+)
+
+const TabThree = () => (
   <Flex w="full" justify="space-around" gap={10}>
     <Flex flexDir="column" gap={2}>
       <Flex align="center" gap={3}>
         <Icon as={IconPin} />
         <Text>Pacotes</Text>
       </Flex>
-      <Input />
+      <Select placeholder="Pacotes">
+        <option value="3dias"> ROTEIRO 3 DIAS</option>
+        <option value="4dias"> ROTEIRO 4 DIAS</option>
+        <option value="5dias"> ROTEIRO 5 DIAS</option>
+      </Select>
     </Flex>
     <Flex flexDir="column" gap={2}>
       <Flex align="center" gap={3}>
         <Icon as={IconCalendar} />
         <Text>Quando começa?</Text>
       </Flex>
-      <Input />
+      <DatePicker />
     </Flex>
     <Flex flexDir="column" gap={2}>
       <Flex align="center" gap={3}>
@@ -102,24 +123,6 @@ const TabOne = () => (
   </Flex>
 )
 
-const TabTwo = () => (
-  <Flex w="full" align="center" justify="space-around" gap={4}>
-    {roteirosData.map(roteiro => (
-      <CardPacks {...roteiro} />
-    ))}
-  </Flex>
-)
-
-const TabThree = () => (
-  <SimpleGrid columns={3} spacing={2}>
-    {vantagensData.map((vantagem, _) => (
-      <GridItem key={_}>
-        <CardVantagens {...vantagem} />
-      </GridItem>
-    ))}
-  </SimpleGrid>
-)
-
 const objDisplays = [
   <TabOne />,
   <TabTwo />,
@@ -128,18 +131,24 @@ const objDisplays = [
 
 export function TabsHome({ ...rest }: TabsHome) {
   const [dataTabs, setDataTabs] = useState(0);
-  const objWidth = [
-    '30%',
+  const objHeight = [
     '50%',
-    '50%'
+    '50%',
+    '30%',
+  ]
+
+  const objWidth = [
+    "70%",
+    "90%",
+    "80%",
   ]
 
   return (
     <Flex
       flexDir="column"
-      w="80%"
+      w={objWidth[dataTabs]}
       mb="-15vh"
-      h={objWidth[dataTabs]}
+      h={objHeight[dataTabs]}
       bg="white"
       borderRadius="xl"
       overflow="auto"
@@ -147,9 +156,9 @@ export function TabsHome({ ...rest }: TabsHome) {
       transition="0.2s ease"
     >
       <Flex justify="center" h="70px" userSelect="none" cursor="pointer">
-        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(0)}>Vamos lá?</Flex>
-        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(1)}>Pacotes</Flex>
-        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(2)}>Vantagens</Flex>
+        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(0)}>Pacotes</Flex>
+        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(1)}>Vantagens</Flex>
+        <Flex justify="center" align="center" w="full" border="1px solid #00000033" onClick={() => setDataTabs(2)}>Vamos lá?</Flex>
       </Flex>
 
       <Flex h="full" align="center">

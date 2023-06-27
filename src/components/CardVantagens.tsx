@@ -13,16 +13,18 @@ export function CardVantagens({ icon, title, description }: CardVantagensType) {
   return (
     <Flex
       w="full"
+      maxW="420px"
       bg="white"
       boxShadow="lg"
       borderRadius="xl"
       px={6}
       py={2}
+      gap={6}
     >
       <Icon as={icon} fontSize="7xl" />
       <Flex flexDir="column">
-        <Text>{title}</Text>
-        <Text>{description}</Text>
+        <Text fontWeight="bold">{title}</Text>
+        <Text fontSize="md">{description}</Text>
       </Flex>
     </Flex>
   )

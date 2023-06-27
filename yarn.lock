@@ -4091,7 +4091,7 @@ dataloader@^2.1.0:
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.2.2.tgz#216dc509b5abe39d43a9b9d97e6e5e473dfbe3e0"
   integrity sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==
 
-date-fns@^2.26.1:
+date-fns@^2.26.1, date-fns@^2.30.0:
   version "2.30.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
   integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
@@ -6073,6 +6073,11 @@ react-copy-to-clipboard@^5.0.4:
   dependencies:
     copy-to-clipboard "^3.3.1"
     prop-types "^15.8.1"
+
+react-day-picker@^8.8.0:
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-8.8.0.tgz#582b9d5e54a84926f159be2b4004801707b3c885"
+  integrity sha512-QIC3uOuyGGbtypbd5QEggsCSqVaPNu8kzUWquZ7JjW9fuWB9yv7WyixKmnaFelTLXFdq7h7zU6n/aBleBqe/dA==
 
 react-dom@18.2.0:
   version "18.2.0"

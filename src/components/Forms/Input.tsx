@@ -5,13 +5,11 @@ import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 function Input() {
   const [primaryColor] = useToken('colors', ['green.500']);
   return (
-
     <InputGroup
       alignSelf="center"
       display="flex"
       flexDir="column"
       borderColor="border-color-input"
-
     >
       <ChakraInput
         h="3.1em"

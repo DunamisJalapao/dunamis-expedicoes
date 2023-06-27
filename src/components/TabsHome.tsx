@@ -92,36 +92,40 @@ const TabTwo = () => (
   </Wrap>
 )
 
-const TabThree = () => (
-  <Flex w="full" justify="space-around" gap={10}>
-    <Flex flexDir="column" gap={2}>
-      <Flex align="center" gap={3}>
-        <Icon as={IconPin} />
-        <Text>Pacotes</Text>
+const TabThree = () => {
+  const [dateSelected, setDateSelected] = useState<Date | undefined>();
+  const handleSaveDate = () => { }
+  return (
+    <Flex px={10} w="full" justify="space-around" gap={10}>
+      <Flex w="full" flexDir="column" gap={2}>
+        <Flex align="center" gap={3}>
+          <Icon as={IconPin} />
+          <Text>Pacotes</Text>
+        </Flex>
+        <Select placeholder="Pacotes">
+          <option value="3dias"> ROTEIRO 3 DIAS</option>
+          <option value="4dias"> ROTEIRO 4 DIAS</option>
+          <option value="5dias"> ROTEIRO 5 DIAS</option>
+        </Select>
       </Flex>
-      <Select placeholder="Pacotes">
-        <option value="3dias"> ROTEIRO 3 DIAS</option>
-        <option value="4dias"> ROTEIRO 4 DIAS</option>
-        <option value="5dias"> ROTEIRO 5 DIAS</option>
-      </Select>
-    </Flex>
-    <Flex flexDir="column" gap={2}>
-      <Flex align="center" gap={3}>
-        <Icon as={IconCalendar} />
-        <Text>Quando começa?</Text>
+      <Flex w="full" flexDir="column" gap={2}>
+        <Flex align="center" gap={3}>
+          <Icon as={IconCalendar} />
+          <Text>Quando começa?</Text>
+        </Flex>
+        <DatePicker dateSelected={dateSelected} onSelectDate={setDateSelected} />
       </Flex>
-      <DatePicker />
-    </Flex>
-    <Flex flexDir="column" gap={2}>
-      <Flex align="center" gap={3}>
-        <Icon as={IconPersons} />
-        <Text>Quantas pessoas?</Text>
+      <Flex w="full" flexDir="column" gap={2}>
+        <Flex align="center" gap={3}>
+          <Icon as={IconPersons} />
+          <Text>Quantas pessoas?</Text>
+        </Flex>
+        <Input />
       </Flex>
-      <Input />
+      <ButtonPrimary mt={8} borderRadius="lg" h="3.1em" />
     </Flex>
-    <ButtonPrimary mt={8} borderRadius="lg" h="3.1em" />
-  </Flex>
-)
+  )
+}
 
 const objDisplays = [
   <TabOne />,

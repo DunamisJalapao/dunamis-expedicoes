@@ -10,13 +10,21 @@ export function Contact({ ...rest }: ContactType) {
     <Flex
       w="100vw"
       h="60vh"
-      bg="green.100"
-      bgImage="/bg.jpeg"
-      bgSize="cover"
-      bgPos="center"
+      flexDir="column"
       pos="relative"
-      {...rest}
     >
+      <Flex
+        w="full"
+        h="full"
+        bg="green.100"
+        bgImage="/bg.jpeg"
+        bgSize="cover"
+        bgPos="center"
+        bgAttachment="fixed"
+        bgRepeat="no-repeat"
+        {...rest}
+      >
+      </Flex>
       <Flex
         w="full"
         h="full"
@@ -30,12 +38,12 @@ export function Contact({ ...rest }: ContactType) {
         textAlign="center"
         px={4}
         gap={10}
+        pos="absolute"
       >
         <Text>Algum Duvida?</Text>
         <Text>Vamos tornar seus sonhos em realidade</Text>
         <ButtonPrimary w="16rem" h="4rem" />
       </Flex>
-
     </Flex>
   )
 }

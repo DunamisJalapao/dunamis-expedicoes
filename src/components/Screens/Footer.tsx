@@ -43,7 +43,6 @@ export function Footer() {
     )
   }
 
-
   return (
     <Flex w={{ base: "full", md: "100vw" }} h={{ base: "full", md: "30vh" }} px={{ base: 4, md: 60 }} py={{ base: 12, md: 0 }} align="center" justify="center" flexDir="column" gap={5}>
       <Flex w="full" textTransform="uppercase" gap={16} fontSize="20px" fontWeight="bold" align="center" color="black" justify="space-between">

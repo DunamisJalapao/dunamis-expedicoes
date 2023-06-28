@@ -25,7 +25,8 @@ export function Gallery({ ...rest }: ItinerariesType) {
 
   const search = async () => {
     const response = await getPhotos();
-    if (response !== undefined) {
+    console.log("response =>", response)
+    if (response.length > 0) {
       console.log(response[0])
       response[0].images.map(image => {
         console.log(photosGallery.includes(image.url));

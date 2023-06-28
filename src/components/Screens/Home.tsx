@@ -19,21 +19,6 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
     100% { transform:translate(0,10px) rotate(45deg); opacity: 0; }
   `
 
-  const photosMemo = async () => {
-    const response = await getPhotos();
-    if (response !== undefined) {
-      console.log(response[0])
-      response[0].images.map(image => {
-        console.log(photosGallery.includes(image.url));
-        if (!photosGallery.includes(image.url)) setphotosGallery(prev => [...prev, image.url])
-      })
-    }
-  }
-
-  useEffect(() => {
-    photosMemo();
-  }, [])
-
   return (
     <Flex
       w="100vw"

@@ -16,6 +16,7 @@ import IconPhotos from '../../public/assets/icon-photos.svg';
 import { CardVantagens } from "./CardVantagens";
 import { useState } from "react";
 import { DatePicker } from "./Forms/DatePicker";
+import { format } from "date-fns";
 
 
 type TabsHome = FlexProps & {};
@@ -94,7 +95,14 @@ const TabTwo = () => (
 
 const TabThree = () => {
   const [dateSelected, setDateSelected] = useState<Date | undefined>();
-  const handleSaveDate = () => { }
+  const [packs, setPacks] = useState('');
+  const [qtdPersons, setQtdPersons] = useState(0);
+
+  const handleSaveDate = () => {
+    let msg = encodeURIComponent(`Olá! Gostaria de fazer uma reserva de um pacote ${packs} no dia ${format(dateSelected!, 'dd/MM/yyy')} para ${qtdPersons} pessoas`);
+    window.open(`https://api.whatsapp.com/send?phone=556392437096&text=${msg}`);
+  }
+
   return (
     <Flex px={10} w="full" justify="space-around" gap={10}>
       <Flex w="full" flexDir="column" gap={2}>
@@ -102,10 +110,10 @@ const TabThree = () => {
           <Icon as={IconPin} />
           <Text>Pacotes</Text>
         </Flex>
-        <Select placeholder="Pacotes">
-          <option value="3dias"> ROTEIRO 3 DIAS</option>
-          <option value="4dias"> ROTEIRO 4 DIAS</option>
-          <option value="5dias"> ROTEIRO 5 DIAS</option>
+        <Select onChange={(e: any) => setPacks(e.target.value)} placeholder="Pacotes" _placeholder={{ color: 'red' }}>
+          <option value="ROTEIRO 3 DIAS"> ROTEIRO 3 DIAS</option>
+          <option value="ROTEIRO 4 DIAS"> ROTEIRO 4 DIAS</option>
+          <option value="ROTEIRO 5 DIAS"> ROTEIRO 5 DIAS</option>
         </Select>
       </Flex>
       <Flex w="full" flexDir="column" gap={2}>
@@ -120,9 +128,12 @@ const TabThree = () => {
           <Icon as={IconPersons} />
           <Text>Quantas pessoas?</Text>
         </Flex>
-        <Input />
+        <Input
+          value={qtdPersons}
+          onChange={(e: any) => setQtdPersons(e.target.value)}
+        />
       </Flex>
-      <ButtonPrimary mt={8} borderRadius="lg" h="3.1em" />
+      <ButtonPrimary onClick={handleSaveDate} mt={8} borderRadius="lg" h="3.1em" />
     </Flex>
   )
 }

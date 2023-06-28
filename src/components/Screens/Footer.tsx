@@ -1,7 +1,7 @@
 "use client"
 
 import { Divider, Flex, Icon, Text, Image, Box, useMediaQuery } from "@chakra-ui/react";
-import { FaWhatsapp, FaInstagram, FaFacebookF } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { TfiTwitter } from 'react-icons/tfi'
 
 import LogoPNG from '../../../public/assets/logo.png';
@@ -11,6 +11,13 @@ import { NavBar } from "../NavBar";
 
 export function Footer() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
+
+  const listIcons = [
+    { icon: FaWhatsapp, route: 'https://api.whatsapp.com/send?phone=556392437096' },
+    { icon: FaInstagram, route: 'https://www.instagram.com/dunamis_expedicoes/' },
+    { icon: FaTiktok, route: 'https://www.tiktok.com/@dunamis_expedicoes' },
+    { icon: FaYoutube, route: 'https://www.youtube.com/@dunamis_expedicoes' },
+  ]
 
   if (isMobile) {
     return (
@@ -22,18 +29,11 @@ export function Footer() {
           <Text>Dunamis Expedições</Text>
         </Flex>
         <Flex w="50%" fontSize="xl" justify="space-between" color="#0000006c">
-          <Flex p={1} pr={3} borderRight="2px solid #00000022" >
-            <Icon as={FaWhatsapp} />
-          </Flex>
-          <Flex p={1} pr={3} borderRight="2px solid #00000022">
-            <Icon as={FaInstagram} />
-          </Flex>
-          <Flex p={1} pr={3} borderRight="2px solid #00000022">
-            <Icon as={FaFacebookF} />
-          </Flex>
-          <Flex p={1} pr={3} borderRight="2px solid #00000022">
-            <Icon as={TfiTwitter} />
-          </Flex>
+          {listIcons.map((buttons, _) => (
+            <Flex cursor="pointer" as="a" target="_blank" href={buttons.route} key={_} p={1} pr={3} borderRight="2px solid #00000022" _hover={{ trasform: 'scale(1.5)' }}>
+              <Icon as={buttons.icon} />
+            </Flex>
+          ))}
         </Flex>
         <Flex flex={1} flexDir="column" >
           <Text>Design and Develop</Text>
@@ -50,19 +50,12 @@ export function Footer() {
           <NavBar color="black" />
         </Flex>
 
-        <Flex w={{ base: "full", md: "20%" }} justify="space-between">
-          <Flex p={3} border="2px solid #112126ff" borderRadius="50%">
-            <Icon as={FaWhatsapp} color="whatsapp.600" />
-          </Flex>
-          <Flex p={3} border="2px solid #112126ff" borderRadius="50%">
-            <Icon as={FaInstagram} />
-          </Flex>
-          <Flex p={3} border="2px solid #112126ff" borderRadius="50%">
-            <Icon as={FaFacebookF} color="facebook.600" />
-          </Flex>
-          <Flex p={3} border="2px solid #112126ff" borderRadius="50%">
-            <Icon as={TfiTwitter} color="twitter.600" />
-          </Flex>
+        <Flex w={{ base: "full", md: "20%" }} justify="right">
+          {listIcons.map((buttons, _) => (
+            <Flex cursor="pointer" as="a" target="_blank" href={buttons.route} key={_} p={3} ml={6} border="2px solid #112126ff" borderRadius="50%" _hover={{ trasform: 'scale(1.5)' }}>
+              <Icon as={buttons.icon} />
+            </Flex>
+          ))}
         </Flex>
       </Flex>
 

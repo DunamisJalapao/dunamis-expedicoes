@@ -5,6 +5,7 @@ import { About } from "@/types";
 import { Flex, FlexProps, Image, Text } from "@chakra-ui/react";
 import { PortableText } from "@portabletext/react";
 import { useEffect, useState } from "react";
+import { Fade } from "react-awesome-reveal";
 
 type AboutType = FlexProps & {}
 
@@ -31,15 +32,19 @@ export function AboutScreen({ ...rest }: AboutType) {
         align="center"
         flexDir={{ base: 'column', md: 'row' }}
       >
-        <Flex w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} borderRadius="25px" overflow="auto" boxShadow="0px 58px 50px -27px rgba(210, 181, 151, 1),0px 8px 100px 13px rgba(0,0,0,0.1)">
-          <Image w="full" src={aboutObj.image} objectFit="cover" />
+        <Flex zIndex={1} w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} borderRadius="25px" overflow="hidden" boxShadow="0px 58px 50px -27px rgba(210, 181, 151, 1),0px 8px 100px 13px rgba(0,0,0,0.1)">
+          <Fade>
+            <Image w="full" src={aboutObj.image} objectFit="cover" />
+          </Fade>
         </Flex>
-        <Flex w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} >
-          <Text fontSize={{ base: "md", md: "3xl" }}>
-            <PortableText value={aboutObj.description} />
-          </Text>
+        <Flex zIndex={0} w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} >
+          <Fade direction="left" delay={500}>
+            <Text fontSize={{ base: "md", md: "3xl" }}>
+              <PortableText value={aboutObj.description} />
+            </Text>
+          </Fade>
         </Flex>
       </Flex>
-    </Flex>
+    </Flex >
   )
 }

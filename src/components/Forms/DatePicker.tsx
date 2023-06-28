@@ -41,7 +41,6 @@ export function DatePicker({
     onSelectDate(day);
   }
 
-
   return (
     <>
       <Popover>
@@ -64,7 +63,7 @@ export function DatePicker({
 
                   {...rest}
                 >
-                  <Text userSelect="none" color={'inherit'}>{(!!dateSelected) ? format(dateSelected!, 'dd/MM/yyyy') : 'Selecione a data'}</Text>
+                  <Text userSelect="none" color={!!dateSelected ? 'inherit' : 'gray.400'}>{(!!dateSelected) ? format(dateSelected!, 'dd/MM/yyyy') : 'Selecione a data'}</Text>
                 </Flex>
               </FormControl>
 

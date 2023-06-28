@@ -31,7 +31,7 @@ export function HomeScreen({ ...rest }: HomeScreenType) {
         pos="relative"
       >
         <AspectRatio w="full" ratio={1}>
-          <video autoPlay muted loop preload="auto">
+          <video playsInline autoPlay muted loop preload="auto">
             <source src="/video_bg.mp4" type="video/mp4" />
           </video>
         </AspectRatio>

@@ -9,7 +9,7 @@ import { Fade } from "react-awesome-reveal";
 
 type AboutType = FlexProps & {}
 
-export function AboutScreen({ ...rest }: AboutType) {
+export default function AboutScreen({ ...rest }: AboutType) {
   const [aboutObj, setAboutObj] = useState<About>({} as About);
 
   const search = async () => {

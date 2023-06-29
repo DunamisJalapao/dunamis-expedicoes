@@ -9,7 +9,7 @@ import { SlideShow } from "../SlideShow";
 
 type HomeScreenType = FlexProps & {}
 
-export function HomeScreen({ ...rest }: HomeScreenType) {
+export default function HomeScreen({ ...rest }: HomeScreenType) {
   const [photosGallery, setphotosGallery] = useState<string[]>([] as string[]);
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 

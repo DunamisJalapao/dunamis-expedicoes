@@ -5,7 +5,7 @@ import { ButtonPrimary } from "../ButtonPrimary";
 
 type ContactType = FlexProps & {}
 
-export function Contact({ ...rest }: ContactType) {
+export default function Contact({ ...rest }: ContactType) {
   return (
     <Flex
       w="100vw"
@@ -20,7 +20,7 @@ export function Contact({ ...rest }: ContactType) {
         bgImage="/bg.jpeg"
         bgSize="cover"
         bgPos="center"
-        bgAttachment="fixed"
+        bgAttachment={{ base: "inherit", md: "fixed" }}
         bgRepeat="no-repeat"
         {...rest}
       >

@@ -31,10 +31,10 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
               h="65%"
               overflow="hidden"
               boxShadow={`0px 30px 40px -27px ${data}`}
-
             >
               <Image
                 src={card.image}
+                w="full"
                 objectFit="cover"
                 transition="transform .2s ease"
                 _hover={{

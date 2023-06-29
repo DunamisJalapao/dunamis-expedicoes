@@ -16,7 +16,7 @@ const leftToRight = keyframes`
   to {transform: translate(0)}
 `
 
-export function Gallery({ ...rest }: ItinerariesType) {
+export default function Gallery({ ...rest }: ItinerariesType) {
   const [photosGallery, setphotosGallery] = useState<string[]>([] as string[]);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -25,7 +25,6 @@ export function Gallery({ ...rest }: ItinerariesType) {
 
   const search = async () => {
     const response = await getPhotos();
-    console.log("response =>", response)
     if (response.length > 0) {
       console.log(response[0])
       response[0].images.map(image => {
@@ -52,6 +51,7 @@ export function Gallery({ ...rest }: ItinerariesType) {
           <Flex w="full" gap={2} animation={animationToRight}>
             {photosGallery.map((photos, index) => (
               <Flex
+                key={index}
                 minW={{ base: "150px", md: "350px" }}
                 h={{ base: '150px', md: "250px" }}
                 bgImage={photos}
@@ -68,6 +68,7 @@ export function Gallery({ ...rest }: ItinerariesType) {
           >
             {photosGallery.map((photos, index) => (
               <Flex
+                key={index}
                 minW={{ base: "150px", md: "350px" }}
                 h={{ base: '150px', md: "250px" }}
                 bgImage={photos}

@@ -7,7 +7,7 @@ import { Attractivie } from "@/types";
 import { getAttractivies } from "@/sanity/sanity-utils";
 type PackType = FlexProps & {}
 
-export function Places({ ...rest }: PackType) {
+export default function Places({ ...rest }: PackType) {
   const [dataCard, setDataCard] = useState<Attractivie[]>([] as Attractivie[]);
   console.log("dataCard =>", dataCard);
 
@@ -26,8 +26,8 @@ export function Places({ ...rest }: PackType) {
         <Text align="center" fontSize={{ base: "2xl", md: "5xl" }} color="#112126ff" fontWeight="bold" fontFamily="var(--font-lato)">Encontre os lugares <br /> para se apaixonar</Text>
         <Flex w="full" h="full" justify="center" px={{ base: 5, md: 0 }}>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacingX='20px' spacingY={{ base: '20px', md: "0px" }}>
-            {dataCard.map(card => (
-              <CardPlaces card={card} />
+            {dataCard.map((card, _) => (
+              <CardPlaces key={_} card={card} />
             ))}
           </SimpleGrid>
         </Flex>

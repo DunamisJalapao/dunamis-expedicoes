@@ -9,7 +9,7 @@ import { NavBar } from "../NavBar";
 
 // ARRUMAR O FOOTER QUE NEM O DO VERCEL
 
-export function Footer() {
+export default function Footer() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   const listIcons = [

@@ -147,8 +147,8 @@ const objDisplays = [
 export function TabsHome({ ...rest }: TabsHome) {
   const [dataTabs, setDataTabs] = useState(0);
   const objHeight = [
-    '50%',
-    '50%',
+    { base: "60%", '2xl': '50%' },
+    { base: "75%", '2xl': '50%' },
     '30%',
   ]
 
@@ -161,7 +161,7 @@ export function TabsHome({ ...rest }: TabsHome) {
   return (
     <Flex
       flexDir="column"
-      w={objWidth[dataTabs]}
+      w={{ base: "full", xl: objWidth[dataTabs] }}
       mb="-15vh"
       h={objHeight[dataTabs]}
       bg="white"

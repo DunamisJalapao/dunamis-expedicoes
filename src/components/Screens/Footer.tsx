@@ -10,7 +10,7 @@ import { NavBar } from "../NavBar";
 // ARRUMAR O FOOTER QUE NEM O DO VERCEL
 
 export default function Footer() {
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 820px)");
 
   const listIcons = [
     { icon: FaWhatsapp, route: 'https://api.whatsapp.com/send?phone=556392437096' },

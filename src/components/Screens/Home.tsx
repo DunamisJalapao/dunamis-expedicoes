@@ -11,7 +11,7 @@ type HomeScreenType = FlexProps & {}
 
 export default function HomeScreen({ ...rest }: HomeScreenType) {
   const [photosGallery, setphotosGallery] = useState<string[]>([] as string[]);
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 820px)");
 
   const animateArrow = keyframes`
     0%   { transform:translate(0,-10px) rotate(45deg); opacity: 0;  }
@@ -44,7 +44,7 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
           h="full"
           flexDir="column"
           align="center"
-          px={{ base: "20px", md: "220px" }}
+          px={{ base: "20px", "2xl": "220px" }}
           py="13px"
 
           justify="space-between"

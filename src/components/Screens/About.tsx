@@ -26,7 +26,7 @@ export default function AboutScreen({ ...rest }: AboutType) {
       <Text mt={{ base: 5, md: 0 }} mb={{ base: 5, md: 0 }} align="center" fontSize={{ base: "2xl", md: "5xl" }} color="#112126ff" textTransform="uppercase" fontWeight="bold" fontFamily="var(--font-lemonMilk)">Sobre Nós</Text>
       <Flex
         mt={{ base: 0, md: 14 }}
-        px={{ base: 0, md: 96 }}
+        px={{ base: 0, sm: 14, '2xl': 96 }}
         gap={{ base: 5, md: 10 }}
         w="full"
         align="center"

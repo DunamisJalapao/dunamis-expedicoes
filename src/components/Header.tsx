@@ -9,7 +9,7 @@ import { CgMenuRight } from 'react-icons/cg';
 import { useUtils } from "@/hooks/utils";
 
 export function Header() {
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 820px)");
   const { isOpen, onToggle } = useUtils();
   return (
     <Flex
@@ -23,7 +23,7 @@ export function Header() {
       px={{ base: "0.5rem", md: "4rem" }}
       align="center"
     >
-      <Flex w={{ base: "25%", md: "50%" }}>
+      <Flex w={{ base: "25%", md: "40%", "2xl": "50%" }}>
         <Image
           src="/assets/logo.png"
           w="5rem"

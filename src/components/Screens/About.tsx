@@ -37,9 +37,9 @@ export default function AboutScreen({ ...rest }: AboutType) {
             <Image w="full" src={aboutObj.image} objectFit="cover" />
           </Fade>
         </Flex>
-        <Flex zIndex={0} w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} >
+        <Flex zIndex={0} w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} textAlign={{ base: 'center', md: 'left' }} >
           <Fade direction="left" delay={500}>
-            <Text fontSize={{ base: "md", md: "3xl" }}>
+            <Text fontSize={{ base: "md", md: "2xl", xl: "3xl" }}>
               <PortableText value={aboutObj.description} />
             </Text>
           </Fade>

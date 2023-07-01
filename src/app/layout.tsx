@@ -35,11 +35,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${lato.variable} ${lemonMilk.variable}`}>
-        <Suspense fallback={<Loading />}>
-          <Providers>
+        <Providers>
+          <Suspense fallback={<Loading />}>
             {children}
-          </Providers>
-        </Suspense>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   )

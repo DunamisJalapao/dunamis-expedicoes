@@ -1,10 +1,9 @@
 "use client"
 
-import { Divider, Flex, Icon, Text, Image, Box, useMediaQuery } from "@chakra-ui/react";
-import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
-import { TfiTwitter } from 'react-icons/tfi'
+import { Divider, Flex, Icon, Text, useMediaQuery } from "@chakra-ui/react";
+import Image from 'next/image';
+import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
-import LogoPNG from '../../../public/assets/logo.png';
 import { NavBar } from "../NavBar";
 
 // ARRUMAR O FOOTER QUE NEM O DO VERCEL
@@ -21,25 +20,35 @@ export default function Footer() {
 
   if (isMobile) {
     return (
-      <Flex w="full" h="full" px={4} py={6} align="center" justify="center" flexDir="column" gap={10} color="#0000006c" textAlign="center">
-        <Image w="35%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
+      <div className="flex w-full h-full px-4 py-4 items-center justify-center flex-col gap-10 color-[#0000006c] text-center">
+
+        <div className="w-[35%] relative">
+          <Image
+            src='/assets/logo.png'
+            alt="logo Dunamis Expedições"
+            fill
+          />
+        </div>
+
         <NavBar textAlign="left" isFooter={true} color="black" />
-        <Flex flexDir="column" fontFamily="var(--font-lato)">
-          <Text>© Todos os direitos reservados</Text>
-          <Text>Dunamis Expedições</Text>
-        </Flex>
-        <Flex w="50%" fontSize="xl" justify="space-between" color="#0000006c">
+
+        <div className="flex flex-col font-lato">
+          <p>© Todos os direitos reservados</p>
+          <p>Dunamis Expedições</p>
+        </div>
+        <div className="flex w-1/2 text-xl justify-between">
           {listIcons.map((buttons, _) => (
             <Flex cursor="pointer" as="a" target="_blank" href={buttons.route} key={_} p={1} pr={3} borderRight="2px solid #00000022" _hover={{ trasform: 'scale(1.5)' }}>
               <Icon as={buttons.icon} />
             </Flex>
           ))}
-        </Flex>
-        <Flex flex={1} flexDir="column" >
-          <Text>Design and Develop</Text>
-          <Text>João Vitor Soares</Text>
-        </Flex>
-      </Flex>
+        </div>
+
+        <div className="flex flex-1 flex-col">
+          <p>Design and Develop</p>
+          <p>João Vitor Soares</p>
+        </div>
+      </div>
     )
   }
 

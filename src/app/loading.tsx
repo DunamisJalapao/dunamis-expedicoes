@@ -1,14 +1,11 @@
 "use client"
 
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 export default function Loading() {
   return (
-
-    <Flex w="100vw" h="100vh" flexDir="column" gap={2} align="center" justify="center">
-      <Spinner size="lg" />
+    <div className="flex w-screen h-screen flex-col gap-2 items-center justify-center">
       <Text>Carregando...</Text>
-    </Flex>
-
+    </div>
   )
 }

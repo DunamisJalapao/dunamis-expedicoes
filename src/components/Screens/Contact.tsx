@@ -40,7 +40,7 @@ export default function Contact({ ...rest }: ContactType) {
         gap={10}
         pos="absolute"
       >
-        <Text>Algum Duvida?</Text>
+        <Text>Alguma Duvida?</Text>
         <Text>Vamos tornar seus sonhos em realidade</Text>
         <ButtonPrimary w="16rem" h="4rem" />
       </Flex>

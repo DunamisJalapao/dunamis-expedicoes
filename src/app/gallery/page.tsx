@@ -1,9 +1,8 @@
 "use client"
 
 import { getPhotos } from "@/sanity/sanity-utils";
-import { Flex, FlexProps, GridItem, Image, SimpleGrid, Text, keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Photos } from "@/types";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default function Gallery() {
@@ -25,15 +24,14 @@ export default function Gallery() {
   }, [])
 
   return (
-    <Flex w="100vw" h="100vh">
-      <Flex w="full" h="full" py={10} flexDir="column">
+    <div className="flex w-screen h-screen overflow-x-hidden">
+      <div className="flex w-full h-full py-10 flex-col gap-5">
+        <div className="flex px-5 md:px-10 flex-col font-bold">
+          <p className="font-lato text-4xl">Galeria</p>
+          {/* <p>Pequeno parágrafo para a galeria</p> */}
+        </div>
 
-        <Flex px={{ base: 5, md: 20 }} flexDir="column" fontWeight="bold">
-          <Text fontFamily="var(--font-lato)" fontSize="5xl">Galeria</Text>
-          <Text>Pequeno parágrafo para a galeria</Text>
-        </Flex>
-
-        <Flex justify="center" py={10} px={{ base: 5, md: 10 }} flexDir="column">
+        <div className="flex justify-center px-5 md:px-10 flex-col">
           <ResponsiveMasonry
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           >
@@ -43,10 +41,8 @@ export default function Gallery() {
               ))}
             </Masonry>
           </ResponsiveMasonry>
-
-        </Flex>
-
-      </Flex>
-    </Flex >
+        </div>
+      </div>
+    </div>
   )
 }

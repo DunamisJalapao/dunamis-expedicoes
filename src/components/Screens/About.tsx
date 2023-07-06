@@ -2,12 +2,12 @@
 
 import { getAbout } from "@/sanity/sanity-utils";
 import { About } from "@/types";
-import { Flex, FlexProps, Image, Text } from "@chakra-ui/react";
 import { PortableText } from "@portabletext/react";
-import { useEffect, useState } from "react";
+import Image from 'next/image';
+import { HTMLAttributes, useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 
-type AboutType = FlexProps & {}
+type AboutType = HTMLAttributes<HTMLDivElement> & {}
 
 export default function AboutScreen({ ...rest }: AboutType) {
   const [aboutObj, setAboutObj] = useState<About>({} as About);
@@ -21,30 +21,29 @@ export default function AboutScreen({ ...rest }: AboutType) {
   useEffect(() => {
     search();
   }, [])
+
   return (
-    <Flex flexDir="column" align="center" justify={{ base: 'inherit', md: 'center' }} w={{ base: "full", md: "100vw" }} h={{ base: "full", md: "100vh" }} bg="#F8F8F8" {...rest}>
-      <Text mt={{ base: 5, md: 0 }} mb={{ base: 5, md: 0 }} align="center" fontSize={{ base: "2xl", md: "5xl" }} color="#112126ff" textTransform="uppercase" fontWeight="bold" fontFamily="var(--font-lemonMilk)">Sobre Nós</Text>
-      <Flex
-        mt={{ base: 0, md: 14 }}
-        px={{ base: 0, sm: 14, '2xl': 96 }}
-        gap={{ base: 5, md: 10 }}
-        w="full"
-        align="center"
-        flexDir={{ base: 'column', md: 'row' }}
-      >
-        <Flex zIndex={1} w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} borderRadius="25px" overflow="hidden" boxShadow="0px 58px 50px -27px rgba(210, 181, 151, 1),0px 8px 100px 13px rgba(0,0,0,0.1)">
-          <Fade>
-            <Image w="full" src={aboutObj.image} objectFit="cover" />
+    <div {...rest} className="flex flex-col items-center md:justify-center w-full md:w-screen h-full md:h-screen bg-[#f8f8f8]">
+      <h1 className="mt-5 md:mt-0 mb-5 md:mb-0 items-center text-4xl md:text-5xl text-[#112126ff] uppercase font-bold font-lemon-milk">Sobre nós</h1>
+      <div className="flex mt-0 md:mt-14 px-0 sm:px-14 2xl:px-96 gap-5 md:gap-10 w-full items-center flex-col md:flex-row">
+        <div className="flex z-10 w-[20rem] md:w-[50rem] h-[20rem] md:h-[40rem] rounded-[25px] overflow-hidden shadow-[0px 58px 50px -27px rgba(210, 181, 151, 1),0px 8px 100px 13px rgba(0,0,0,0.1)]">
+          <Fade className="w-full relative">
+            <Image
+              src={aboutObj.image}
+              alt="image about"
+              fill
+              className="object-cover"
+            />
           </Fade>
-        </Flex>
-        <Flex zIndex={0} w={{ base: "20rem", md: "50rem" }} h={{ base: "20rem", md: "40rem" }} textAlign={{ base: 'center', md: 'left' }} >
+        </div>
+        <div className="flex z-0 w-[20rem] md:w-[50rem] h-[20rem] md:h-[40rem] text-center md:text-left">
           <Fade direction="left" delay={500}>
-            <Text fontSize={{ base: "md", md: "2xl", xl: "3xl" }}>
+            <div className="text-md md:text-xl xl:text-2xl">
               <PortableText value={aboutObj.description} />
-            </Text>
+            </div>
           </Fade>
-        </Flex>
-      </Flex>
-    </Flex >
+        </div>
+      </div>
+    </div>
   )
 }

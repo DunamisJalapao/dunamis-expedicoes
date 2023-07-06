@@ -1,8 +1,7 @@
 import { Lato } from 'next/font/google'
-import { Providers } from './providers'
 import localFont from 'next/font/local'
-import { Suspense } from 'react'
-import Loading from './loading'
+import '../styles/globals.css'
+import { Providers } from './providers'
 
 const lato = Lato({ subsets: ['latin'], weight: ["400", "700", "900"], style: 'normal', variable: '--font-lato' })
 
@@ -36,9 +35,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${lato.variable} ${lemonMilk.variable}`}>
         <Providers>
-          <Suspense fallback={<Loading />}>
-            {children}
-          </Suspense>
+          {children}
         </Providers>
       </body>
     </html>

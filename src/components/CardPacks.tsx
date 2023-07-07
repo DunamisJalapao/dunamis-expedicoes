@@ -1,59 +1,48 @@
 "use client"
 
-import { Flex, Text, Icon, FlexProps } from "@chakra-ui/react";
 import IconChecked from '../../public/assets/icon-checked.svg'
 import Link from "next/link";
+import { HTMLAttributes } from "react";
 
-type CardPacksType = FlexProps & {
+type CardPacksType = HTMLAttributes<HTMLDivElement> & {
   title: string,
   duration: string,
   foods: string,
   hotel: string,
-  doc: string;
+  doc: string,
+  img: string,
 }
 
-export function CardPacks({ duration, foods, hotel, title, doc, ...rest }: CardPacksType) {
+export function CardPacks({ duration, foods, hotel, img, title, doc, ...rest }: CardPacksType) {
   return (
     <Link href={doc} target="_blank" passHref>
-      <Flex
-        px={4}
-        py={4}
-        w="15rem"
-        h="15rem"
-        borderRadius="xl"
-        flexDir="column"
-        justify="space-between"
-        bg="white"
-        boxShadow="xl"
-        cursor="pointer"
-        transition="0.1s linear"
-        _hover={{
-          transform: 'scale(1.03)'
-        }}
-        {...rest}
-      >
-        <Flex flexDir="column">
-          <Text fontSize="sm" fontFamily="var(--font-lemonMilk)" color="#2E5C2E" textTransform="uppercase">Nome</Text>
-          <Text color="#FF5A00" fontSize="2xl" fontWeight="bold">{title}</Text>
-        </Flex>
-        <Flex flexDir="column">
-          <Text color="#2E5C2E" fontFamily="var(--font-lemonMilk)" textTransform="uppercase">Informações</Text>
-          <Flex align="center" gap={2}>
-            <Icon as={IconChecked} />
-            <Text>{duration}</Text>
-          </Flex>
-          <Flex align="center" gap={2}>
-            <Icon as={IconChecked} />
-            <Text>{foods}</Text>
-          </Flex>
-          <Flex align="center" gap={2}>
-            <Icon as={IconChecked} />
-            <Text>{hotel}</Text>
-          </Flex>
-        </Flex>
+      <div {...rest} className="flex w-[25rem] h-[25rem] rounded-xl flex-col overflow-hidden bg-white shadow-xl cursor-pointer duration-100 hover:scale-105">
+        <div className="w-full h-[25rem] overflow-hidden">
+          <img className='w-full h-full object-cover' src={img} alt="" />
+        </div>
+        <div className='flex px-4 pt-4 pb-4 flex-col h-full justify-between'>
+          <div className="flex">
+            <p className="text-[#FF5A00] text-2xl font-bold">{title}</p>
+          </div>
+          <div className="flex flex-col ">
+            <p className="text-[#2E5C2E] font-lemon-milk uppercase">Informações</p>
+            <div className="flex items-center gap-2">
+              <IconChecked width="1rem" />
+              <p>{duration}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <IconChecked width="1rem" />
+              <p>{foods}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <IconChecked width="1rem" />
+              <p>{hotel}</p>
+            </div>
+          </div>
+          <p className="text-[#FF5A00] text-md font-lemon-milk text-center">Saiba mais+</p>
+        </div>
 
-        <Text color="#FF5A00" fontSize="md" fontFamily="var(--font-lemonMilk)" textAlign="center">Saiba mais+</Text>
-      </Flex>
+      </div>
     </Link>
 
   )

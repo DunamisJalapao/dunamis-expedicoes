@@ -9,7 +9,7 @@ import { CgMenuRight } from 'react-icons/cg';
 import { useUtils } from "@/hooks/utils";
 
 export function Header() {
-  const [isMobile] = useMediaQuery("(max-width: 820px)");
+  const [isMobile] = useMediaQuery("(max-width: 1024px)");
   const { isOpen, onToggle } = useUtils();
   return (
     <Flex
@@ -39,7 +39,7 @@ export function Header() {
           </Flex>
           :
           <>
-            <NavBar />
+            <NavBar className="lg:ml-auto mr-auto" />
             <ButtonPrimary />
           </>
         }

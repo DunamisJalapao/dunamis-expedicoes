@@ -4,95 +4,35 @@ import { AspectRatio, Box, Flex, FlexProps, Image, keyframes, useMediaQuery } fr
 import { Header } from "../Header";
 import { TabsHome } from "../TabsHome";
 import { getPhotos } from '@/sanity/sanity-utils';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { HTMLAttributes, useCallback, useEffect, useMemo, useState } from 'react';
 import { SlideShow } from "../SlideShow";
 
-type HomeScreenType = FlexProps & {}
+type HomeScreenType = HTMLAttributes<HTMLDivElement> & {}
 
 export default function HomeScreen({ ...rest }: HomeScreenType) {
-  const [photosGallery, setphotosGallery] = useState<string[]>([] as string[]);
   const [isMobile] = useMediaQuery("(max-width: 820px)");
-
-  const animateArrow = keyframes`
-    0%   { transform:translate(0,-10px) rotate(45deg); opacity: 0;  }
-    50%  { opacity: 1;  }
-    100% { transform:translate(0,10px) rotate(45deg); opacity: 0; }
-  `
-
   return (
-    <Flex
-      w="100vw"
-      h="100vh"
-      {...rest}
-    >
-      <Flex
-        w="full"
-        h={{ base: "100vh", md: "80vh" }}
-        pos="relative"
-      >
+    <div {...rest} className="flex w-screen h-screen">
+      <div className="flex w-full h-screen md:h-[80vh] relative">
         <AspectRatio w="full" ratio={1}>
           <video playsInline autoPlay muted loop preload="auto">
             <source src="/video_bg.mp4" type="video/mp4" />
           </video>
         </AspectRatio>
 
-        <Flex
-          pos="absolute"
-          top={0}
-          left={0}
-          w="full"
-          h="full"
-          flexDir="column"
-          align="center"
-          px={{ base: "20px", "2xl": "220px" }}
-          py="13px"
-
-          justify="space-between"
-        >
+        <div className="flex absolute top-0 left-0 w-full h-full flex-col items-center px-[20px] 2xl:px-[220px] py-[13px] justify-between">
           <Header />
           {!isMobile ?
             <TabsHome />
             :
             <>
-              <Box
-                position="absolute"
-                left="50%"
-                bottom="10px"
-                display="block"
-                textAlign="center"
-                fontSize="20px"
-                zIndex={100}
-                textDecoration="none"
-                textShadow={0}
-                width="25px"
-                height="25px"
-                borderBottom="4px solid #fff"
-                borderRight="4px solid #fff"
-                boxShadow="lg"
-                animation={`${animateArrow} 3s ease-in-out infinite`}
-              />
-              <Box
-                position="absolute"
-                left="50%"
-                bottom="25px"
-                display="block"
-                textAlign="center"
-                fontSize="20px"
-                zIndex={100}
-                textDecoration="none"
-                textShadow={0}
-                width="25px"
-                height="25px"
-                borderBottom="4px solid #fff"
-                borderRight="4px solid #fff"
-                boxShadow="lg"
-                animation={`${animateArrow} 3s ease-in-out infinite`}
-              />
+              <div className="absolute left-1/2 bottom-[10px] block text-center text-xl z-50 no-underline w-[25px] h-[25px] shadow-lg border-b-4 border-b-[#fff] border-r-4 border-r-[#fff] animate-arrow-scroll" />
+              <div className="absolute left-1/2 bottom-[25px] block text-center text-xl z-50 no-underline w-[25px] h-[25px] shadow-lg border-b-4 border-b-[#fff] border-r-4 border-r-[#fff] animate-arrow-scroll" />
             </>
           }
-        </Flex>
-      </Flex>
+        </div>
 
-    </Flex >
+      </div>
+    </div>
   )
 }

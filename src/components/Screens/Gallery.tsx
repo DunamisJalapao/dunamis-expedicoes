@@ -2,10 +2,10 @@
 
 import { getPhotos } from "@/sanity/sanity-utils";
 import { Flex, FlexProps, GridItem, Image, SimpleGrid, Text, keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 import { Photos } from "@/types";
 
-type ItinerariesType = FlexProps & {}
+type ItinerariesType = HTMLAttributes<HTMLDivElement> & {}
 
 const rightToLeft = keyframes`
   from {transform: translate(0);}
@@ -39,47 +39,30 @@ export default function Gallery({ ...rest }: ItinerariesType) {
   }, [])
 
   return (
-    <Flex w={{ base: "full", md: "100vw" }} h={{ base: "full", md: "100vh" }}   {...rest}>
-      <Flex w="full" h="full" pt={{ base: 4, md: 10 }} pb={{ base: 8, md: 10 }} flexDir="column" bg="#F8F8F8" gap={5}>
-
-        <Flex px={{ base: 5, md: 20 }} flexDir="column" fontWeight="bold">
-          <Text fontFamily="var(--font-lato)" fontSize="5xl">Galeria</Text>
-          <Text>Pequeno parágrafo para a galeria</Text>
-        </Flex>
-
-        <Flex h="full" justify="center" flexDir="column" gap={2}>
-          <Flex w="full" gap={2} animation={animationToRight}>
+    <div {...rest} className="flex w-full md:w-screen h-full md:h-screen">
+      <div className="flex w-full h-full pt-4 md:pt-10 pb-8 md:pb-10 flex-col bg-[#F8F8F8] gap-5">
+        <div className="flex px-5 md:px-20 flex-col font-bold">
+          <p className="font-lato text-5xl">Galeria</p>
+          <p>Pequeno parágrafo para a galeria</p>
+        </div>
+        <div className="flex h-full justify-center flex-col gap-2">
+          <div className="flex w-full gap-2 animate-right-roll">
             {photosGallery.map((photos, index) => (
-              <Flex
-                key={index}
-                minW={{ base: "150px", md: "350px" }}
-                h={{ base: '150px', md: "250px" }}
-                bgImage={photos}
-                bgSize="cover"
-                rounded="xl"
-              />
+              <div key={index} className={`flex min-w-[150px] md:min-w-[350px] h-[150px] md:h-[250px] bg-cover rounded-xl overflow-hidden`}>
+                <img className="w-full object-cover" src={photos} alt={`photo-gallery-${index}`} />
+              </div>
             ))}
-          </Flex>
-
-          <Flex
-            w="full"
-            gap={2}
-            animation={animationToLeft}
-          >
+          </div>
+          <div className="flex w-full gap-2 animate-left-roll">
             {photosGallery.map((photos, index) => (
-              <Flex
-                key={index}
-                minW={{ base: "150px", md: "350px" }}
-                h={{ base: '150px', md: "250px" }}
-                bgImage={photos}
-                bgSize="cover"
-                rounded="xl"
-              />
+              <div key={index} className={`flex min-w-[150px] md:min-w-[350px] h-[150px] md:h-[250px] bg-cover rounded-xl overflow-hidden`}>
+                <img className="w-full object-cover" src={photos} alt={`photo-gallery-${index}`} />
+              </div>
             ))}
-          </Flex>
-        </Flex>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      </Flex>
-    </Flex>
   )
 }

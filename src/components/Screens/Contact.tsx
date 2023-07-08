@@ -1,7 +1,6 @@
 
-import { Flex, FlexProps, Text } from "@chakra-ui/react";
-import { ButtonPrimary } from "../ButtonPrimary";
 import { HTMLAttributes } from "react";
+import { ButtonPrimary } from "../ButtonPrimary";
 
 type ContactType = HTMLAttributes<HTMLDivElement> & {}
 
@@ -13,7 +12,7 @@ export default function Contact({ ...rest }: ContactType) {
       <div className="flex w-full h-full bg-[#2E5C2EC7] flex-col items-center justify-center text-white font-lato text-[24px] md:text-[46px] text-center px-4 gap-10 absolute">
         <p>Alguma Duvida?</p>
         <p>Vamos tornar seus sonhos em realidade</p>
-        <ButtonPrimary w="16rem" h="4rem" />
+        <ButtonPrimary className="w-[16rem] h-[4rem]" />
       </div>
     </div>
 

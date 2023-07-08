@@ -1,58 +1,49 @@
-import { Flex } from "@chakra-ui/react"
+import { HTMLAttributes } from "react";
+import { CarouselUI } from "./Material-UI";
 
-import 'keen-slider/keen-slider.min.css'
-import { useKeenSlider } from 'keen-slider/react';
+type SlideShowProp = HTMLAttributes<HTMLDivElement> & {}
 
-type SlideShowProps = {
-  photos: string[];
-}
-
-
-export function SlideShow({ photos }: SlideShowProps) {
-  const [sliderRef] = useKeenSlider(
-    {
-      loop: true,
-    },
-    [
-      (slider) => {
-        let timeout: ReturnType<typeof setTimeout>
-        let mouseOver = false
-        function clearNextTimeout() {
-          clearTimeout(timeout)
-        }
-        function nextTimeout() {
-          clearTimeout(timeout)
-          if (mouseOver) return
-          timeout = setTimeout(() => {
-            slider.next()
-          }, 6000)
-        }
-        slider.on("created", () => {
-          slider.container.addEventListener("mouseover", () => {
-            mouseOver = true
-            clearNextTimeout()
-          })
-          slider.container.addEventListener("mouseout", () => {
-            mouseOver = false
-            nextTimeout()
-          })
-          nextTimeout()
-        })
-        slider.on("dragStarted", clearNextTimeout)
-        slider.on("animationEnded", nextTimeout)
-        slider.on("updated", nextTimeout)
-      },
-    ]
-  )
+export function SlideShow({ ...rest }: SlideShowProp) {
   return (
-    <Flex
-      w="full"
-      className='keen-slider'
-      ref={sliderRef}
+    <CarouselUI
+      className={rest.className}
+      autoplay
+      autoplayDelay={10000}
+      loop
+      transition={{ duration: 1 }}
+      prevArrow={({ handlePrev }) => (
+        <></>
+      )}
+      nextArrow={({ handleNext }) => (
+        <></>
+      )}
+      navigation={({ setActiveIndex, activeIndex, length }) => (
+        <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+          {new Array(length).fill("").map((_, i) => (
+            <span
+              key={i}
+              className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i ? "bg-white w-8" : "bg-white/50 w-4"}`}
+              onClick={() => setActiveIndex(i)}
+            />
+          ))}
+        </div>
+      )}
     >
-      {photos.map((photo, index) => (
-        <Flex className='keen-slider__slide' bgImage={photo} bgSize="cover" bgPos="center" />
-      ))}
-    </Flex>
-  )
+      <img
+        src="/home1.png"
+        alt="image 1"
+        className="h-full w-full object-cover"
+      />
+      <img
+        src="/home2.png"
+        alt="image 2"
+        className="h-full w-full object-cover"
+      />
+      <img
+        src="/home3.png"
+        alt="image 3"
+        className="h-full w-full object-cover"
+      />
+    </CarouselUI>
+  );
 }

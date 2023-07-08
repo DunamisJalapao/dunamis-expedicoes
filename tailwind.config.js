@@ -1,10 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+const withMT = require("@material-tailwind/react/utils/withMT")
+module.exports = withMT({
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      gridTemplateColumns:{
+        'resposive-fit': 'repeat(auto-fit, minmax(25rem, 25rem))'
+      },
       keyframes:{
         rightToLeft: {
           'from': {transform: 'translate(0)'},
@@ -31,5 +36,5 @@ module.exports = {
       "lato": "var(--font-lato)"
     }
   },
-  plugins: [],
-}
+  plugins:[],
+})

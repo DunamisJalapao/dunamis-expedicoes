@@ -33,9 +33,9 @@ const roteirosData = [
 
 export default function Packs({ ...rest }: PacksProps) {
   return (
-    <div {...rest} className="flex flex-col w-screen h-[80vh] items-center py-10 gap-10">
+    <div {...rest} className="flex flex-col w-full lg:w-screen h-[80vh] items-center py-10 gap-10">
       <h1 className="mt-5 md:mt-0 mb-5 md:mb-0 text-4xl md:text-5xl text-[#112126ff] uppercase font-bold font-lemon-milk">Pacotes</h1>
-      <div className="flex gap-10 h-full items-center">
+      <div className="grid w-[80%] px-14 grid-cols-resposive-fit justify-center gap-10">
         {roteirosData.map(roteiro => (
           <CardPacks {...roteiro} />
         ))}

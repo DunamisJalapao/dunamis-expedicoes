@@ -1,5 +1,6 @@
 "use client"
 
+import { ThemeProviderUI } from '@/components/Material-UI'
 import { UtilsProvider } from '@/hooks/utils'
 import THEME from '@/utils/theme'
 import { CacheProvider } from '@chakra-ui/next-js'
@@ -13,9 +14,11 @@ export function Providers({
   return (
     <CacheProvider>
       <ChakraProvider theme={THEME}>
-        <UtilsProvider>
-          {children}
-        </UtilsProvider>
+        <ThemeProviderUI>
+          <UtilsProvider>
+            {children}
+          </UtilsProvider>
+        </ThemeProviderUI>
       </ChakraProvider>
     </CacheProvider>
   )

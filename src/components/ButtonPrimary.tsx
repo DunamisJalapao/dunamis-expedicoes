@@ -1,42 +1,16 @@
 "use client"
 
-import { Button, ButtonProps } from "@chakra-ui/react";
-import Link from "next/link";
+import { HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
-type ButtonPrimaryTypes = ButtonProps & {}
+type ButtonPrimaryTypes = HTMLAttributes<HTMLButtonElement> & {}
 
-export function ButtonPrimary({ onClick, ...rest }: ButtonPrimaryTypes) {
-  if (onClick !== undefined) {
-    return (
-      <Button
-        w="12rem"
-        h="3.4rem"
-        borderRadius="xl"
-        bg="#112126ff"
-        color="white"
-        textTransform="uppercase"
-        onClick={onClick}
-        {...rest}
-      >
-        Contato
-      </Button>
-    )
-  }
-
+export function ButtonPrimary({ ...rest }: ButtonPrimaryTypes) {
   return (
     // <Link href="https://api.whatsapp.com/send?phone=556392437096" target="_blank">
-    <Link href="https://api.whatsapp.com/send?phone=556392437096" target="_blank">
-      <Button
-        w="12rem"
-        h="3.4rem"
-        borderRadius="xl"
-        bg="#112126ff"
-        color="white"
-        textTransform="uppercase"
-        {...rest}
-      >
-        Contato
-      </Button>
-    </Link>
+
+    <button {...rest} className={twMerge("w-[12rem] h-[3.4rem] rounded-xl bg-[#112126ff] text-white uppercase", rest.className)}>
+      Contato
+    </button>
   )
 }

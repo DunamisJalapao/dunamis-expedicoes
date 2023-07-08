@@ -36,7 +36,7 @@ export default function AboutScreen({ ...rest }: AboutType) {
             />
           </Fade>
         </div>
-        <div className="flex z-0 w-[20rem] md:w-[50rem] h-[20rem] md:h-[40rem] text-center md:text-left">
+        <div className="flex z-0 w-[20rem] md:w-[50rem] h-[20rem] md:h-[40rem] text-justify md:text-left">
           <Fade direction="left" delay={500}>
             <div className="text-md md:text-xl xl:text-2xl">
               <PortableText value={aboutObj.description} />

@@ -9,7 +9,7 @@ const roteirosData = [
     duration: '3 dias e 2 noites',
     foods: 'Alimento incluso',
     hotel: 'Hospedagem inclusa',
-    doc: '/roteiro3dias.pdf',
+    doc: '/packs/roteiro-3-dias',
     img: '/pack3.jpg'
   },
   {
@@ -17,7 +17,7 @@ const roteirosData = [
     duration: '4 dias e 3 noites',
     foods: 'Alimento incluso',
     hotel: 'Hospedagem inclusa',
-    doc: '/roteiro4dias.pdf',
+    doc: '/packs/roteiro-4-dias',
     img: '/pack4.jpg'
   },
   {
@@ -25,7 +25,7 @@ const roteirosData = [
     duration: '5 dias e 4 noites',
     foods: 'Alimento incluso',
     hotel: 'Hospedagem inclusa',
-    doc: '/roteiro5dias.pdf',
+    doc: '/packs/roteiro-5-dias',
     img: '/pack5.jpg'
 
   },
@@ -33,11 +33,11 @@ const roteirosData = [
 
 export default function Packs({ ...rest }: PacksProps) {
   return (
-    <div {...rest} className="flex flex-col w-full lg:w-screen h-[80vh] items-center py-10 gap-10">
+    <div {...rest} className="flex flex-col w-full lg:w-screen h-full 2xl:h-[80vh]  items-center py-10 gap-10">
       <h1 className="mt-5 md:mt-0 mb-5 md:mb-0 text-4xl md:text-5xl text-[#112126ff] uppercase font-bold font-lemon-milk">Pacotes</h1>
-      <div className="grid w-[80%] px-14 grid-cols-resposive-fit justify-center gap-10">
-        {roteirosData.map(roteiro => (
-          <CardPacks {...roteiro} />
+      <div className="grid w-full grid-cols-resposive-fit justify-center gap-10">
+        {roteirosData.map((roteiro, _) => (
+          <CardPacks key={_} {...roteiro} />
         ))}
       </div>
     </div>

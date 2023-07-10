@@ -1,4 +1,5 @@
 "use client"
+import { Header } from '@/components/Header'
 import { lazy } from 'react'
 
 const HomeScreen = lazy(() => import('../components/Screens/Home'))
@@ -13,7 +14,10 @@ const Footer = lazy(() => import('../components/Screens/Footer'))
 export default function Home() {
 
   return (
-    <div className="flex flex-col overflow-x-hidden">
+    <main className="flex flex-col overflow-x-hidden">
+      <nav className='w-full -mb-[5rem] z-50 px-[20px] 2xl:px-[220px] fixed top-3'>
+        <Header />
+      </nav>
       <HomeScreen id="container-home" />
       <Packs id="container-packs" />
       <AboutScreen id="container-about" />
@@ -21,6 +25,6 @@ export default function Home() {
       <Gallery id="container-gallery" />
       <Contact id="container-contact" />
       <Footer />
-    </div>
+    </main>
   )
 }

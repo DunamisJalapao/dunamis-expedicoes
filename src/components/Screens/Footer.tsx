@@ -1,25 +1,14 @@
 "use client"
 
-import Image from 'next/image';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
+import { useMediaQuery } from '@chakra-ui/react';
 import { NavBar } from "../NavBar";
-import { useEffect, useState } from "react";
 
 // ARRUMAR O FOOTER QUE NEM O DO VERCEL
 
 export default function Footer() {
-  const [width, setWidth] = useState(0);
-  const handleWindowSizeChange = () => {
-    setWidth(window.innerWidth);
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    }
-  }, []);
+  const [isMobile] = useMediaQuery("(max-width: 820px)");
 
   const listIcons = [
     { icon: <FaWhatsapp />, route: 'https://api.whatsapp.com/send?phone=556392437096' },
@@ -28,7 +17,7 @@ export default function Footer() {
     { icon: <FaYoutube />, route: 'https://www.youtube.com/@dunamis_expedicoes' },
   ]
 
-  if (width <= 820) {
+  if (isMobile) {
     return (
       <div className="flex w-full h-full px-4 py-4 items-center justify-center flex-col gap-10 color-[#0000006c] text-center">
         <div className="w-[35%] sm:w-[25%] relative">

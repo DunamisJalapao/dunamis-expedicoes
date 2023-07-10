@@ -1,9 +1,12 @@
-import { HTMLAttributes } from "react";
+"use client"
+import { HTMLAttributes, ReactNode } from "react";
 import { CarouselUI } from "./Material-UI";
 
-type SlideShowProp = HTMLAttributes<HTMLDivElement> & {}
+type SlideShowProp = HTMLAttributes<HTMLDivElement> & {
+  children: ReactNode
+}
 
-export function SlideShow({ ...rest }: SlideShowProp) {
+export function SlideShow({ children, ...rest }: SlideShowProp) {
   return (
     <CarouselUI
       className={rest.className}
@@ -29,21 +32,7 @@ export function SlideShow({ ...rest }: SlideShowProp) {
         </div>
       )}
     >
-      <img
-        src="/home1.png"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="/home2.png"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="/home3.png"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
+      {children}
     </CarouselUI>
   );
 }

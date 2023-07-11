@@ -8,7 +8,8 @@ module.exports = withMT({
   theme: {
     extend: {
       gridTemplateColumns:{
-        'resposive-fit': 'repeat(auto-fit, minmax(25rem, 25rem))'
+        'resposive-fit': 'repeat(auto-fit, minmax(25rem, 25rem))',
+        'resposive-fit-two': 'repeat(auto-fit, minmax(300px, 300px))'
       },
       keyframes:{
         rightToLeft: {

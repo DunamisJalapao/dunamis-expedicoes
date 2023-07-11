@@ -1,9 +1,9 @@
 "use client"
-import { Box, Flex, FlexProps, Icon, Image, Text } from "@chakra-ui/react";
-import IconPin from '../../public/assets/icon-pin.svg';
 import { Attractivie } from "@/types";
-import Color, { useColor } from "color-thief-react";
+import { Flex, FlexProps, Icon, Image, Text } from "@chakra-ui/react";
+import Color from "color-thief-react";
 import Link from "next/link";
+import IconPin from '../../public/assets/icon-pin.svg';
 
 type CardPlacesType = FlexProps & {
   card: Attractivie
@@ -11,10 +11,10 @@ type CardPlacesType = FlexProps & {
 
 export function CardPlaces({ card, ...rest }: CardPlacesType) {
   return (
-    <Link href={card.url ? card.url : 'javascript:void(0)'} target={card.url ? "_blank" : undefined}>
+    <Link href={card.url} target={"_blank"}>
       <Flex
         w={{ base: "full", md: "300px" }}
-        h={{ base: "250px", md: "350px" }}
+        h={{ base: "23rem", md: "350px" }}
         bg="white"
         boxShadow="lg"
         flexDir={"column"}
@@ -28,7 +28,7 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
           {({ data, loading, error }) => (
             <Flex
               w="full"
-              h="65%"
+              h="75%"
               overflow="hidden"
               boxShadow={`0px 30px 40px -27px ${data}`}
             >
@@ -44,7 +44,7 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
             </Flex>
           )}
         </Color>
-        <Flex flexDir="column" h="35%" py={4} px={3}>
+        <Flex flexDir="column" h="15%" py={4} px={3}>
           <Text fontFamily="var(--font-lemonMilk)">{card.attractivie}</Text>
           <Flex align="center" gap={2}>
             <Icon as={IconPin} />

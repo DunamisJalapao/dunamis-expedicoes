@@ -40,33 +40,33 @@ export default function PackLayout({
       <nav className="w-full -mb-[5rem] z-50 fixed top-3  px-[20px] 2xl:px-[220px]">
         <Header />
       </nav>
-      <main className="flex flex-col items-center">
+      <main className="flex flex-col items-center px-4 md:px-auto">
 
         {children}
 
         <div className="flex flex-col w-full items-center justify-center">
-          <div className="flex py-10 justify-center h-full gap-10 font-lemon-milk">
-            <div className="flex w-[30%] h-[25rem] flex-col gap-6 ">
+          <div className="flex flex-col md:flex-row py-10 justify-center h-full md:gap-10 font-lemon-milk">
+            <div className="flex w-full md:w-[30%] h-full py-5 md:py-0 md:h-[25rem] flex-col gap-6 text-center">
               <div className="flex flex-col gap-5">
-                <h2 className="text-3xl">Simulação de veículo</h2>
+                <h2 className="text-xl md:text-3xl">Simulação de veículo</h2>
               </div>
-              <div>
+              <div className='w-full text-md'>
                 <p>O transporte é realizado em veículo 4x4 com capacidade para 6 passageiros e 1 condutor ambiental. </p>
                 <br />
                 <p>Temos opção de veículo 4x4 exclusivo e privativo, para esta opção consultar Pacote Exclusivo juntamente a agência.</p>
               </div>
             </div>
-            <div className={`w-[30rem] h-[35rem] overflow-hidden rounded-2xl`}>
+            <div className={`w-full md:w-[30rem] md:h-[35rem] overflow-hidden rounded-2xl`}>
               <img className="object-cover rounded-2xl" src="/car.png" alt="..." />
             </div>
           </div>
 
-          <div className="border border-[#0000000e] w-[60%]" />
+          <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
           <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
-            <div className="flex flex-col w-[60%] justify-center gap-8">
-              <h1 className="text-4xl">O que está incluso?</h1>
-              <ul className="px-4 list-decimal list-inside text-2xl">
+            <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
+              <h1 className="text-2xl md:text-4xl self-center">O que está incluso?</h1>
+              <ul className="px-4 list-decimal list-inside text-xl md:text-2xl">
                 <li>
                   Café da manhã, almoço e jantar
                 </li>
@@ -82,13 +82,13 @@ export default function PackLayout({
             </div>
           </div>
 
-          <div className="border border-[#0000000e] w-[60%]" />
+          <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
 
           <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
-            <div className="flex flex-col w-[60%] justify-center gap-8">
-              <h1 className="text-4xl">O que não inclui:</h1>
-              <ul className="px-4 list-decimal list-inside text-2xl">
+            <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
+              <h1 className="text-2xl md:text-4xl self-center">O que não inclui:</h1>
+              <ul className="px-4 list-decimal list-inside text-xl md:text-2xl">
                 <li>Passagens aéreas</li>
                 <li>Passeios opcionais</li>
                 <li>Hospedagem e refeições em Palmas - TO</li>
@@ -100,8 +100,8 @@ export default function PackLayout({
           </div>
         </div>
 
-        <div className="flex flex-col w-[60%] gap-5">
-          <h1 className="font-lemon-milk text-3xl">Perguntas frequentes</h1>
+        <div className="flex flex-col w-full md:w-[60%] gap-5">
+          <h1 className="font-lemon-milk text-xl md:text-3xl self-center">Perguntas frequentes</h1>
           <div className="flex flex-col w-full">
             {asks.map(ask => (
               <>

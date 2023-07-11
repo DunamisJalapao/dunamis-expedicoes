@@ -1,34 +1,16 @@
 "use client"
 
 import { getPhotos } from "@/sanity/sanity-utils";
-import { Flex, FlexProps, GridItem, Image, SimpleGrid, Text, keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
 import { HTMLAttributes, useEffect, useState } from "react";
-import { Photos } from "@/types";
 
 type ItinerariesType = HTMLAttributes<HTMLDivElement> & {}
-
-const rightToLeft = keyframes`
-  from {transform: translate(0);}
-  to {transform: translate(-85vw)}
-`
-const leftToRight = keyframes`
-  from {transform: translate(-85vw);}
-  to {transform: translate(0)}
-`
-
 export default function Gallery({ ...rest }: ItinerariesType) {
   const [photosGallery, setphotosGallery] = useState<string[]>([] as string[]);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const animationToRight = prefersReducedMotion ? undefined : `${leftToRight} infinite alternate 180s linear`
-  const animationToLeft = prefersReducedMotion ? undefined : `${rightToLeft} infinite alternate 180s linear`
 
   const search = async () => {
     const response = await getPhotos();
     if (response.length > 0) {
-      console.log(response[0])
       response[0].images.map(image => {
-        console.log(photosGallery.includes(image.url));
         if (!photosGallery.includes(image.url)) setphotosGallery(prev => [...prev, image.url])
       })
     }

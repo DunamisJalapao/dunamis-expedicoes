@@ -11,9 +11,7 @@ export default function Gallery() {
   const search = async () => {
     const response = await getPhotos();
     if (response !== undefined) {
-      console.log(response[0])
       response[0].images.map(image => {
-        console.log(photosGallery.includes(image.url));
         if (!photosGallery.includes(image.url)) setphotosGallery(prev => [...prev, image.url])
       })
     }

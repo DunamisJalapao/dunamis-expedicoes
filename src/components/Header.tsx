@@ -1,10 +1,9 @@
 "use client"
-import { useUtils } from "@/hooks/utils";
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Icon, Image, Text, useMediaQuery } from "@chakra-ui/react";
+
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Icon, Image, Text, useDisclosure, useMediaQuery } from "@chakra-ui/react";
 import { HTMLAttributes, useEffect, useState } from "react";
 import { CgMenuRight } from 'react-icons/cg';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import { twMerge } from "tailwind-merge";
 import { NavBar } from "./NavBar";
 
 type HeaderProps = HTMLAttributes<HTMLDivElement> & {}
@@ -18,25 +17,23 @@ const listIcons = [
 
 export function Header({ ...rest }: HeaderProps) {
   const [isMobile] = useMediaQuery("(max-width: 1024px)");
-  const [color, _setColor] = useState('rgba(255,2555,255,0.2)');
+  const [color, _setColor] = useState(true)
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleScrollWindow = () => {
     const position = window.scrollY;
-
-    console.log('position =>', position)
-    position <= 100 ? _setColor('rgba(255,2555,255,0.2)') : _setColor('#112126a8');
+    return position <= 100 ? _setColor(true) : _setColor(false);
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScrollWindow)
+    window.addEventListener('scroll', handleScrollWindow, true)
     return () => {
-      window.removeEventListener('scroll', handleScrollWindow);
+      window.removeEventListener('scroll', handleScrollWindow, true);
     }
   }, []);
 
-  const { isOpen, onToggle } = useUtils();
   return (
-    <div className={twMerge(`flex w-full h-[5rem] bg-[${color}] shadow-lg rounded-2xl backdrop-filter backdrop-blur px-[0.5rem] md:px-[4rem] items-center transition`, rest.className)}>
+    <div className={`${color ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-[#112126a8]'} flex w-full h-[5rem] shadow-lg rounded-2xl backdrop-filter backdrop-blur px-[0.5rem] 2xl:px-[4rem] items-center transition`}>
       <div className="flex flex-1">
         <Image
           src="/assets/logo.png"
@@ -45,7 +42,7 @@ export function Header({ ...rest }: HeaderProps) {
       </div>
 
       {isMobile ?
-        <div className="flex flex-1 justify-end" onClick={() => onToggle(true)}>
+        <div className="flex flex-1 justify-end" onClick={onOpen}>
           <Icon color="white" fontSize="4xl" as={CgMenuRight} />
         </div>
         :
@@ -65,7 +62,7 @@ export function Header({ ...rest }: HeaderProps) {
         </>
       }
 
-      <Drawer isOpen={isOpen} size="full" placement="left" onClose={() => onToggle(false)}>
+      <Drawer isOpen={isOpen} size="full" placement="left" onClose={onClose}>
         <DrawerOverlay>
           <DrawerContent bg="#112126ff" p="4">
             <DrawerCloseButton color="white" mt={6} />

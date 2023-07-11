@@ -240,12 +240,12 @@ export default function Pack({ params }: { params: { slug: string } }) {
             </div>
           </SlideShow>
         </div>
-        <div className="flex flex-col shadow-md w-[30%] bg-white p-10 rounded -mr-10 z-20 gap-5">
+        <div className="flex flex-col shadow-md w-[100%] md:w-[30%] bg-white px-4 py-5 md:p-10  rounded -mr-28 md:-mr-10 z-20 gap-5">
           <h1
             style={{
-              WebkitTextStroke: '1px #ff5900'
+              WebkitTextStroke: '2px #ff5900'
             }}
-            className="text-7xl font-lemon-milk font-bold uppercase text-transparent stroke-0 stroke-red"
+            className=" text-3xl xl:text-7xl font-lemon-milk font-bold uppercase text-transparent stroke-0 stroke-red"
           >
             {objPacks[slug].title}
           </h1>
@@ -258,9 +258,9 @@ export default function Pack({ params }: { params: { slug: string } }) {
                 style={{
                   boxShadow: `0px 30px 40px -27px ${data}`
                 }}
-                className={`w-[28%] overflow-hidden rounded-3xl z-10`}
+                className={`w-full md:w-[28%] h-[70%] sm:h-auto overflow-hidden rounded-3xl z-10`}
               >
-                <img className={`w-full`} src={objPacks[slug].imgHome} alt="..." />
+                <img className={`md:w-full h-full sm:h-auto object-cover`} src={objPacks[slug].imgHome} alt="..." />
               </div>
             </>
           )}
@@ -272,40 +272,40 @@ export default function Pack({ params }: { params: { slug: string } }) {
       <div className="flex flex-col w-screen h-full items-center justify-center font-lemon-milk">
         {objPacks[slug].days.map((day, _) => (
           <>
-            <div key={_} className="flex py-10 justify-center h-full gap-20">
-              <div className="flex h-[25rem] flex-col justify-around">
+            <div key={_} className="flex flex-col md:flex-row py-10 px-4 md:px-auto w-full justify-center h-full md:gap-20">
+              <div className="flex h-[25rem] flex-col justify-center md:justify-around gap-4">
                 <div className="flex flex-col gap-5">
 
-                  <h1 className="text-5xl">{day.title}</h1>
-                  <h2 className="px-4 text-3xl">{day.locale}</h2>
+                  <h1 className="text-3xl md:text-5xl self-center md:self-start">{day.title}</h1>
+                  <h2 className="px-4 text-xl md:text-3xl text-center md:text-start">{day.locale}</h2>
                 </div>
                 <div>
 
-                  <h3 className="text-2xl">Atrações a serem visitadas:</h3>
+                  <h3 className="text-xl md:text-2xl mb-2">Atrações a serem visitadas:</h3>
                   <ul className="px-4 list-disc pl-6">
                     {day.attractivies.map((attracitive, _) => (
-                      <li>{attracitive}</li>
+                      <li key={_}>{attracitive}</li>
                     ))}
                   </ul>
                 </div>
                 {/* <p>20h: Chegada na pousada</p> */}
               </div>
               <div
-                className={`w-[30rem] h-[35rem] ${_ % 2 === 1 ? '-order-1' : 'order-1'} overflow-hidden rounded-2xl`}
+                className={`w-full md:w-[30rem] h-[35rem] ${_ % 2 === 1 ? 'order-1 md:-order-1' : 'order-1'} overflow-hidden rounded-2xl`}
               >
-                <img src={day.photo} alt="..." />
+                <img className="rounded-2xl" src={day.photo} alt="..." />
               </div>
             </div>
 
-            <div className="border border-[#0000000e] w-[60%]" />
+            <div className="border border-[#0000000e] w-full md:w-[60%]" />
           </>
         ))}
       </div>
 
       <div className="flex flex-col w-full items-center justify-center">
         <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
-          <div className="flex flex-col w-[60%] justify-center gap-8">
-            <h1 className="text-4xl">Atividades Opcionais - Não inclusos no Pacote</h1>
+          <div className="flex flex-col w-full md:w-[60%] px-4 md:px-auto justify-center gap-8">
+            <h1 className="text-2xl md:text-4xl">Atividades Opcionais - Não inclusos no Pacote</h1>
             <ul className="px-4 list-decimal list-inside text-2xl">
               {objPacks[slug].optionalActivies.map((activies, _) => (
                 <li key={_}>{activies}</li>
@@ -314,7 +314,7 @@ export default function Pack({ params }: { params: { slug: string } }) {
             <p>*Todas sujeitas à disponibilidade na data de viagem</p>
           </div>
         </div>
-        <div className="border border-[#0000000e] w-[60%]" />
+        <div className="border border-[#0000000e] w-full md:w-[60%]" />
       </div>
     </>
   )

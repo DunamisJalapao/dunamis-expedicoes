@@ -14,7 +14,7 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
     <Link href={card.url} target={"_blank"}>
       <Flex
         w={{ base: "full", md: "300px" }}
-        h={{ base: "23rem", md: "full" }}
+        h="full"
         bg="white"
         boxShadow="lg"
         flexDir={"column"}

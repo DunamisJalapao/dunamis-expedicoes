@@ -11,7 +11,6 @@ export function SlideShow({ children, ...rest }: SlideShowProp) {
     <CarouselUI
       className={rest.className}
       autoplay
-      autoplayDelay={10000}
       loop
       transition={{ duration: 1 }}
       prevArrow={({ handlePrev }) => (

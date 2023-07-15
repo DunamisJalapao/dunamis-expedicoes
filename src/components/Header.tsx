@@ -69,7 +69,9 @@ export function Header({ ...rest }: HeaderProps) {
             <DrawerHeader>Navegação</DrawerHeader>
             <DrawerBody>
               <Flex flexDir="column" h="full" align="center">
-                <NavBar />
+                <div onClick={onClose}>
+                  <NavBar />
+                </div>
                 <Flex mt="auto" flexDir="column" color="#ffffff4b" align="center" fontFamily="var(--font-lato)" gap={2}>
                   <Image w="25%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
                   <Text fontSize="sm">© Todos os direitos reservados</Text>

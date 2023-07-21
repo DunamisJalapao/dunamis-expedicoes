@@ -59,6 +59,13 @@ export const metadata: Metadata = {
     google: 'jn0w3o7CCimMkNFtzZNs8rMlwksnf8OQI9zt4yEH96s'
   },
   category: 'tourism',
+  openGraph: {
+    type: "website",
+    url: "https://dunamisexpedicoes.com.br/",
+    title: "Dunamis Expedições",
+    description: "A sua agência de turismo",
+    siteName: "Dunamis Expedições",
+  }
 }
 
 export default function RootLayout({

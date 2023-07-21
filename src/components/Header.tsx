@@ -1,6 +1,6 @@
 "use client"
 
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Icon, Image, Text, useDisclosure, useMediaQuery } from "@chakra-ui/react";
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Flex, Icon, Image, Text, useMediaQuery } from "@chakra-ui/react";
 import { HTMLAttributes, useEffect, useState } from "react";
 import { CgMenuRight } from 'react-icons/cg';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
@@ -18,7 +18,7 @@ const listIcons = [
 export function Header({ ...rest }: HeaderProps) {
   const [isMobile] = useMediaQuery("(max-width: 1024px)");
   const [color, _setColor] = useState(true)
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleScrollWindow = () => {
     const position = window.scrollY;
@@ -42,7 +42,7 @@ export function Header({ ...rest }: HeaderProps) {
       </div>
 
       {isMobile ?
-        <div className="flex flex-1 justify-end" onClick={onOpen}>
+        <div className="flex flex-1 justify-end" onClick={() => setIsOpen(true)}>
           <Icon color="white" fontSize="4xl" as={CgMenuRight} />
         </div>
         :
@@ -62,16 +62,15 @@ export function Header({ ...rest }: HeaderProps) {
         </>
       }
 
-      <Drawer isOpen={isOpen} size="full" placement="left" onClose={onClose}>
+      <Drawer isOpen={isOpen} size="full" placement="left" onClose={() => setIsOpen(false)}>
         <DrawerOverlay>
           <DrawerContent bg="#112126ff" p="4">
             <DrawerCloseButton color="white" mt={6} />
-            <DrawerHeader>Navegação</DrawerHeader>
             <DrawerBody>
               <Flex flexDir="column" h="full" align="center">
-                <div onClick={onClose}>
-                  <NavBar />
-                </div>
+                <Flex align="center" h="full" >
+                  <NavBar callbackFunc={() => setIsOpen(false)} />
+                </Flex>
                 <Flex mt="auto" flexDir="column" color="#ffffff4b" align="center" fontFamily="var(--font-lato)" gap={2}>
                   <Image w="25%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
                   <Text fontSize="sm">© Todos os direitos reservados</Text>

@@ -54,6 +54,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  applicationName: 'Dunamis Expedições',
+  verification: {
+    google: 'jn0w3o7CCimMkNFtzZNs8rMlwksnf8OQI9zt4yEH96s'
+  },
   category: 'tourism',
 }
 

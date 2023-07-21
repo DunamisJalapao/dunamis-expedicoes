@@ -1,5 +1,4 @@
 "use client"
-import { SlideShow } from "@/components/SlideShow";
 import Color from "color-thief-react";
 
 type roteiro = {
@@ -9,7 +8,6 @@ type roteiro = {
   days:
   {
     title: string,
-    locale: string,
     attractivies: string[]
     photo: string
   }[],
@@ -24,43 +22,39 @@ type ObjPacks = {
 
 const objPacks: ObjPacks = {
   'roteiro-3-dias': {
-    title: 'ROTEIRO DE 3 DIAS',
+    title: 'PACOTE DE 3 DIAS',
     imgHome: '/pack3.jpg',
-    description: 'Descrição ou texto de efeito para o roteiro',
+    description: 'Roteiro de 3 dias e 2 noites',
     days: [
       {
         title: '1° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Comunidade Quilombola',
           'Prainha do Rio Novo',
-          'Serra do Espirito Santo',
+          'Serra do Espirito Santo (Contemplação e Fotos)',
           'Recando das Dunas',
-          'Dunas do Jalpão'
+          'Dunas do Jalapão'
         ],
         photo: '/assets/imgs/3dias/photo1.jpg'
       },
       {
         title: '2° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
-          'Comunidade Quilombola',
-          'Prainha do Rio Novo',
-          'Serra do Espirito Santo',
-          'Recando das Dunas',
-          'Dunas do Jalpão'
+          'Fervedouro Buritis',
+          'Fervedouro do Ceiça',
+          'Cabana de artesanato',
+          'Cachoeira do formiga',
+          'Fervedouro por enquanto',
+          'Experiência com banho norturno em fervedouro'
         ],
         photo: '/assets/imgs/3dias/photo2.jpg'
       },
       {
         title: '3° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
-          'Comunidade Quilombola',
-          'Prainha do Rio Novo',
-          'Serra do Espirito Santo',
-          'Recando das Dunas',
-          'Dunas do Jalpão'
+          'Fervedouro Bela Vista',
+          'Cachoeira das Araras',
+          'Serra da Catedral (Contemplação e fotos)'
         ],
         photo: '/assets/imgs/3dias/photo3.jpg'
       }
@@ -72,13 +66,12 @@ const objPacks: ObjPacks = {
     ]
   },
   'roteiro-4-dias': {
-    title: 'ROTEIRO DE 4 DIAS',
+    title: 'PACOTE DE 4 DIAS',
     imgHome: '/pack4.jpg',
-    description: 'Descrição ou texto de efeito para o roteiro',
+    description: 'Roteiro de 4 dias e 3 noites',
     days: [
       {
         title: '1° Dia',
-        locale: 'Palmas/Pindorama do Tocantins',
         attractivies: [
           'Pedra Furada',
           'Lagoa do Japonês',
@@ -87,11 +80,10 @@ const objPacks: ObjPacks = {
       },
       {
         title: '2° Dia',
-        locale: 'Pindorama do Tocantins/Mateiros',
         attractivies: [
           'Cânion Sussuapara',
           'Comunidade Quilombola',
-          'Serra do Espírito Santo',
+          'Serra do Espírito Santo (Contemplação e fotos)',
           'Recanto das Dunas',
           'Dunas do Jalapão',
         ],
@@ -99,7 +91,6 @@ const objPacks: ObjPacks = {
       },
       {
         title: '3° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Fervedouro Buritis',
           'Fervedouro do Ceiça',
@@ -112,11 +103,10 @@ const objPacks: ObjPacks = {
       },
       {
         title: '4° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Fervedouro Bela Vista',
           'Cachoeira das Araras',
-          'Serra da Catedral',
+          'Serra da Catedral (Contemplação e Fotos)',
         ],
         photo: '/assets/imgs/4dias/photo4.jpg'
       }
@@ -128,13 +118,12 @@ const objPacks: ObjPacks = {
     ]
   },
   'roteiro-5-dias': {
-    title: 'ROTEIRO DE 5 DIAS',
+    title: 'PACOTE DE 5 DIAS',
     imgHome: '/pack5.jpg',
-    description: 'Descrição ou texto de efeito para o roteiro',
+    description: 'Roteiro de 5 dias e 4 noites',
     days: [
       {
         title: '1° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Pedra Furada',
           'Lagoa do Japonês',
@@ -143,11 +132,10 @@ const objPacks: ObjPacks = {
       },
       {
         title: '2° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Cânion Sussuapara',
           'Comunidade Quilombola',
-          'Serra do Espírito Santo',
+          'Serra do Espírito Santo (Contemplação e Fotos',
           'Recanto das Dunas',
           'Dunas do Jalapão',
         ],
@@ -155,7 +143,6 @@ const objPacks: ObjPacks = {
       },
       {
         title: '3° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Fervedouro Buritis',
           'Fervedouro do Ceiça',
@@ -168,17 +155,15 @@ const objPacks: ObjPacks = {
       },
       {
         title: '4° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Fervedouro Bela Vista',
           'Cachoeira das Araras',
-          'Serra da Catedral',
+          'Serra da Catedral (Contemplação e Fotos) ',
         ],
         photo: '/assets/imgs/5dias/photo4.jpg'
       },
       {
         title: '5° Dia',
-        locale: 'Palmas/Ponte Alta',
         attractivies: [
           'Cachoeira da Roncadeira',
           'Cachoeira Escorrega Macaco',
@@ -205,40 +190,16 @@ export default function Pack({ params }: { params: { slug: string } }) {
     <>
       <div className="flex w-screen h-screen items-center justify-center relative">
         <div className="absolute w-full h-full left-0 top-0 z-0">
-          <SlideShow>
-            <div className="flex w-full h-full relative">
-              <div
-                className={`w-full h-full backdrop-filter backdrop-blur absolute top-0 left-0`}
-              />
-              <img
-                src="/home1.png"
-                alt="image 1"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="flex w-full h-full relative">
-              <div
-                className={`w-full h-full backdrop-filter backdrop-blur absolute top-0 left-0`}
-              />
-              <img
-                src="/home2.png"
-                alt="image 1"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="flex w-full h-full relative">
-              <div
-                className={`w-full h-full backdrop-filter backdrop-blur absolute top-0 left-0`}
-              />
-              <img
-                src="/home3.png"
-                alt="image 1"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </SlideShow>
+          <div className="flex w-full h-full relative">
+            <div
+              className={`w-full h-full backdrop-filter backdrop-blur absolute top-0 left-0`}
+            />
+            <img
+              src="/home1.png"
+              alt="image 1"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
         <div className="flex flex-col shadow-md w-[100%] md:w-[30%] bg-white px-4 py-5 md:p-10  rounded -mr-28 md:-mr-10 z-20 gap-5">
           <h1
@@ -273,11 +234,9 @@ export default function Pack({ params }: { params: { slug: string } }) {
         {objPacks[slug].days.map((day, _) => (
           <>
             <div key={_} className="flex flex-col md:flex-row py-10 px-4 md:px-auto w-full justify-center h-full md:gap-20">
-              <div className="flex h-[25rem] flex-col justify-center md:justify-around gap-4">
-                <div className="flex flex-col gap-5">
-
+              <div className="flex h-[25rem] flex-col justify-center md:justify-around ">
+                <div className="flex flex-col">
                   <h1 className="text-3xl md:text-5xl self-center md:self-start">{day.title}</h1>
-                  <h2 className="px-4 text-xl md:text-3xl text-center md:text-start">{day.locale}</h2>
                 </div>
                 <div>
 

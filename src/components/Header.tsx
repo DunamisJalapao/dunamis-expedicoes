@@ -1,9 +1,9 @@
-"use client"
-
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Flex, Icon, Image, Text, useMediaQuery } from "@chakra-ui/react";
+'use client'
 import { HTMLAttributes, useEffect, useState } from "react";
 import { CgMenuRight } from 'react-icons/cg';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { useMediaQueryUI } from "./Chakra-UI";
+import { DraweComponent } from "./DrawerComponent";
 import { NavBar } from "./NavBar";
 
 type HeaderProps = HTMLAttributes<HTMLDivElement> & {}
@@ -16,7 +16,7 @@ const listIcons = [
 ]
 
 export function Header({ ...rest }: HeaderProps) {
-  const [isMobile] = useMediaQuery("(max-width: 1024px)");
+  const [isMobile] = useMediaQueryUI("(max-width: 1024px)");
   const [color, _setColor] = useState(true)
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -35,15 +35,16 @@ export function Header({ ...rest }: HeaderProps) {
   return (
     <div className={`${color ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-[#112126a8]'} flex w-full h-[5rem] shadow-lg rounded-2xl backdrop-filter backdrop-blur px-[0.5rem] 2xl:px-[4rem] items-center transition`}>
       <div className="flex flex-1">
-        <Image
+
+        <img
           src="/assets/logo.png"
-          w={"5rem"}
+          className="w-[5rem]"
         />
       </div>
 
       {isMobile ?
         <div className="flex flex-1 justify-end" onClick={() => setIsOpen(true)}>
-          <Icon color="white" fontSize="4xl" as={CgMenuRight} />
+          <CgMenuRight className="text-white text-4xl" />
         </div>
         :
         <>
@@ -62,24 +63,10 @@ export function Header({ ...rest }: HeaderProps) {
         </>
       }
 
-      <Drawer isOpen={isOpen} size="full" placement="left" onClose={() => setIsOpen(false)}>
-        <DrawerOverlay>
-          <DrawerContent bg="#112126ff" p="4">
-            <DrawerCloseButton color="white" mt={6} />
-            <DrawerBody>
-              <Flex flexDir="column" h="full" align="center">
-                <Flex align="center" h="full" >
-                  <NavBar callbackFunc={() => setIsOpen(false)} />
-                </Flex>
-                <Flex mt="auto" flexDir="column" color="#ffffff4b" align="center" fontFamily="var(--font-lato)" gap={2}>
-                  <Image w="25%" src='/assets/logo.png' alt="logo Dunamis Expedições" />
-                  <Text fontSize="sm">© Todos os direitos reservados</Text>
-                </Flex>
-              </Flex>
-            </DrawerBody>
-          </DrawerContent>
-        </DrawerOverlay>
-      </Drawer>
+      <DraweComponent
+        isOpen={isOpen}
+        toggle={() => setIsOpen(false)}
+      />
     </div>
   )
 }

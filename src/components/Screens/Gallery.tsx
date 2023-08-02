@@ -1,4 +1,3 @@
-"use client"
 
 import { getPhotos } from "@/sanity/sanity-utils";
 import Link from "next/link";

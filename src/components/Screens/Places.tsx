@@ -22,8 +22,6 @@ export default async function Places({ ...rest }: PackType) {
           </div>
         </div>
       </div>
-
     </div>
-
   )
 }

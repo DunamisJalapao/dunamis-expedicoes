@@ -1,4 +1,5 @@
 "use client"
+
 import Color from "color-thief-react";
 
 type roteiro = {

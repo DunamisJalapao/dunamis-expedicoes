@@ -1,14 +1,11 @@
-"use client"
-
+'use client'
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
-import { useMediaQuery } from '@chakra-ui/react';
+import { useMediaQueryUI } from '../Chakra-UI';
 import { NavBar } from "../NavBar";
 
-// ARRUMAR O FOOTER QUE NEM O DO VERCEL
-
 export default function Footer() {
-  const [isMobile] = useMediaQuery("(max-width: 1024px)");
+  const [isMobile] = useMediaQueryUI("(max-width: 1024px)");
 
   const listIcons = [
     { icon: <FaWhatsapp />, route: 'https://api.whatsapp.com/send?phone=556392437096' },

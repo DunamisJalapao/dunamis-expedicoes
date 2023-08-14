@@ -1,5 +1,5 @@
-import { useDisclosure, UseDisclosureReturn } from "@chakra-ui/react";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useMediaQuery } from "@chakra-ui/react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface UtilsProps {
   children: ReactNode;
@@ -8,22 +8,26 @@ interface UtilsProps {
 type UtilsContextData = {
   isOpen: boolean,
   onToggle(value?: boolean): void;
+  isMobile: boolean,
 };
 
 const UtilsContext = createContext({} as UtilsContextData);
 
 export function UtilsProvider({ children }: UtilsProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMobile] = useMediaQuery("(max-width: 1024px)");
 
   function onToggle(value = undefined) {
     if (value === undefined) setIsOpen(!isOpen);
     else setIsOpen(value);
+
   }
 
   return (
     <UtilsContext.Provider value={{
       isOpen,
-      onToggle
+      onToggle,
+      isMobile
     }}>
       {children}
     </UtilsContext.Provider>

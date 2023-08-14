@@ -1,11 +1,11 @@
 'use client'
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
-import { useMediaQueryUI } from '../Chakra-UI';
+import { useUtils } from '@/hooks/utils';
 import { NavBar } from "../NavBar";
 
 export default function Footer() {
-  const [isMobile] = useMediaQueryUI("(max-width: 1024px)");
+  const { isMobile } = useUtils();
 
   const listIcons = [
     { icon: <FaWhatsapp />, route: 'https://api.whatsapp.com/send?phone=556392437096' },

@@ -1,5 +1,6 @@
 "use client"
 
+import { ButtonWhats } from "@/components/ButtonWhats";
 import { getPhotos } from "@/sanity/sanity-utils";
 import { Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -41,6 +42,7 @@ export default function Gallery() {
           </ResponsiveMasonry>
         </div>
       </div>
+      <ButtonWhats />
     </div>
   )
 }

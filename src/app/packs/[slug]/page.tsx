@@ -1,5 +1,6 @@
 "use client"
 
+import { ButtonWhats } from "@/components/ButtonWhats";
 import Color from "color-thief-react";
 
 type roteiro = {
@@ -276,6 +277,8 @@ export default function Pack({ params }: { params: { slug: string } }) {
         </div>
         <div className="border border-[#0000000e] w-full md:w-[60%]" />
       </div>
+      <ButtonWhats />
+
     </>
   )
 }

@@ -1,8 +1,8 @@
 'use client'
+import { useUtils } from "@/hooks/utils";
 import { HTMLAttributes, useEffect, useState } from "react";
 import { CgMenuRight } from 'react-icons/cg';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import { useMediaQueryUI } from "./Chakra-UI";
 import { DraweComponent } from "./DrawerComponent";
 import { NavBar } from "./NavBar";
 
@@ -16,9 +16,10 @@ const listIcons = [
 ]
 
 export function Header({ ...rest }: HeaderProps) {
-  const [isMobile] = useMediaQueryUI("(max-width: 1024px)");
   const [color, _setColor] = useState(true)
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const { isMobile } = useUtils();
 
   const handleScrollWindow = () => {
     const position = window.scrollY;

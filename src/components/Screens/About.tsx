@@ -1,5 +1,4 @@
 import { getAbout } from "@/sanity/sanity-utils";
-import { PortableText } from "@portabletext/react";
 import { HTMLAttributes } from "react";
 import { Fade } from "react-awesome-reveal";
 
@@ -20,7 +19,16 @@ export default async function AboutScreen({ ...rest }: AboutType) {
         <div className="flex z-0 w-[20rem] md:w-[50rem] h-full md:h-[40rem] text-justify md:text-left">
           <Fade direction="left" delay={500} triggerOnce>
             <div className="text-md md:text-xl xl:text-2xl">
-              <PortableText value={about[0].description} />
+              {/* <PortableText value={about[0].description} /> */}
+              <p>
+                A Dunamis Expedições é uma empresa <strong>tocantinense</strong> que foi criada através da soma do olhar de dois profissionais que enxergaram no turismo, o modo transformador de contemplar a vida e realizar sonhos.
+
+                <br /><br />
+                Nossos direcionadores como agência, é atuar de forma ética, oferecer serviços de qualidade, garantir bem estar dos nossos clientes e fazer a diferença no cenário social, pois acreditamos numa sociedade mais humana e solidária.
+                <br /><br />
+
+
+                <strong>Somos a Dunamis Expedições!</strong></p>
             </div>
           </Fade>
         </div>

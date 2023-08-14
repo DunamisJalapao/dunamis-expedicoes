@@ -1,12 +1,12 @@
 
+import { useUtils } from '@/hooks/utils';
 import { HTMLAttributes } from 'react';
-import { useMediaQueryUI } from '../Chakra-UI';
 import { SlideShow } from "../SlideShow";
 
 type HomeScreenType = HTMLAttributes<HTMLDivElement> & {}
 
 export default function HomeScreen({ ...rest }: HomeScreenType) {
-  const isMobile = useMediaQueryUI('(max-width: 820px)')
+  const { isMobile } = useUtils()
   return (
     <div {...rest} className="flex w-screen h-screen">
       <div className="flex w-full h-screen px-[20px] 2xl:px-[220px] py-[13px] relative">

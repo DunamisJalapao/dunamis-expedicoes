@@ -1,4 +1,3 @@
-'use client'
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
 import { useUtils } from '@/hooks/utils';

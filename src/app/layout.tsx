@@ -43,12 +43,12 @@ export const metadata: Metadata = {
     'turismo em palmas'
   ],
   robots: {
-    index: false,
+    index: true,
     follow: true,
     nocache: true,
     googleBot: {
       index: true,
-      follow: false,
+      follow: true,
       noimageindex: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
@@ -63,9 +63,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://dunamisexpedicoes.com.br/",
-    title: "Dunamis Expedições",
-    description: "A sua agência de turismo",
-    siteName: "Dunamis Expedições",
   }
 }
 

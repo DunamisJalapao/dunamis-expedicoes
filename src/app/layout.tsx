@@ -24,7 +24,10 @@ const lemonMilk = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Dunamis Expedições',
+  title: {
+    default: 'Dunamis Expedições',
+    template: '%s | Dunamis Expedições'
+  },
   description: 'A sua agência de turismo',
   keywords: [
     'Jalapão como ir',

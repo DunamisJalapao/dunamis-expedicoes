@@ -1,10 +1,16 @@
 import { CollapseCard } from '@/components/CollapseCard'
 import { Header } from '@/components/Header'
 import Footer from '@/components/Screens/Footer'
+import { Metadata } from 'next'
+import { objPacks } from './aux'
 
-export const metadata = {
-  title: 'Dunamis Expedições',
-  description: 'A sua agência de turismo',
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = params;
+  const slugTyped = slug as keyof typeof objPacks
+  return {
+    title: objPacks[slugTyped].title,
+    description: objPacks[slugTyped].description
+  }
 }
 
 const asks = [

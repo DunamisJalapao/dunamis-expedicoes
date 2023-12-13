@@ -21,13 +21,15 @@ export function Header({ ...rest }: HeaderProps) {
   const handleScrollWindow = () => {
     const position = window.scrollY;
     return position <= 100 ? _setColor(true) : _setColor(false);
+
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScrollWindow, true)
+    window.addEventListener('scroll', handleScrollWindow)
     return () => {
-      window.removeEventListener('scroll', handleScrollWindow, true);
+      window.removeEventListener('scroll', handleScrollWindow);
     }
+
   }, []);
 
   return (

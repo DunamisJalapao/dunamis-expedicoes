@@ -8,6 +8,7 @@ import HomeScreen from "@/components/screens/Home";
 import Packs from "@/components/screens/Packs";
 import Places from "@/components/screens/Places";
 
+
 export default function Home() {
   return (
     <main className="flex flex-col overflow-x-hidden">

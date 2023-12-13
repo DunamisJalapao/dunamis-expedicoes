@@ -30,7 +30,7 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
           <p className="font-bardon-stamp text-sm">{card.name}</p>
           <div className="flex items-center gap-2">
             <IconPin className="w-4" />
-            <p className="text-[#7C7C7C] font-work-sans text-lg">{card.region}</p>
+            <p className="text-[#7C7C7C] font-work-sans font-semibold text-lg">{card.region}</p>
           </div>
         </div>
       </div>

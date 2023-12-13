@@ -34,10 +34,10 @@ export function Header({ ...rest }: HeaderProps) {
 
   return (
     <div className={`${color ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-[#112126a8]'} flex w-full h-[5rem] shadow-lg rounded-2xl backdrop-filter backdrop-blur px-[0.5rem] 2xl:px-[4rem] items-center transition`}>
-      <div className="flex flex-1">
+      <div className="flex flex-1 ">
         <img
           src="/assets/logo.png"
-          className="w-[5rem]"
+          className="w-[8rem] ml-4"
         />
       </div>
 

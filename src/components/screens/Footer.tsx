@@ -16,10 +16,10 @@ export default function Footer() {
 
   if (width < 850) {
     return (
-      <div className="flex w-full h-full px-4 py-4 items-center justify-center flex-col gap-10 color-[#0000006c] text-center">
-        <div className="w-[35%] sm:w-[25%] relative">
+      <div className="flex w-full h-full px-4 py-8 items-center justify-center flex-col gap-10 color-[#0000006c] text-center">
+        <div className="w-[30%] sm:w-[20%] relative">
           <img
-            src='/assets/logo.png'
+            src='/assets/logo-green.png'
             alt="logo Dunamis Expedições"
           />
         </div>
@@ -78,7 +78,7 @@ export default function Footer() {
 
           <div className="flex flex-1 justify-center">
             <div className="flex relative items-center justify-center w-full">
-              <img className="w-[25%]" src="/assets/logo.png" alt="logo Dunamis Expedições" />
+              <img className="w-[50%]" src="/assets/logo-green.png" alt="logo Dunamis Expedições" />
             </div>
           </div>
 

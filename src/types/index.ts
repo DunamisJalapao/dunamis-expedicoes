@@ -1,12 +1,9 @@
-import { TypedObject } from "sanity";
-
 export type Attractivie = {
-  _id: string;
-  _createdeAt: Date;
-  attractivie: string;
+  id: number;
+  name: string;
   region: string;
-  image: string;
-  url: string;
+  link: string;
+  img: string;
 };
 
 export type Photos = {
@@ -22,5 +19,4 @@ export type About = {
   _id: string;
   _createdAt: string;
   image: string;
-  description: TypedObject;
 };

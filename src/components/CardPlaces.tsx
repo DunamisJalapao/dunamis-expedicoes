@@ -1,58 +1,39 @@
 "use client"
 import { Attractivie } from "@/types";
-import { Flex, FlexProps, Icon, Image, Text } from "@chakra-ui/react";
 import Color from "color-thief-react";
 import Link from "next/link";
 import IconPin from '../../public/assets/icon-pin.svg';
 
-type CardPlacesType = FlexProps & {
+type CardPlacesType = {
   card: Attractivie
 };
 
 export function CardPlaces({ card, ...rest }: CardPlacesType) {
   return (
-    <Link href={card.url} target={"_blank"}>
-      <Flex
-        w={{ base: "full", md: "300px" }}
-        h="full"
-        bg="white"
-        boxShadow="lg"
-        flexDir={"column"}
-        overflow="auto"
-        borderRadius="15px"
-        {...rest}
-      >
-
-
-        <Color src={card.image} format="rgbString" crossOrigin="anonymous">
+    <Link href={card.link} target={"_blank"}>
+      <div className="flex w-full md:w-[300px] h-full bg-white shadow-lg flex-col overflow-hidden rounded-[15px]">
+        <Color src={card.img} format="rgbString" crossOrigin="anonymous">
           {({ data, loading, error }) => (
-            <Flex
-              w="full"
-              h="75%"
-              overflow="hidden"
-              boxShadow={`0px 30px 40px -27px ${data}`}
-            >
-              <Image
-                src={card.image}
-                w="full"
-                objectFit="cover"
-                transition="transform .2s ease"
-                _hover={{
-                  transform: 'scale(1.05)'
-                }}
+            <div style={{
+              boxShadow: `0px 30px 40px -27px ${data}`
+            }} className={`flex w-full h-[75%]`}>
+              <img
+                src={card.img}
+                alt=""
+                className="w-full object-cover transition hover:scale-[1.05]"
               />
-            </Flex>
+            </div>
           )}
         </Color>
-        <Flex flexDir="column" h="15%" py={4} px={3}>
-          <Text fontFamily="var(--font-lemonMilk)">{card.attractivie}</Text>
-          <Flex align="center" gap={2}>
-            <Icon as={IconPin} />
-            <Text color="#7C7C7C">{card.region}</Text>
-          </Flex>
-        </Flex>
 
-      </Flex>
+        <div className="flex flex-col h-[15%] py-4 px-3 gap-3">
+          <p className="font-bardon-stamp text-sm">{card.name}</p>
+          <div className="flex items-center gap-2">
+            <IconPin className="w-4" />
+            <p className="text-[#7C7C7C] font-work-sans text-lg">{card.region}</p>
+          </div>
+        </div>
+      </div>
     </Link>
 
   )

@@ -1,19 +1,14 @@
-"use client"
-
-import { ButtonWhats } from '@/components/ButtonWhats'
-import { Header } from '@/components/Header'
-import AboutScreen from '@/components/Screens/About'
-import Contact from '@/components/Screens/Contact'
-import Footer from '@/components/Screens/Footer'
-import Gallery from '@/components/Screens/Gallery'
-import HomeScreen from '@/components/Screens/Home'
-import Packs from '@/components/Screens/Packs'
-import Places from '@/components/Screens/Places'
-
-
+'use client'
+import { Header } from "@/components/Header";
+import AboutScreen from "@/components/screens/About";
+import Contact from "@/components/screens/Contact";
+import Footer from "@/components/screens/Footer";
+import Gallery from "@/components/screens/Gallery";
+import HomeScreen from "@/components/screens/Home";
+import Packs from "@/components/screens/Packs";
+import Places from "@/components/screens/Places";
 
 export default function Home() {
-
   return (
     <main className="flex flex-col overflow-x-hidden">
       <nav className='w-full -mb-[5rem] z-50 px-[20px] fixed top-3'>
@@ -26,7 +21,6 @@ export default function Home() {
       <Gallery id="container-gallery" />
       <Contact id="container-contact" />
       <Footer />
-      <ButtonWhats />
     </main>
   )
 }

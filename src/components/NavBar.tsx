@@ -14,48 +14,24 @@ type NavBarProps = HTMLAttributes<HTMLDivElement> & {
 export function NavBar({ isFooter = false, callbackFunc = () => { }, ...rest }: NavBarProps) {
   const pathname = usePathname();
   if (pathname === '/') {
-    if (isFooter) {
-      return (
-        <div {...rest} className={twMerge("flex w-full flex-col ml-auto mr-auto uppercase gap-3 text-md font-bold text-white justify-around", rest.className)}>
-          <LinkScroll onClick={callbackFunc} to="container-home" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Início</p> </LinkScroll>
-          <LinkScroll onClick={callbackFunc} to="container-about" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Sobre Nós</p> </LinkScroll>
-          <LinkScroll onClick={callbackFunc} to="container-pack" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Roteiros</p> </LinkScroll>
-          <LinkScroll onClick={callbackFunc} to="container-places" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Atrativos</p> </LinkScroll>
-          <Link href="/gallery"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Galeria</p> </Link>
-        </div>
-      )
-    }
-
     return (
-      <div {...rest} className={twMerge("flex flex-col lg:flex-row uppercase gap-16 text-lg font-bold items-center text-white justify-around", rest.className)}>
-        <LinkScroll onClick={callbackFunc} to="container-home" smooth={true}> <p className="pb-1 cursor-pointer select-none">Início</p> </LinkScroll>
-        <LinkScroll onClick={callbackFunc} to="container-about" smooth={true}> <p className="pb-1 cursor-pointer select-none">Sobre Nós</p> </LinkScroll>
-        <LinkScroll onClick={callbackFunc} to="container-pack" smooth={true}> <p className="pb-1 cursor-pointer select-none">Roteiros</p> </LinkScroll>
-        <LinkScroll onClick={callbackFunc} to="container-places" smooth={true}> <p className="pb-1 cursor-pointer select-none">Atrativos</p> </LinkScroll>
-        <Link href="/gallery"> <p className="pb-1 cursor-pointer select-none">Galeria</p> </Link>
-      </div>
-    )
-  }
-
-  if (isFooter) {
-    return (
-      <div {...rest} className={twMerge("flex w-full flex-col ml-auto mr-auto uppercase gap-3 text-md font-bold text-white justify-around", rest.className)}>
-        <Link href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Início</p> </Link>
-        <Link href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Sobre Nós</p> </Link>
-        <Link href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Roteiros</p> </Link>
-        <Link href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Atrativos</p> </Link>
-        <Link href="/gallery"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022]">Galeria</p> </Link>
+      <div {...rest} className={twMerge("flex flex-col md:flex-row w-full uppercase gap-3 px-0 lg:px-18 2xl:px-32 text-lg font-bold items-center text-white justify-between", rest.className)}>
+        <LinkScroll className="w-full" onClick={callbackFunc} to="container-home" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Início</p> </LinkScroll>
+        <LinkScroll className="w-full" onClick={callbackFunc} to="container-about" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Sobre Nós</p> </LinkScroll>
+        <LinkScroll className="w-full" onClick={callbackFunc} to="container-pack" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Roteiros</p> </LinkScroll>
+        <LinkScroll className="w-full" onClick={callbackFunc} to="container-places" smooth={true}> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Atrativos</p> </LinkScroll>
+        <Link className="w-full" href="/gallery"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Galeria</p> </Link>
       </div>
     )
   }
 
   return (
-    <div {...rest} className={twMerge("flex flex-col lg:flex-row uppercase gap-16 text-lg font-bold items-center text-white justify-around", rest.className)}>
-      <Link href="/"> <p className="pb-1 cursor-pointer select-none">Início</p> </Link>
-      <Link href="/"> <p className="pb-1 cursor-pointer select-none">Sobre Nós</p> </Link>
-      <Link href="/"> <p className="pb-1 cursor-pointer select-none">Roteiros</p> </Link>
-      <Link href="/"> <p className="pb-1 cursor-pointer select-none">Atrativos</p> </Link>
-      <Link href="/gallery"> <p className="pb-1 cursor-pointer select-none">Galeria</p> </Link>
+    <div {...rest} className={twMerge("flex flex-col md:flex-row uppercase text-lg font-bold items-center text-white justify-around", rest.className)}>
+      <Link className="w-full" href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Início</p> </Link>
+      <Link className="w-full" href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Sobre Nós</p> </Link>
+      <Link className="w-full" href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Roteiros</p> </Link>
+      <Link className="w-full" href="/"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Atrativos</p> </Link>
+      <Link className="w-full" href="/gallery"> <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none">Galeria</p> </Link>
     </div>
   )
 

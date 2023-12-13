@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Dunas do Jalapão",
+    "region": "Mateiros - TO",
+    "link": "",
+    "img": "/assets/imgs/places/dunas.png"
+  },
+  {
+    "id": 2,
+    "name": "Fervedouro Bela Vista",
+    "region": "São Félix - TO",
+    "link": "",
+    "img": "/assets/imgs/places/bela-vista.png"
+  },
+  {
+    "id": 3,
+    "name": "Cânion Sussuapara",
+    "region": "Ponte Alta - TO",
+    "link": "",
+    "img": "/assets/imgs/places/sussuapara.png"
+  },
+  {
+    "id": 4,
+    "name": "Cachoeira do Formiga",
+    "region": "Mateiros - TO",
+    "link": "",
+    "img": "/assets/imgs/places/formiga.png"
+  },
+  {
+    "id": 15,
+    "name": "Lago do Japonês",
+    "region": "Pindorama do Tocantins - TO",
+    "link": "",
+    "img": "/assets/imgs/places/japones.png"
+  }
+]

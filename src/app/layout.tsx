@@ -1,27 +1,51 @@
-import { Metadata } from 'next'
-import { Lato } from 'next/font/google'
+import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Script from 'next/script'
-import '../styles/globals.css'
+import './globals.css'
 import { Providers } from './providers'
 
-const lato = Lato({ subsets: ['latin'], weight: ["400", "700", "900"], style: 'normal', variable: '--font-lato' })
 
-const lemonMilk = localFont({
+const blueDream = localFont({
   src: [
     {
-      path: '../../public/fonts/LEMONMILK-Regular.otf',
+      path: '../../public/fonts/BLUEDREAM-Regular.otf',
       weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/LEMONMILK-Bold.otf',
-      weight: '700',
-      style: 'normal',
+      style: 'normal'
     }
   ],
-  variable: '--font-lemonMilk'
-})
+  variable: '--font-blue-dream'
+});
+const bardonStamp = localFont({
+  src: [
+    {
+      path: '../../public/fonts/BardonStamp-Regular.otf',
+      weight: '400',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-bardon-stamp'
+});
+const bardonClean = localFont({
+  src: [
+    {
+      path: '../../public/fonts/BardonClean-Regular.otf',
+      weight: '400',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-bardon-clean'
+});
+
+const workSans = localFont({
+  src: [
+    {
+      path: '../../public/fonts/WorkSans-Regular.ttf',
+      weight: '400',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-work-sans'
+});
 
 export const metadata: Metadata = {
   title: {
@@ -75,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <head>
         <Script
           strategy="afterInteractive"
@@ -95,9 +119,8 @@ export default function RootLayout({
             
           `}
         </Script>
-
       </head>
-      <body className={`${lato.variable} ${lemonMilk.variable}`}>
+      <body className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}>
         <noscript dangerouslySetInnerHTML={{
           __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
             height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>`}} />

@@ -1,6 +1,5 @@
 "use client"
 
-import { ButtonWhats } from "@/components/ButtonWhats";
 import Color from "color-thief-react";
 import { objPacks } from "./aux";
 
@@ -28,11 +27,11 @@ export default function Pack({ params }: { params: { slug: string } }) {
             style={{
               WebkitTextStroke: '2px #ff5900'
             }}
-            className=" text-3xl xl:text-7xl font-lemon-milk font-bold uppercase text-transparent stroke-0 stroke-red"
+            className="text-2xl xl:text-[3rem] leading-normal font-bold uppercase text-transparent font-bardon-stamp"
           >
             {objPacks[slug].title}
           </h1>
-          <p className="uppercase">{objPacks[slug].description}</p>
+          <p className="uppercase text-sm font-bardon-clean">{objPacks[slug].description}</p>
         </div>
         <Color src={'/pack3.jpg'} format="rgbString" crossOrigin="anonymous">
           {({ data, loading, error }) => (
@@ -52,18 +51,17 @@ export default function Pack({ params }: { params: { slug: string } }) {
 
       {/* DIAS */}
 
-      <div className="flex flex-col w-screen h-full items-center justify-center font-lemon-milk">
+      <div className="flex flex-col w-screen h-full items-center justify-center font-bardon-clean">
         {objPacks[slug].days.map((day, _) => (
           <>
             <div key={_} className="flex flex-col md:flex-row py-10 px-4 md:px-auto w-full justify-center h-full md:gap-20">
-              <div className="flex h-[25rem] flex-col justify-center md:justify-around ">
+              <div className="flex h-[25rem] flex-col justify-center md:justify-around gap-5 ">
                 <div className="flex flex-col">
-                  <h1 className="text-3xl md:text-5xl self-center md:self-start">{day.title}</h1>
+                  <h1 className="text-3xl md:text-5xl self-center md:self-start font-bardon-stamp">{day.title}</h1>
                 </div>
                 <div>
-
-                  <h3 className="text-xl md:text-2xl mb-2">Atrações a serem visitadas:</h3>
-                  <ul className="px-4 list-disc pl-6">
+                  <h3 className="text-3xl md:text-5xl mb-2 font-blue-dream">Atrações a serem visitadas:</h3>
+                  <ul className="px-4 list-disc pl-6 font-work-sans">
                     {day.attractivies.map((attracitive, _) => (
                       <li key={_}>{attracitive}</li>
                     ))}
@@ -92,12 +90,11 @@ export default function Pack({ params }: { params: { slug: string } }) {
                 <li key={_}>{activies}</li>
               ))}
             </ul>
-            <p>*Todas sujeitas à disponibilidade na data de viagem</p>
+            <p>* Todas sujeitas à disponibilidade na data de viagem</p>
           </div>
         </div>
         <div className="border border-[#0000000e] w-full md:w-[60%]" />
       </div>
-      <ButtonWhats />
 
     </>
   )

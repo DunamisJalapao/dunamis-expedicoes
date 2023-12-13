@@ -1,8 +1,9 @@
-import { CollapseCard } from '@/components/CollapseCard'
-import { Header } from '@/components/Header'
-import Footer from '@/components/Screens/Footer'
-import { Metadata } from 'next'
-import { objPacks } from './aux'
+// import { CollapseCard } from '@/components/CollapseCard'
+import { CardDetails } from '@/components/CardDetails';
+import { Header } from '@/components/Header';
+import Footer from '@/components/screens/Footer';
+import { Metadata } from 'next';
+import { objPacks } from './aux';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { slug } = params;
@@ -42,7 +43,7 @@ export default function PackLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col overflow-x-hidden">
+    <div className="flex flex-col overflow-x-hidden font-work-sans">
       <nav className="w-full -mb-[5rem] z-50 fixed top-3  px-[20px] 2xl:px-[220px]">
         <Header />
       </nav>
@@ -111,10 +112,20 @@ export default function PackLayout({
           <div className="flex flex-col w-full">
             {asks.map(ask => (
               <>
-                <CollapseCard.Root
-                  title={ask.ask}
-                  content={ask.answer}
-                />
+                <CardDetails>
+                  <CardDetails.Wrapper>
+                    <CardDetails.Trigger>
+                      {/* <CardDetails.Icon icon={IconDescription} /> */}
+                      <CardDetails.Title>{ask.ask}</CardDetails.Title>
+                    </CardDetails.Trigger>
+
+                    <CardDetails.Content>
+                      <p className="text-xl">
+                        {ask.answer}
+                      </p>
+                    </CardDetails.Content>
+                  </CardDetails.Wrapper>
+                </CardDetails>
                 <div className="border mt-2 mb-2 border-[#0000000e] w-[full]" />
               </>
             ))}

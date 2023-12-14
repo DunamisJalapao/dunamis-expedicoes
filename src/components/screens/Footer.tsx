@@ -35,7 +35,7 @@ export default function Footer() {
 
         <div className='w-full'>
 
-          <NavBar className="text-left text-black " isFooter={true} />
+          <NavBar className="text-left text-black " />
         </div>
 
         <div className="flex flex-col font-work-sans">

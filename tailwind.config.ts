@@ -17,6 +17,14 @@ const config: Config = {
         "resposive-fit-two": "repeat(auto-fit, minmax(300px, 300px))",
       },
       keyframes: {
+        pulseBorder: {
+          "0%": {
+            boxShadow: "0 0 0 0 #25D366",
+          },
+          "100%": {
+            boxShadow: "0 0 0 25px rgba(255, 0, 0, 0)",
+          },
+        },
         opacityNormal: {
           "0%": { opacity: "0" },
           "50%": { opacity: "1" },
@@ -49,6 +57,7 @@ const config: Config = {
         "arrow-scroll": "arrowHome 3s ease-in-out infinite",
         opacity: "opacity 2s ease-in-out infinite",
         "opacity-normal": "opacityNormal 1s ease-in-out",
+        "pulse-border": "pulseBorder 2s infinite",
       },
     },
     fontFamily: {

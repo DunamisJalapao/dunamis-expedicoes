@@ -68,14 +68,14 @@ export default function PackLayout({
               <Image
                 src="/car.png"
                 alt="imagens da galeria"
-                sizes="100vh"
+                sizes="100vw"
                 style={{
-                  width: 'auto',
+                  width: '100%',
                   height: '100%',
-                  objectFit: 'cover'
+                  objectFit: 'cover',
                 }}
-                width={800}
-                height={400}
+                width={1}
+                height={1}
               />
 
             </div>

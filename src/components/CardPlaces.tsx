@@ -26,10 +26,11 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
                 sizes="100vw"
                 style={{
                   width: '100%',
-                  height: 'auto',
+                  height: '100%',
+                  objectFit: 'cover',
                 }}
-                width={500}
-                height={300}
+                width={1}
+                height={1}
               />
             </div>
           )}

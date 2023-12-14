@@ -44,8 +44,8 @@ export function Header({ ...rest }: HeaderProps) {
             width: '50%',
             height: '100%',
           }}
-          width={200}
-          height={100}
+          width={1}
+          height={1}
         />
       </div>
 

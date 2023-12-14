@@ -27,8 +27,8 @@ export default function Gallery({ ...rest }: ItinerariesType) {
                       height: '100%',
                       objectFit: 'cover',
                     }}
-                    width={500}
-                    height={300}
+                    width={1}
+                    height={1}
                   />
                 </div>
               ))}
@@ -45,8 +45,8 @@ export default function Gallery({ ...rest }: ItinerariesType) {
                       height: '100%',
                       objectFit: 'cover',
                     }}
-                    width={500}
-                    height={300}
+                    width={1}
+                    height={1}
                   />
                 </div>
               ))}

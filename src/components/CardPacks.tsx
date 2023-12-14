@@ -26,10 +26,10 @@ export function CardPacks({ duration, foods, hotel, img, title, doc, ...rest }: 
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover'
+              objectFit: 'cover',
             }}
-            width={500}
-            height={300}
+            width={1}
+            height={1}
           />
         </div>
         <div className='flex px-4 h-[10rem] pt-4 pb-4 flex-col justify-between'>

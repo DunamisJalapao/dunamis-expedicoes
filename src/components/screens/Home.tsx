@@ -13,15 +13,12 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
       <div className="flex w-full h-full px-[20px] 2xl:px-[220px] py-[13px] relative">
         <div className='flex flex-col gap-4 md:gap-10 lg:gap-16 mx-auto my-auto z-10 text-white items-center md:items-start font-bardon-stamp transition-all duration-100'>
           <h1 className='text-2xl xl:text-5xl justify-self-start'>Conheça as</h1>
-          <h1
-
-            className='text-transparent text-4xl md:text-[4rem] xl:text-[6rem] font-bardon-clean text-stroke-mobile md:text-stroke'
-          >
+          <h1 className='text-transparent text-4xl md:text-[4rem] xl:text-[6rem] font-bardon-clean text-stroke-mobile md:text-stroke'>
             Maravilhas
           </h1>
           <h1 className='text-xl md:text-2xl xl:text-4xl md:ml-auto text-center'>do Jalapão conosco</h1>
         </div>
-        <div className='w-full absolute top-0 left-0 bg-red-200'>
+        <div className='w-full absolute top-0 left-0'>
           <Carousel infiniteLoop interval={10000} showArrows={false} showIndicators={false} showThumbs={false} autoPlay>
             <div className="h-screen object-bottom">
               <Image
@@ -33,8 +30,9 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
                   height: '100%',
                   objectFit: 'cover',
                 }}
-                width={500}
-                height={300}
+                width={1}
+                height={1}
+                loading='lazy'
               />
             </div>
             <div className="h-screen ">
@@ -47,8 +45,9 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
                   height: '100%',
                   objectFit: 'cover',
                 }}
-                width={500}
-                height={300}
+                width={1}
+                height={1}
+                loading='lazy'
               />
             </div>
             <div className="h-screen">
@@ -61,8 +60,9 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
                   height: '100%',
                   objectFit: 'cover',
                 }}
-                width={500}
-                height={300}
+                width={1}
+                height={1}
+                loading='lazy'
               />
             </div>
           </Carousel>

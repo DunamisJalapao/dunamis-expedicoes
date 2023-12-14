@@ -27,10 +27,9 @@ export default function Footer() {
               width: '50%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'bottom'
             }}
-            width={500}
-            height={300}
+            width={1}
+            height={1}
           />
         </div>
 
@@ -96,10 +95,9 @@ export default function Footer() {
                   width: '50%',
                   height: '100%',
                   objectFit: 'cover',
-                  objectPosition: 'bottom'
                 }}
-                width={500}
-                height={300}
+                width={1}
+                height={1}
               />
             </div>
           </div>

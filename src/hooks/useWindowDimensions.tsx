@@ -13,7 +13,6 @@ export default function useWindowDimensions() {
     const handleSize = () => {
       setWindowDimensions(getWindowDimensions);
     };
-
     window.addEventListener('resize', handleSize);
 
     return () => window.removeEventListener('resize', handleSize);

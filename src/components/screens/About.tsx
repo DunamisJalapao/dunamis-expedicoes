@@ -22,8 +22,8 @@ export default function AboutScreen({ ...rest }: AboutType) {
                 objectFit: 'cover',
                 objectPosition: 'bottom'
               }}
-              width={500}
-              height={300}
+              width={1}
+              height={1}
             />
           </Fade>
         </div>

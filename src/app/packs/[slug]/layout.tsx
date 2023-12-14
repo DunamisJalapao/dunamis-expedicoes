@@ -3,6 +3,7 @@ import { CardDetails } from '@/components/CardDetails';
 import { Header } from '@/components/Header';
 import Footer from '@/components/screens/Footer';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { objPacks } from './aux';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -63,8 +64,20 @@ export default function PackLayout({
                 <p>Temos opção de veículo 4x4 exclusivo e privativo, para esta opção consultar Pacote Exclusivo juntamente a agência.</p>
               </div>
             </div>
-            <div className={`w-full md:w-[30rem] md:h-[35rem] overflow-hidden rounded-2xl`}>
-              <img className="object-cover rounded-2xl" src="/car.png" alt="..." />
+            <div className={`w-full md:w-[30rem] md:h-[35rem] bg-red-100 overflow-hidden rounded-2xl`}>
+              <Image
+                src="/car.png"
+                alt="imagens da galeria"
+                sizes="100vh"
+                style={{
+                  width: 'auto',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                width={800}
+                height={400}
+              />
+
             </div>
           </div>
 

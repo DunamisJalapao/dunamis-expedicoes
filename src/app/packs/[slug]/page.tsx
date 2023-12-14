@@ -1,6 +1,7 @@
 "use client"
 
 import Color from "color-thief-react";
+import Image from "next/image";
 import { objPacks } from "./aux";
 
 
@@ -15,11 +16,18 @@ export default function Pack({ params }: { params: { slug: string } }) {
             <div
               className={`w-full h-full backdrop-filter backdrop-blur absolute top-0 left-0`}
             />
-            <img
+            <Image
               src="/home1.png"
-              alt="image 1"
-              className="h-full w-full object-cover"
+              alt="imagem home 01"
+              sizes="100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              width={500}
+              height={300}
             />
+
           </div>
         </div>
         <div className="flex flex-col shadow-md w-[100%] md:w-[30%] bg-white px-4 py-5 md:p-10  rounded -mr-28 md:-mr-10 z-20 gap-5">
@@ -42,7 +50,17 @@ export default function Pack({ params }: { params: { slug: string } }) {
                 }}
                 className={`w-full md:w-[28%] h-[70%] sm:h-auto overflow-hidden rounded-3xl z-10`}
               >
-                <img className={`md:w-full h-full sm:h-auto object-cover`} src={objPacks[slug].imgHome} alt="..." />
+                <Image
+                  src={objPacks[slug].imgHome}
+                  alt="imagem home 01"
+                  sizes="100vw"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
+                  width={500}
+                  height={300}
+                />
               </div>
             </>
           )}
@@ -72,7 +90,17 @@ export default function Pack({ params }: { params: { slug: string } }) {
               <div
                 className={`w-full md:w-[30rem] h-[35rem] ${_ % 2 === 1 ? 'order-1 md:-order-1' : 'order-1'} overflow-hidden rounded-2xl`}
               >
-                <img className="rounded-2xl" src={day.photo} alt="..." />
+                <Image
+                  src={day.photo}
+                  alt="imagem home 01"
+                  sizes="100vw"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
+                  width={500}
+                  height={300}
+                />
               </div>
             </div>
 

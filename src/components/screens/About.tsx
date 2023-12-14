@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import { HTMLAttributes } from "react";
 import { Fade } from "react-awesome-reveal";
 
@@ -11,7 +12,19 @@ export default function AboutScreen({ ...rest }: AboutType) {
       <div className="flex mt-0 md:mt-14 px-0 sm:px-14 2xl:px-96 gap-5 md:gap-10 w-full items-center flex-col md:flex-row">
         <div className="flex z-10 w-[25rem] md:w-[50rem] h-[25rem] md:h-[40rem] rounded-[25px] overflow-hidden shadow-[0px_28px_50px_-27px_#d2b597,0px_8px_100px_13px_#00000003] md:shadow-[0px_58px_50px_-27px_#d2b597,0px_8px_100px_13px_#00000003]">
           <Fade className="w-full relative" triggerOnce>
-            <img className="w-full h-full object-cover object-bottom" src={'/about.png'} alt="imagem about" />
+            <Image
+              src={'/about.png'}
+              alt="imagem home 01"
+              sizes="100vw"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'bottom'
+              }}
+              width={500}
+              height={300}
+            />
           </Fade>
         </div>
         <div className="flex z-0 w-[25rem] md:w-[50rem] h-full md:h-[40rem] text-justify md:text-left">

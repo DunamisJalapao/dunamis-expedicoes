@@ -3,6 +3,7 @@ import { HTMLAttributes, useEffect, useState } from "react";
 import { CgMenuRight } from 'react-icons/cg';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 // import { DraweComponent } from "./DrawerComponent";
+import Image from "next/image";
 import { NavBar } from "./NavBar";
 
 type HeaderProps = HTMLAttributes<HTMLDivElement> & {}
@@ -35,9 +36,16 @@ export function Header({ ...rest }: HeaderProps) {
   return (
     <div className={`${color ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-[#112126a8]'} flex w-full h-[5rem] shadow-lg rounded-2xl backdrop-filter backdrop-blur px-[0.5rem] 2xl:px-[4rem] items-center transition`}>
       <div className="flex flex-1 ">
-        <img
+        <Image
           src="/assets/logo.png"
-          className="w-[8rem] ml-4"
+          alt="imagem home 01"
+          sizes="50vw"
+          style={{
+            width: '50%',
+            height: '100%',
+          }}
+          width={200}
+          height={100}
         />
       </div>
 

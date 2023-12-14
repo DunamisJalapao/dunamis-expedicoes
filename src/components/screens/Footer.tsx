@@ -2,6 +2,7 @@
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
 import useWindowDimensions from '@/hooks/useWindowDimensions';
+import Image from 'next/image';
 import { NavBar } from "../NavBar";
 
 export default function Footer() {
@@ -18,9 +19,18 @@ export default function Footer() {
     return (
       <div className="flex w-full h-full px-4 py-8 items-center justify-center flex-col gap-10 color-[#0000006c] text-center">
         <div className="w-[30%] sm:w-[20%] relative">
-          <img
-            src='/assets/logo-green.png'
-            alt="logo Dunamis Expedições"
+          <Image
+            src="/assets/logo-green.png"
+            alt="imagem home 01"
+            sizes="100vw"
+            style={{
+              width: '50%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'bottom'
+            }}
+            width={500}
+            height={300}
           />
         </div>
 
@@ -78,7 +88,19 @@ export default function Footer() {
 
           <div className="flex flex-1 justify-center">
             <div className="flex relative items-center justify-center w-full">
-              <img className="w-[50%]" src="/assets/logo-green.png" alt="logo Dunamis Expedições" />
+              <Image
+                src="/assets/logo-green.png"
+                alt="imagem home 01"
+                sizes="100vw"
+                style={{
+                  width: '50%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'bottom'
+                }}
+                width={500}
+                height={300}
+              />
             </div>
           </div>
 

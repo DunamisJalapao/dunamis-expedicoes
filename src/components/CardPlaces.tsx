@@ -1,6 +1,7 @@
 "use client"
 import { Attractivie } from "@/types";
 import Color from "color-thief-react";
+import Image from "next/image";
 import Link from "next/link";
 import IconPin from '../../public/assets/icon-pin.svg';
 
@@ -17,10 +18,18 @@ export function CardPlaces({ card, ...rest }: CardPlacesType) {
             <div style={{
               boxShadow: `0px 30px 40px -27px ${data}`
             }} className={`flex w-full h-[75%]`}>
-              <img
+
+              <Image
+                className="transition hover:scale-[1.05]"
                 src={card.img}
-                alt=""
-                className="w-full object-cover transition hover:scale-[1.05]"
+                alt="imagem home 01"
+                sizes="100vw"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                }}
+                width={500}
+                height={300}
               />
             </div>
           )}

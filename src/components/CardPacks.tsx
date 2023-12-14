@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import Link from "next/link";
 import { HTMLAttributes } from "react";
 import IconChecked from '../../public/assets/icon-checked.svg';
@@ -18,7 +19,18 @@ export function CardPacks({ duration, foods, hotel, img, title, doc, ...rest }: 
     <Link className="w-full min-w-[300px] h-full" href={doc} passHref prefetch>
       <div {...rest} className="flex rounded-xl flex-col overflow-hidden bg-white shadow-xl cursor-pointer duration-100 hover:scale-105">
         <div className="w-full h-[23rem] overflow-hidden">
-          <img className='w-full h-full object-cover' src={img} alt="" />
+          <Image
+            src={img}
+            alt="imagem home 01"
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
+            }}
+            width={500}
+            height={300}
+          />
         </div>
         <div className='flex px-4 h-[10rem] pt-4 pb-4 flex-col justify-between'>
           <div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { photos } from "@/database/photos";
+import Image from "next/image";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default function Gallery() {
@@ -18,12 +19,23 @@ export default function Gallery() {
           >
             <Masonry gutter="10px">
               {photos.map(photo => (
-                <img className="w-full" src={photo} />
+
+                <Image
+                  src={photo}
+                  alt="imagens da galeria"
+                  sizes="500px"
+                  width={600}
+                  height={600}
+                  quality={0}
+                  style={{
+                    objectFit: 'contain',
+                  }}
+                />
               ))}
             </Masonry>
           </ResponsiveMasonry>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

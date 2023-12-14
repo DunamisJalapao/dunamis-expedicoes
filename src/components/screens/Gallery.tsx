@@ -1,5 +1,6 @@
 
 import { photos } from "@/database/photos";
+import Image from "next/image";
 import Link from "next/link";
 import { HTMLAttributes } from "react";
 
@@ -17,14 +18,36 @@ export default function Gallery({ ...rest }: ItinerariesType) {
             <div className="flex w-full gap-2 animate-right-roll">
               {photos.map((photos, index) => (
                 <div key={index} className={`flex min-w-[150px] md:min-w-[350px] h-[150px] md:h-[250px] bg-cover rounded-xl overflow-hidden`}>
-                  <img className="w-full object-cover" src={photos} alt={`photo-gallery-${index}`} />
+                  <Image
+                    src={photos}
+                    alt={`photo-gallery-${index}`}
+                    sizes="100vw"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    width={500}
+                    height={300}
+                  />
                 </div>
               ))}
             </div>
             <div className="flex w-full gap-2 animate-left-roll">
               {photos.map((photos, index) => (
                 <div key={index} className={`flex min-w-[150px] md:min-w-[350px] h-[150px] md:h-[250px] bg-cover rounded-xl overflow-hidden`}>
-                  <img className="w-full object-cover" src={photos} alt={`photo-gallery-${index}`} />
+                  <Image
+                    src={photos}
+                    alt={`photo-gallery-${index}`}
+                    sizes="100vw"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    width={500}
+                    height={300}
+                  />
                 </div>
               ))}
             </div>

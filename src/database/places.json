@@ -3,35 +3,35 @@
     "id": 1,
     "name": "Dunas do Jalapão",
     "region": "Mateiros - TO",
-    "link": "",
+    "link": "https://www.instagram.com/p/CuS7WtNMiniPCb2sawkLToy_DLrscJYAZUGjG80/",
     "img": "/assets/imgs/places/dunas.png"
   },
   {
     "id": 2,
     "name": "Fervedouro Bela Vista",
     "region": "São Félix - TO",
-    "link": "",
+    "link": "https://www.instagram.com/p/CucMzdzOHJC/?utm_source=ig_web_copy_link&igshid=ZWQ3ODFjY2VlOQ==",
     "img": "/assets/imgs/places/bela-vista.png"
   },
   {
     "id": 3,
     "name": "Cânion Sussuapara",
     "region": "Ponte Alta - TO",
-    "link": "",
+    "link": "https://www.instagram.com/p/CrBslrbOwHs/?utm_source=ig_web_copy_link&igshid=ZWQ3ODFjY2VlOQ==",
     "img": "/assets/imgs/places/sussuapara.png"
   },
   {
     "id": 4,
     "name": "Cachoeira do Formiga",
     "region": "Mateiros - TO",
-    "link": "",
+    "link": "https://www.instagram.com/p/Cr6mBcCPlvQ/?utm_source=ig_web_copy_link&igshid=ZWQ3ODFjY2VlOQ==",
     "img": "/assets/imgs/places/formiga.png"
   },
   {
     "id": 15,
-    "name": "Lago do Japonês",
+    "name": "Lagoo do Japonês",
     "region": "Pindorama do Tocantins - TO",
-    "link": "",
+    "link": "https://www.instagram.com/p/Cp-d-fIOHfz/?utm_source=ig_web_copy_link&igshid=ZWQ3ODFjY2VlOQ==",
     "img": "/assets/imgs/places/japones.png"
   }
 ]

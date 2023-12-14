@@ -1,5 +1,6 @@
 
 "use client"
+import Image from 'next/image';
 import { HTMLAttributes } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -21,26 +22,47 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
           <h1 className='text-xl md:text-2xl xl:text-4xl md:ml-auto text-center'>do Jalapão conosco</h1>
         </div>
         <div className='w-full absolute top-0 left-0 bg-red-200'>
-          <Carousel infiniteLoop showThumbs={false} autoPlay>
+          <Carousel infiniteLoop interval={10000} showArrows={false} showIndicators={false} showThumbs={false} autoPlay>
             <div className="h-screen object-bottom">
-              <img
+              <Image
                 src="/home1.png"
-                alt="image 1"
-                className='w-full h-full object-cover'
+                alt="imagem home 01"
+                sizes="100vw"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                width={500}
+                height={300}
               />
             </div>
             <div className="h-screen ">
-              <img
+              <Image
                 src="/home2.png"
-                alt="image 2"
-                className='w-full h-full object-cover'
+                alt="imagem home 01"
+                sizes="100vw"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                width={500}
+                height={300}
               />
             </div>
             <div className="h-screen">
-              <img
+              <Image
                 src="/home3.png"
-                alt="image 3"
-                className='w-full h-full object-cover'
+                alt="imagem home 01"
+                sizes="100vw"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                width={500}
+                height={300}
               />
             </div>
           </Carousel>

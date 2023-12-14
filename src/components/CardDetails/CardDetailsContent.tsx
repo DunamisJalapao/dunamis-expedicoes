@@ -6,7 +6,7 @@ type CardDetailsContentProps = ComponentProps<'div'> & {
 }
 export function CardDetailsContent({ children, ...rest }: CardDetailsContentProps) {
   return (
-    <div {...rest} className={twMerge("flex w-full h-[15rem] rounded-lg px-4 items-center gap-4 select-none", rest.className)}>
+    <div {...rest} className={twMerge("flex w-full h-[15rem] rounded-lg items-center gap-4 select-none", rest.className)}>
       {children}
     </div>
   )

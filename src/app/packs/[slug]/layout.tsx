@@ -126,14 +126,14 @@ export default function PackLayout({
             {asks.map(ask => (
               <>
                 <CardDetails>
-                  <CardDetails.Wrapper>
-                    <CardDetails.Trigger>
+                  <CardDetails.Wrapper >
+                    <CardDetails.Trigger className='w-full'>
                       {/* <CardDetails.Icon icon={IconDescription} /> */}
                       <CardDetails.Title>{ask.ask}</CardDetails.Title>
                     </CardDetails.Trigger>
 
-                    <CardDetails.Content>
-                      <p className="text-xl">
+                    <CardDetails.Content className='w-full'>
+                      <p className="text-md">
                         {ask.answer}
                       </p>
                     </CardDetails.Content>

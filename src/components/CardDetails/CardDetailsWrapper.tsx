@@ -11,7 +11,7 @@ export function CardDetailsWrapper({ children, ...rest }: CardDetailsWrapperProp
   const { isOpen } = useCardDetails();
 
   return (
-    <div {...rest} data-open={isOpen} className={twMerge("flex flex-col h-[4rem] w-full px-4 py-3 data-[open=true]:h-[20rem] rounded-lg  overflow-hidden gap-2 items-center transition-all", rest.className)}>
+    <div {...rest} data-open={isOpen} className={twMerge("flex flex-col h-[4rem] w-full  py-3 data-[open=true]:h-[20rem] rounded-lg  overflow-hidden gap-2 items-center transition-all", rest.className)}>
       {children}
     </div>
 

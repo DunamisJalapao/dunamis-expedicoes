@@ -16,7 +16,6 @@ function CardDetailsProvider({ children }: CardDetailsType) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleOpen = () => {
-    console.log('hi')
     setIsOpen(!isOpen);
   }
 

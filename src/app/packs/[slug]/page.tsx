@@ -33,7 +33,7 @@ export default function Pack({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-col shadow-md w-[100%] md:w-[30%] bg-white px-4 py-5 md:p-10  rounded -mr-28 md:-mr-10 z-20 gap-5">
           <h1
-            className="text-2xl xl:text-[3rem] leading-normal uppercase text-[#ff5900] font-bardon-stamp"
+            className="text-2xl xl:text-[3rem] leading-normal zuppercase text-[#ff5900] font-bardon-stamp"
           >
             {objPacks[slug].title}
           </h1>

@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/material-ui";
 import { UtilsProvider } from "@/hooks/utils";
 import { ReactNode } from "react";
 
@@ -7,8 +8,10 @@ type ProviderProps = {
 
 export function Providers({ children }: ProviderProps) {
   return (
-    <UtilsProvider>
-      {children}
-    </UtilsProvider>
+    <ThemeProvider>
+      <UtilsProvider>
+        {children}
+      </UtilsProvider>
+    </ThemeProvider>
   )
 }

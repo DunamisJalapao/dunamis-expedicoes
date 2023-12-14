@@ -3,6 +3,7 @@ import { HTMLAttributes, useEffect, useState } from "react";
 import { CgMenuRight } from 'react-icons/cg';
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 // import { DraweComponent } from "./DrawerComponent";
+import { useUtils } from "@/hooks/utils";
 import Image from "next/image";
 import { NavBar } from "./NavBar";
 
@@ -17,7 +18,8 @@ const listIcons = [
 
 export function Header({ ...rest }: HeaderProps) {
   const [color, _setColor] = useState(true)
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const { onToggle } = useUtils();
 
   const handleScrollWindow = () => {
     const position = window.scrollY;
@@ -35,6 +37,7 @@ export function Header({ ...rest }: HeaderProps) {
 
   return (
     <div className={`${color ? 'bg-[rgba(255,255,255,0.2)]' : 'bg-[#112126a8]'} flex w-full h-[5rem] shadow-lg rounded-2xl backdrop-filter backdrop-blur px-[0.5rem] 2xl:px-[4rem] items-center transition`}>
+
       <div className="flex flex-1 ">
         <Image
           src="/assets/logo.png"
@@ -49,7 +52,7 @@ export function Header({ ...rest }: HeaderProps) {
         />
       </div>
 
-      <div className="flex md:hidden flex-1 justify-end" onClick={() => setIsOpen(true)}>
+      <div className="flex md:hidden flex-1 justify-end" onClick={() => onToggle()}>
         <CgMenuRight className="text-white text-4xl" />
       </div>
       <div className="w-full hidden md:flex flex-[5]">
@@ -66,12 +69,6 @@ export function Header({ ...rest }: HeaderProps) {
           ))}
         </div>
       </div>
-
-
-      {/* <DraweComponent
-        isOpen={isOpen}
-        toggle={() => setIsOpen(false)}
-      /> */}
     </div>
   )
 }

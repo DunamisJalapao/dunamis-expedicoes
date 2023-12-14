@@ -1,4 +1,5 @@
 'use client'
+import { Drawer } from "@/components/Drawer";
 import { Header } from "@/components/Header";
 // import AboutScreen from "@/components/screens/About";
 // import Contact from "@/components/screens/Contact";
@@ -31,7 +32,7 @@ export default function Home() {
       <Gallery id="container-gallery" />
       <Contact id="container-contact" />
       <Footer />
-
+      <Drawer />
     </main >
   )
 }

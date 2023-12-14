@@ -12,3 +12,9 @@
     -webkit-text-stroke: 3px #fff;
   }
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}

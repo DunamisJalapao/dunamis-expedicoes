@@ -16,7 +16,7 @@ type CardPacksType = HTMLAttributes<HTMLDivElement> & {
 
 export function CardPacks({ duration, foods, hotel, img, title, doc, ...rest }: CardPacksType) {
   return (
-    <Link className="w-full min-w-[300px] h-full" href={doc} passHref prefetch>
+    <Link className="w-full min-w-[300px] h-full" href={doc}>
       <div {...rest} className="flex rounded-xl flex-col overflow-hidden bg-white shadow-xl cursor-pointer duration-100 hover:scale-105">
         <div className="w-full h-[23rem] overflow-hidden">
           <Image

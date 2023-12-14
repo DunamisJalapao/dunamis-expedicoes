@@ -35,7 +35,6 @@ const bardonClean = localFont({
   ],
   variable: '--font-bardon-clean'
 });
-
 const workSans = localFont({
   src: [
     {
@@ -49,7 +48,7 @@ const workSans = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Dunamis Expedições',
+    default: 'Dunamis Expedições | Melhor agência do Jalapão',
     template: '%s | Dunamis Expedições'
   },
   description: 'A sua agência de turismo',

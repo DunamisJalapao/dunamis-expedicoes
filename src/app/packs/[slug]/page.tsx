@@ -72,9 +72,9 @@ export default function Pack({ params }: { params: { slug: string } }) {
       {/* DIAS */}
 
       <div className="flex flex-col w-screen h-full items-center justify-center font-bardon-clean">
-        {objPacks[slug].days.map((day, _) => (
+        {objPacks[slug].days.map((day, index) => (
           <>
-            <div key={_} className="flex flex-col md:flex-row py-10 px-4 md:px-auto w-full justify-center h-full md:gap-20">
+            <div key={`${index}-${day.attractivies.length}`} className="flex flex-col md:flex-row py-10 px-4 md:px-auto w-full justify-center h-full md:gap-20">
               <div className="flex h-[25rem] flex-col justify-center md:justify-around gap-5 ">
                 <div className="flex flex-col">
                   <h1 className="text-3xl md:text-5xl self-center md:self-start font-bardon-stamp">{day.title}</h1>
@@ -82,15 +82,16 @@ export default function Pack({ params }: { params: { slug: string } }) {
                 <div>
                   <h3 className="text-3xl md:text-5xl mb-2 font-blue-dream">Atrações a serem visitadas:</h3>
                   <ul className="px-4 list-disc pl-6 font-work-sans">
-                    {day.attractivies.map((attracitive, _) => (
-                      <li key={_}>{attracitive}</li>
+                    {day.attractivies.map((attracitive, indexAttractivie) => (
+                      <li key={`${indexAttractivie}-${attracitive}`}>{attracitive}</li>
                     ))}
                   </ul>
                 </div>
                 {/* <p>20h: Chegada na pousada</p> */}
               </div>
               <div
-                className={`w-full md:w-[30rem] h-[35rem] ${_ % 2 === 1 ? 'order-1 md:-order-1' : 'order-1'} overflow-hidden rounded-2xl`}
+                key={`${index}-${day.attractivies.length}`}
+                className={`w-full md:w-[30rem] h-[35rem] ${index % 2 === 1 ? 'order-1 md:-order-1' : 'order-1'} overflow-hidden rounded-2xl`}
               >
                 <Image
                   src={day.photo}
@@ -106,10 +107,13 @@ export default function Pack({ params }: { params: { slug: string } }) {
                 />
               </div>
             </div>
-
-            <div className="border border-[#0000000e] w-full md:w-[60%]" />
+            {index === (objPacks[slug].days.length - 1) && (
+              <p key={`${index}-${day.attractivies.length}`} className="px-4 my-9 md:px-auto font-work-sans text-md w-[60%] text-justify"><strong>* Nota</strong>: Pode haver alteração na sequência do roteiro, ou até de um atrativo por outro do mesmo tipo, em decorrência do fluxo de turistas nos atrativos, disponibilidade de hospedagem ou outras condições externas.</p>
+            )}
+            <div key={`${index}-${day.attractivies.length}`} className="border border-[#0000000e] w-full md:w-[60%]" />
           </>
         ))}
+
       </div>
 
       <div className="flex flex-col w-full items-center justify-center">

@@ -16,6 +16,15 @@ const config: Config = {
         "resposive-fit-two": "repeat(auto-fit, minmax(300px, 300px))",
       },
       keyframes: {
+        opacityNormal: {
+          "0%": { opacity: "0" },
+          "50%": { opacity: "1" },
+        },
+        opacity: {
+          "0%": { opacity: "0" },
+          "50%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
         rightToLeft: {
           from: { transform: "translate(0)" },
           to: { transform: "translate(-85vw)" },
@@ -37,6 +46,8 @@ const config: Config = {
         "right-roll": "leftToRight infinite alternate 180s linear",
         "left-roll": "rightToLeft infinite alternate 180s linear",
         "arrow-scroll": "arrowHome 3s ease-in-out infinite",
+        opacity: "opacity 2s ease-in-out infinite",
+        "opacity-normal": "opacityNormal 1s ease-in-out",
       },
     },
     fontFamily: {

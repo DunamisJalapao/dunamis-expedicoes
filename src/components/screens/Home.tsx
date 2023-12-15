@@ -22,7 +22,7 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
           <Carousel infiniteLoop interval={10000} showArrows={false} showIndicators={false} showThumbs={false} autoPlay>
             <div className="h-screen object-bottom">
               <Image
-                src="/home1.jpeg"
+                src="/home2.jpeg"
                 alt="imagem home 01"
                 sizes="100vw"
                 style={{
@@ -37,7 +37,7 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
             </div>
             <div className="h-screen ">
               <Image
-                src="/home2.jpeg"
+                src="/home1.jpeg"
                 alt="imagem home 01"
                 sizes="100vw"
                 style={{

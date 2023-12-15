@@ -1,5 +1,6 @@
 "use client"
 
+import { Drawer } from "@/components/Drawer";
 import Color from "color-thief-react";
 import Image from "next/image";
 import { objPacks } from "./aux";
@@ -10,6 +11,8 @@ export default function Pack({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <Drawer />
+
       <div className="flex w-screen h-screen items-center justify-center relative">
         <div className="absolute w-full h-full left-0 top-0 z-0">
           <div className="flex w-full h-full relative">

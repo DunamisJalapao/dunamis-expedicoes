@@ -45,6 +45,7 @@ export default function PackLayout({
 }) {
   return (
     <div className="flex flex-col overflow-x-hidden font-work-sans">
+
       <nav className="w-full -mb-[5rem] z-50 fixed top-3  px-[20px] 2xl:px-[220px]">
         <Header />
       </nav>

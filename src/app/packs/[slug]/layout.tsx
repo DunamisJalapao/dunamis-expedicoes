@@ -64,21 +64,25 @@ export default function PackLayout({
                 <p>Temos opção de veículo 4x4 exclusivo e privativo, para esta opção consultar Pacote Exclusivo juntamente a agência.</p>
               </div>
             </div>
-            <div className={`w-full md:w-[30rem] md:h-[35rem] bg-red-100 overflow-hidden rounded-2xl`}>
-              <Image
-                src="/car.png"
-                alt="imagens da galeria"
-                sizes="100vw"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
-                width={1}
-                height={1}
-              />
+            <div className='flex flex-col  h-full'>
+              <div className={`w-full md:w-[30rem] md:h-[35rem] overflow-hidden rounded-2xl`}>
+                <Image
+                  src="/car.jpeg"
+                  alt="imagens da galeria"
+                  sizes="100vw"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  width={1}
+                  height={1}
+                />
+              </div>
+              <p className='text-sm mt-2 font-semibold'>* Imagem meramente ilustrativa</p>
 
             </div>
+
           </div>
 
           <div className="border border-[#0000000e] w-full md:w-[60%]" />

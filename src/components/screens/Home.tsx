@@ -37,13 +37,14 @@ export default function HomeScreen({ ...rest }: HomeScreenType) {
             </div>
             <div className="h-screen ">
               <Image
-                src="/home2.png"
+                src="/home2.jpeg"
                 alt="imagem home 01"
                 sizes="100vw"
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  objectPosition: 'center'
                 }}
                 width={1}
                 height={1}

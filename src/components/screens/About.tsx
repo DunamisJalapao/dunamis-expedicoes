@@ -37,19 +37,22 @@ export default function AboutScreen({ ...rest }: AboutType) {
             <div className="text-md md:text-xl xl:text-2xl font-work-sans">
               {/* <PortableText value={about[0].description} /> */}
               <p>
-                A Dunamis Expedições é uma empresa <strong>tocantinense</strong>{" "}
-                que foi criada através da soma do olhar de dois profissionais
-                que enxergaram no turismo, o modo transformador de contemplar a
-                vida e realizar sonhos.
+                A Dunamis Expedições é uma agência de turismo do{" "}
+                <strong>Tocantins</strong> que foi fundada por um casa, Ruty
+                (engenheira ambienta) e Glauco (gestor ambiental), os quais
+                perceberam no turismo uma forma transformadora de contemplar a
+                vida.
                 <br />
                 <br />
-                Nossos direcionadores como agência, é atuar de forma ética,
-                oferecer serviços de qualidade, garantir bem estar dos nossos
-                clientes e fazer a diferença no cenário social, pois acreditamos
-                numa sociedade mais humana e solidária.
+                Nossa dedicação vai além do serviço; é a criação de uma vivência
+                repleta de sentimentos e momentos especiais, guiado pelo amor ao
+                que fazemos. Desde o momento em que você nos escolhe, cada
+                detalhe da sua viagem é cuidadosamente planejado e executado, e
+                a nossa maior alegria é proporcionar uma experiência genuína e
+                memorável.
                 <br />
                 <br />
-                <strong>Somos a Dunamis Expedições!</strong>
+                {/* <strong>Somos a Dunamis Expedições!</strong> */}
               </p>
             </div>
           </Fade>

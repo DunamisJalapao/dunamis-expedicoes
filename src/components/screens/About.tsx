@@ -32,7 +32,7 @@ export default function AboutScreen({ ...rest }: AboutType) {
             />
           </Fade>
         </div>
-        <div className="flex z-0 w-[25rem] md:w-[50rem] h-full md:h-[40rem] text-center md:text-left">
+        <div className="flex z-0 w-[25rem] md:w-[50rem] h-full md:h-[40rem] text-justify md:text-left">
           <Fade direction="left" delay={500} triggerOnce>
             <div className="text-md md:text-xl xl:text-2xl font-work-sans">
               {/* <PortableText value={about[0].description} /> */}

@@ -37,10 +37,9 @@ export default function AboutScreen({ ...rest }: AboutType) {
             <div className="text-md md:text-xl xl:text-2xl font-work-sans">
               {/* <PortableText value={about[0].description} /> */}
               <p>
-                A Dunamis Expedições é uma agência de turismo do{" "}
-                <strong>Tocantins</strong> que foi fundada por um casal
-                ambiental, Ruty (engenheira ambienta) e Glauco (gestor
-                ambiental), os quais perceberam no turismo uma forma
+                A Dunamis Expedições é uma agência de turismo do Tocantins que
+                foi fundada por um casal, Ruty (engenheira ambiental) e Glauco
+                (gestor ambiental), os quais perceberam no turismo uma forma
                 transformadora de contemplar a vida.
                 <br />
                 <br />

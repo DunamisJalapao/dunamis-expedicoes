@@ -32,16 +32,16 @@ export default function AboutScreen({ ...rest }: AboutType) {
             />
           </Fade>
         </div>
-        <div className="flex z-0 w-[25rem] md:w-[50rem] h-full md:h-[40rem] text-justify md:text-left">
+        <div className="flex z-0 w-[25rem] md:w-[50rem] h-full md:h-[40rem] text-center md:text-left">
           <Fade direction="left" delay={500} triggerOnce>
             <div className="text-md md:text-xl xl:text-2xl font-work-sans">
               {/* <PortableText value={about[0].description} /> */}
               <p>
                 A Dunamis Expedições é uma agência de turismo do{" "}
-                <strong>Tocantins</strong> que foi fundada por um casa, Ruty
-                (engenheira ambienta) e Glauco (gestor ambiental), os quais
-                perceberam no turismo uma forma transformadora de contemplar a
-                vida.
+                <strong>Tocantins</strong> que foi fundada por um casal
+                ambiental, Ruty (engenheira ambienta) e Glauco (gestor
+                ambiental), os quais perceberam no turismo uma forma
+                transformadora de contemplar a vida.
                 <br />
                 <br />
                 Nossa dedicação vai além do serviço; é a criação de uma vivência

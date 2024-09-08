@@ -9,13 +9,13 @@ export default function AboutScreen({ ...rest }: AboutType) {
   return (
     <div
       {...rest}
-      className="flex flex-col items-center md:justify-center w-full md:w-screen h-full md:h-screen bg-[#f8f8f8] py-9"
+      className="flex flex-col items-center md:justify-center w-full md:w-screen h-full md:h-screen bg-[#f8f8f8] "
     >
-      <h1 className="mt-5 md:mt-0 mb-5 md:mb-0 items-center text-4xl md:text-5xl text-[#112126ff] uppercase font-bold font-bardon-stamp">
+      <h1 className="mt-5 md:mt-0 mb-5 md:mb-0 items-center text-2xl md:text-3xl text-[#112126ff] uppercase font-bold font-bardon-stamp">
         Sobre nós
       </h1>
-      <div className="flex mt-0 md:mt-14 px-0 sm:px-14 2xl:px-96 gap-5 md:gap-10 w-full items-center flex-col md:flex-row">
-        <div className="flex z-10 w-[25rem] md:w-[50rem] h-[25rem] md:h-[40rem] rounded-[25px] overflow-hidden shadow-[0px_28px_50px_-27px_#d2b597,0px_8px_100px_13px_#00000003] md:shadow-[0px_58px_50px_-27px_#d2b597,0px_8px_100px_13px_#00000003]">
+      <div className="flex mt-0 md:mt-14 px-0 sm:px-14 mx-auto gap-5 md:gap-10 w-full items-center justify-center flex-col md:flex-row">
+        <div className="flex z-10 w-[25rem] md:w-[30rem] h-[25rem] md:h-[40rem] rounded-[25px] overflow-hidden shadow-[0px_28px_50px_-27px_#d2b597,0px_8px_100px_13px_#00000003] md:shadow-[0px_58px_50px_-27px_#d2b597,0px_8px_100px_13px_#00000003]">
           <Fade className="w-full relative" triggerOnce>
             <Image
               src={"/about.jpeg"}
@@ -32,7 +32,7 @@ export default function AboutScreen({ ...rest }: AboutType) {
             />
           </Fade>
         </div>
-        <div className="flex z-0 w-[25rem] md:w-[50rem] h-full md:h-[40rem] text-justify md:text-left">
+        <div className="flex z-0 w-[25rem] md:w-[30rem] h-full md:h-[40rem] text-justify md:text-left">
           <Fade direction="left" delay={500} triggerOnce>
             <div className="text-md md:text-xl xl:text-2xl font-work-sans">
               {/* <PortableText value={about[0].description} /> */}

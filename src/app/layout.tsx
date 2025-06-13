@@ -1,4 +1,5 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -180,6 +181,7 @@ export default function RootLayout({
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
+        <SpeedInsights />
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { HTMLAttributes } from "react";
-import { Fade } from "react-awesome-reveal";
+import Fade from "react-awesome-reveal";
 
 type AboutType = HTMLAttributes<HTMLDivElement> & {};
 

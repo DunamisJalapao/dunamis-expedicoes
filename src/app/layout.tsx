@@ -171,11 +171,20 @@ export default function RootLayout({
           }}
         />
 
-        {/* Only critical preload */}
-        <link rel="preload" href="/home1.jpeg" as="image" />
+        {/* Critical preloads for LCP */}
+        <link rel="preload" href="/home1.jpeg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/home2.jpeg" as="image" type="image/jpeg" />
 
-        {/* Only essential DNS prefetch */}
+        {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//api.whatsapp.com" />
+        <link rel="dns-prefetch" href="//www.instagram.com" />
+        <link rel="dns-prefetch" href="//www.tiktok.com" />
+        <link rel="dns-prefetch" href="//www.youtube.com" />
+
+        {/* Preconnect for critical external resources */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://api.whatsapp.com" />
         <Script
           strategy="lazyOnload"
           dangerouslySetInnerHTML={{

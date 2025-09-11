@@ -5,23 +5,31 @@ const nextConfig = {
   poweredByHeader: false,
   swcMinify: true,
 
-  // Image optimization
+  // Modern browser support - reduce polyfills
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+
+  // Image optimization - simplified to avoid ResponseAborted errors
   images: {
     formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year for better caching
+    minimumCacheTTL: 86400, // 1 day to avoid cache issues
     dangerouslyAllowSVG: true,
     unoptimized: false,
+    loader: "default",
+    domains: [],
+    remotePatterns: [],
   },
 
-  // Experimental features for performance
+  // Experimental features for performance - simplified
   experimental: {
     optimizePackageImports: ["react-icons", "react-responsive-carousel"],
     optimizeCss: true,
   },
 
-  // Webpack optimizations
+  // Webpack optimizations - simplified
   webpack(config, { dev, isServer }) {
     // SVG handling
     config.module.rules.push({
@@ -30,7 +38,7 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    // Production optimizations
+    // Basic production optimizations
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
         chunks: "all",
@@ -48,11 +56,11 @@ const nextConfig = {
     return config;
   },
 
-  // Headers for better caching
+  // Headers for better caching - simplified to avoid regex issues
   async headers() {
     return [
       {
-        source: "/assets/(.*)",
+        source: "/assets/:path*",
         headers: [
           {
             key: "Cache-Control",
@@ -61,7 +69,7 @@ const nextConfig = {
         ],
       },
       {
-        source: "/_next/static/(.*)",
+        source: "/_next/static/:path*",
         headers: [
           {
             key: "Cache-Control",
@@ -70,7 +78,7 @@ const nextConfig = {
         ],
       },
       {
-        source: "/fonts/(.*)",
+        source: "/fonts/:path*",
         headers: [
           {
             key: "Cache-Control",

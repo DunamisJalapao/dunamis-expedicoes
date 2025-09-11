@@ -4,16 +4,25 @@
 
 /* Critical CSS moved to inline styles in layout.tsx for better performance */
 
+/* Defer non-critical CSS */
 @layer utilities {
+  /* Only include used utilities to reduce bundle size */
   .text-stroke {
-    /* WebkitTextStroke */
     -webkit-text-stroke: 6px #fff;
   }
+
   .text-stroke-mobile {
-    /* WebkitTextStroke */
-    -webkit-text-stroke: 3px #fff;
+    -webkit-text-stroke: 2px #fff;
+  }
+
+  @media (min-width: 1024px) {
+    .text-stroke-mobile {
+      -webkit-text-stroke: 3px #fff;
+    }
   }
 }
+
+/* Removed duplicate utilities - consolidated above */
 
 @layer base {
   html {
@@ -46,7 +55,7 @@
     @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
   }
 
-  /* Performance optimizations */
+  /* Performance optimizations - consolidated */
   .will-change-transform {
     will-change: transform;
   }
@@ -59,10 +68,5 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
-  }
-
-  /* Basic performance optimizations */
-  .will-change-transform {
-    will-change: transform;
   }
 }

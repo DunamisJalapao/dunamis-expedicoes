@@ -35,6 +35,7 @@ const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
                   width={300}
                   height={300}
                   loading="lazy"
+                  quality={75}
                   className="hover:scale-110 transition-transform duration-300"
                 />
               </div>
@@ -58,6 +59,7 @@ const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
                   width={300}
                   height={300}
                   loading="lazy"
+                  quality={75}
                   className="hover:scale-110 transition-transform duration-300"
                 />
               </div>

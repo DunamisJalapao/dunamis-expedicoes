@@ -16,7 +16,7 @@ const blueDream = localFont({
   ],
   variable: "--font-blue-dream",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 const bardonStamp = localFont({
   src: [
@@ -28,7 +28,7 @@ const bardonStamp = localFont({
   ],
   variable: "--font-bardon-stamp",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 const bardonClean = localFont({
   src: [
@@ -40,7 +40,7 @@ const bardonClean = localFont({
   ],
   variable: "--font-bardon-clean",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 const workSans = localFont({
   src: [
@@ -52,7 +52,7 @@ const workSans = localFont({
   ],
   variable: "--font-work-sans",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -156,13 +156,29 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        {/* Critical CSS inline for faster FCP */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+            body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+            .font-bardon-stamp { font-family: var(--font-bardon-stamp), system-ui, sans-serif; }
+            .font-bardon-clean { font-family: var(--font-bardon-clean), system-ui, sans-serif; }
+            .font-blue-dream { font-family: var(--font-blue-dream), system-ui, sans-serif; }
+            .font-work-sans { font-family: var(--font-work-sans), system-ui, sans-serif; }
+            .text-stroke-mobile { -webkit-text-stroke: 2px #FF5A00; }
+            .text-stroke { -webkit-text-stroke: 3px #FF5A00; }
+            @media (min-width: 1024px) { .text-stroke-mobile { -webkit-text-stroke: 3px #FF5A00; } }
+          `,
+          }}
+        />
+
         {/* Only critical preload */}
         <link rel="preload" href="/home1.jpeg" as="image" />
 
         {/* Only essential DNS prefetch */}
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function (w, d, s, l, i) {
               w[l] = w[l] || []; w[l].push({

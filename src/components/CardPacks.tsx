@@ -42,6 +42,7 @@ const CardPacks = memo(function CardPacks({
             width={400}
             height={300}
             loading="lazy"
+            quality={75}
           />
         </div>
         <div className="flex px-4 h-[10rem] pt-4 pb-4 flex-col justify-between">

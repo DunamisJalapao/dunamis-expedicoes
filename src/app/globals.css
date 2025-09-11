@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical CSS moved to inline styles in layout.tsx for better performance */
+
 @layer utilities {
   .text-stroke {
     /* WebkitTextStroke */

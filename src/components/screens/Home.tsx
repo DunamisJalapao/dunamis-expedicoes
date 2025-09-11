@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, memo } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 type HomeScreenType = HTMLAttributes<HTMLDivElement> & {};
 
-const HomeScreen = function HomeScreen({ ...rest }: HomeScreenType) {
+const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
   return (
     <div {...rest} className="flex w-screen h-screen relative overflow-hidden">
       <div className="flex w-full h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-4 sm:py-6 md:py-8 relative">
@@ -47,6 +47,7 @@ const HomeScreen = function HomeScreen({ ...rest }: HomeScreenType) {
                 width={1920}
                 height={1080}
                 priority
+                quality={75}
               />
             </div>
             <div className="h-screen">
@@ -63,6 +64,7 @@ const HomeScreen = function HomeScreen({ ...rest }: HomeScreenType) {
                 width={1920}
                 height={1080}
                 loading="lazy"
+                quality={75}
               />
             </div>
             <div className="h-screen">
@@ -79,6 +81,7 @@ const HomeScreen = function HomeScreen({ ...rest }: HomeScreenType) {
                 width={1920}
                 height={1080}
                 loading="lazy"
+                quality={75}
               />
             </div>
           </Carousel>
@@ -87,6 +90,6 @@ const HomeScreen = function HomeScreen({ ...rest }: HomeScreenType) {
       </div>
     </div>
   );
-};
+});
 
 export default HomeScreen;

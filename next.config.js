@@ -1,25 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Performance optimizations - simplified for faster first load
+  // Performance optimizations
   compress: true,
   poweredByHeader: false,
+  swcMinify: true,
 
-  // Image optimization - simplified
+  // Image optimization
   images: {
     formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 86400, // 1 day instead of 1 year
+    minimumCacheTTL: 31536000, // 1 year for better caching
     dangerouslyAllowSVG: true,
+    unoptimized: false,
   },
 
-  // Minimal experimental features
+  // Experimental features for performance
   experimental: {
-    optimizePackageImports: ["react-icons"],
+    optimizePackageImports: ["react-icons", "react-responsive-carousel"],
+    optimizeCss: true,
   },
 
-  // Simplified webpack
-  webpack(config) {
+  // Webpack optimizations
+  webpack(config, { dev, isServer }) {
     // SVG handling
     config.module.rules.push({
       test: /\.svg$/i,
@@ -27,10 +30,25 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
+    // Production optimizations
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        chunks: "all",
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+            priority: 10,
+          },
+        },
+      };
+    }
+
     return config;
   },
 
-  // Minimal headers
+  // Headers for better caching
   async headers() {
     return [
       {
@@ -38,7 +56,25 @@ const nextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=86400",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/fonts/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

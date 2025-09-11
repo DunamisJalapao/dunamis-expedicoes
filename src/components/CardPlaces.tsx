@@ -35,6 +35,7 @@ const CardPlaces = memo(function CardPlaces({ card, ...rest }: CardPlacesType) {
                 width={400}
                 height={300}
                 loading="lazy"
+                quality={75}
               />
             </div>
           )}

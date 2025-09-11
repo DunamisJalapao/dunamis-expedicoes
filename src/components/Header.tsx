@@ -1,5 +1,5 @@
 "use client";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { HTMLAttributes, memo, useCallback, useEffect, useState } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 // import { DraweComponent } from "./DrawerComponent";
@@ -22,22 +22,22 @@ const listIcons = [
   { icon: <FaYoutube />, route: "https://www.youtube.com/@dunamis_expedicoes" },
 ];
 
-export function Header({ ...rest }: HeaderProps) {
+const Header = memo(function Header({ ...rest }: HeaderProps) {
   const [color, _setColor] = useState(true);
 
   const { onToggle } = useUtils();
 
-  const handleScrollWindow = () => {
+  const handleScrollWindow = useCallback(() => {
     const position = window.scrollY;
     return position <= 100 ? _setColor(true) : _setColor(false);
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrollWindow);
     return () => {
       window.removeEventListener("scroll", handleScrollWindow);
     };
-  }, []);
+  }, [handleScrollWindow]);
 
   return (
     <div
@@ -84,4 +84,6 @@ export function Header({ ...rest }: HeaderProps) {
       </div>
     </div>
   );
-}
+});
+
+export { Header };

@@ -1,10 +1,10 @@
 import { photos } from "@/database/photos";
 import Image from "next/image";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, memo } from "react";
 
 type ItinerariesType = HTMLAttributes<HTMLDivElement> & {};
 
-export default function Gallery({ ...rest }: ItinerariesType) {
+const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
   return (
     <div
       {...rest}
@@ -34,8 +34,8 @@ export default function Gallery({ ...rest }: ItinerariesType) {
                   }}
                   width={300}
                   height={300}
-                  className="hover:scale-110 transition-transform duration-300"
                   loading="lazy"
+                  className="hover:scale-110 transition-transform duration-300"
                 />
               </div>
             ))}
@@ -57,8 +57,8 @@ export default function Gallery({ ...rest }: ItinerariesType) {
                   }}
                   width={300}
                   height={300}
-                  className="hover:scale-110 transition-transform duration-300"
                   loading="lazy"
+                  className="hover:scale-110 transition-transform duration-300"
                 />
               </div>
             ))}
@@ -67,4 +67,6 @@ export default function Gallery({ ...rest }: ItinerariesType) {
       </div>
     </div>
   );
-}
+});
+
+export default Gallery;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, memo } from "react";
 import IconChecked from "../../public/assets/icon-checked.svg";
 
 type CardPacksType = HTMLAttributes<HTMLDivElement> & {
@@ -14,7 +14,7 @@ type CardPacksType = HTMLAttributes<HTMLDivElement> & {
   img: string;
 };
 
-export function CardPacks({
+const CardPacks = memo(function CardPacks({
   duration,
   foods,
   hotel,
@@ -24,12 +24,12 @@ export function CardPacks({
   ...rest
 }: CardPacksType) {
   return (
-    <Link className="w-full h-full group" href={doc}>
+    <Link className="w-full min-w-[300px] h-full" href={doc}>
       <div
         {...rest}
-        className="flex rounded-xl sm:rounded-2xl flex-col overflow-hidden bg-white shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-[1.01] hover:-translate-y-2"
+        className="flex rounded-xl flex-col overflow-hidden bg-white shadow-xl cursor-pointer duration-100 hover:scale-105"
       >
-        <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
+        <div className="w-full h-[23rem] overflow-hidden">
           <Image
             src={img}
             alt={`${title} - Dunamis Expedições`}
@@ -41,26 +41,28 @@ export function CardPacks({
             }}
             width={400}
             height={300}
-            className="group-hover:scale-110 transition-transform duration-300"
+            loading="lazy"
           />
         </div>
-        <div className="flex px-4 sm:px-6 py-4 sm:py-6 flex-col justify-between min-h-[8rem] sm:min-h-[10rem]">
-          <div className="flex-1">
+        <div className="flex px-4 h-[10rem] pt-4 pb-4 flex-col justify-between">
+          <div>
             <div className="flex">
-              <p className="text-[#FF5A00] text-base sm:text-lg md:text-xl font-bold font-bardon-clean leading-tight">
+              <p className="text-[#FF5A00] text-lg font-bold font-bardon-clean">
                 {title}
               </p>
             </div>
-            <div className="flex items-center gap-2 text-sm sm:text-base md:text-lg mt-2">
-              <IconChecked className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <p className="font-work-sans text-gray-700">{duration}</p>
+            <div className="flex items-center gap-2 text-xl mt-2">
+              <IconChecked width="1rem" />
+              <p className="font-work-sans">{duration}</p>
             </div>
           </div>
-          <p className="text-[#FF5A00] text-xs sm:text-sm font-bardon-stamp text-center mt-4 group-hover:text-orange-600 transition-colors duration-200">
+          <p className="text-[#FF5A00] text-sm font-bardon-stamp text-center justify-self-end">
             Saiba mais+
           </p>
         </div>
       </div>
     </Link>
   );
-}
+});
+
+export { CardPacks };

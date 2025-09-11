@@ -1,14 +1,14 @@
 "use client";
 import { useUtils } from "@/hooks/utils";
 import Link from "next/link";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, memo } from "react";
 import { twMerge } from "tailwind-merge";
 
 type NavBarProps = HTMLAttributes<HTMLDivElement> & {
   drawer?: boolean;
 };
 
-export function NavBar({ drawer = false, ...rest }: NavBarProps) {
+const NavBar = memo(function NavBar({ drawer = false, ...rest }: NavBarProps) {
   const { onToggle } = useUtils();
   return (
     <div
@@ -82,4 +82,6 @@ export function NavBar({ drawer = false, ...rest }: NavBarProps) {
       </Link>
     </div>
   );
-}
+});
+
+export { NavBar };

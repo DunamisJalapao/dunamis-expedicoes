@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Performance optimizations
+  // Performance optimizations - simplified for faster first load
   compress: true,
   poweredByHeader: false,
 
-  // Image optimization - simplified for faster loading
+  // Image optimization - simplified
   images: {
     formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
@@ -13,12 +13,12 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
   },
 
-  // Experimental features - reduced for faster build
+  // Minimal experimental features
   experimental: {
     optimizePackageImports: ["react-icons"],
   },
 
-  // Webpack optimizations - simplified
+  // Simplified webpack
   webpack(config) {
     // SVG handling
     config.module.rules.push({
@@ -30,7 +30,7 @@ const nextConfig = {
     return config;
   },
 
-  // Simplified headers for faster loading
+  // Minimal headers
   async headers() {
     return [
       {

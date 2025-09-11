@@ -156,9 +156,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        {/* Only critical preload */}
         <link rel="preload" href="/home1.jpeg" as="image" />
+
+        {/* Only essential DNS prefetch */}
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//connect.facebook.net" />
         <Script
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{

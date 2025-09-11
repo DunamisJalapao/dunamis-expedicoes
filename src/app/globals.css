@@ -58,4 +58,9 @@
     backface-visibility: hidden;
     perspective: 1000px;
   }
+
+  /* Basic performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
 }

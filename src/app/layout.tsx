@@ -1,5 +1,4 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -165,9 +164,9 @@ export default function RootLayout({
             .font-bardon-clean { font-family: var(--font-bardon-clean), system-ui, sans-serif; }
             .font-blue-dream { font-family: var(--font-blue-dream), system-ui, sans-serif; }
             .font-work-sans { font-family: var(--font-work-sans), system-ui, sans-serif; }
-            .text-stroke-mobile { -webkit-text-stroke: 2px #FF5A00; }
-            .text-stroke { -webkit-text-stroke: 3px #FF5A00; }
-            @media (min-width: 1024px) { .text-stroke-mobile { -webkit-text-stroke: 3px #FF5A00; } }
+            .text-stroke-mobile { -webkit-text-stroke: 2px #fff; }
+            .text-stroke { -webkit-text-stroke: 3px #fff; }
+            @media (min-width: 1024px) { .text-stroke-mobile { -webkit-text-stroke: 3px #fff; } }
           `,
           }}
         />
@@ -254,7 +253,7 @@ export default function RootLayout({
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
-        <SpeedInsights />
+        {/* <SpeedInsights /> */}
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"

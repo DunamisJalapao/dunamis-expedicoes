@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import Footer from "@/components/screens/Footer";
 import { Metadata } from "next";
 import Image from "next/image";
+import { memo } from "react";
 import { objPacks } from "./aux";
 
 export async function generateMetadata({
@@ -47,44 +48,45 @@ const asks = [
   },
 ];
 
-export default function PackLayout({
+const PackLayout = memo(function PackLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col overflow-x-hidden font-work-sans">
-      <nav className="w-full -mb-16 sm:-mb-20 lg:-mb-24 z-50 fixed top-2 sm:top-3 lg:top-4 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <nav className="w-full -mb-[5rem] z-50 fixed top-3  px-[20px] 2xl:px-[220px]">
         <Header />
       </nav>
-      <main className="flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <main className="flex flex-col items-center px-4 md:px-auto">
         {children}
 
         <div className="flex flex-col w-full items-center justify-center">
-          <div className="flex flex-col lg:flex-row py-8 sm:py-12 md:py-16 justify-center h-full gap-6 sm:gap-8 md:gap-10 lg:gap-12 font-lemon-milk">
-            <div className="flex w-full lg:w-[40%] h-full py-4 sm:py-6 md:py-8 lg:py-0 flex-col gap-4 sm:gap-6 md:gap-8 text-center lg:text-left">
-              <div className="flex flex-col gap-3 sm:gap-4 md:gap-5">
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
-                  Simulação de veículo
-                </h2>
+          <div className="flex flex-col md:flex-row py-10 justify-center h-full md:gap-10 font-lemon-milk">
+            <div className="flex w-full md:w-[30%] h-full py-5 md:py-0 md:h-[25rem] flex-col gap-6 text-center">
+              <div className="flex flex-col gap-5">
+                <h2 className="text-xl md:text-3xl">Simulação de veículo</h2>
               </div>
-              <div className="w-full text-sm sm:text-base md:text-lg leading-relaxed">
-                <p className="mb-3 sm:mb-4">
+              <div className="w-full text-md">
+                <p>
                   O transporte é realizado em veículo 4x4 com capacidade para 6
-                  passageiros e 1 condutor ambiental.
+                  passageiros e 1 condutor ambiental.{" "}
                 </p>
+                <br />
                 <p>
                   Temos opção de veículo 4x4 exclusivo e privativo, para esta
                   opção consultar Pacote Exclusivo juntamente a agência.
                 </p>
               </div>
             </div>
-            <div className="flex flex-col h-full">
-              <div className="w-full lg:w-[30rem] h-64 sm:h-80 md:h-96 lg:h-[35rem] overflow-hidden rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="flex flex-col  h-full">
+              <div
+                className={`w-full md:w-[30rem] md:h-[35rem] overflow-hidden rounded-2xl`}
+              >
                 <Image
                   src="/car.jpeg"
-                  alt="Veículo 4x4 para expedições no Jalapão"
-                  sizes="(max-width: 1024px) 100vw, 480px"
+                  alt="imagens da galeria"
+                  sizes="(max-width: 768px) 100vw, 30rem"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -92,23 +94,24 @@ export default function PackLayout({
                   }}
                   width={480}
                   height={560}
-                  className="hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                  quality={75}
                 />
               </div>
-              <p className="text-xs sm:text-sm mt-2 font-semibold text-gray-600">
+              <p className="text-sm mt-2 font-semibold">
                 * Imagem meramente ilustrativa
               </p>
             </div>
           </div>
 
-          <div className="border border-[#0000000e] w-full max-w-4xl my-8 sm:my-12 md:my-16" />
+          <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
-          <div className="flex w-full h-full py-12 sm:py-16 md:py-20 justify-center font-lemon-milk">
-            <div className="flex flex-col w-full max-w-4xl justify-center gap-6 sm:gap-8">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl self-center font-bold">
+          <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
+            <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
+              <h1 className="text-2xl md:text-4xl self-center">
                 O que está incluso?
               </h1>
-              <ul className="px-4 sm:px-6 md:px-8 list-decimal list-inside text-base sm:text-lg md:text-xl lg:text-2xl space-y-2 sm:space-y-3">
+              <ul className="px-4 list-decimal list-inside text-xl md:text-2xl">
                 <li>Café da manhã, almoço e jantar</li>
                 <li>Hospedagem</li>
                 <li>
@@ -122,14 +125,14 @@ export default function PackLayout({
             </div>
           </div>
 
-          <div className="border border-[#0000000e] w-full max-w-4xl my-8 sm:my-12 md:my-16" />
+          <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
-          <div className="flex w-full h-full py-12 sm:py-16 md:py-20 justify-center font-lemon-milk">
-            <div className="flex flex-col w-full max-w-4xl justify-center gap-6 sm:gap-8">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl self-center font-bold">
+          <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
+            <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
+              <h1 className="text-2xl md:text-4xl self-center">
                 O que não inclui:
               </h1>
-              <ul className="px-4 sm:px-6 md:px-8 list-decimal list-inside text-base sm:text-lg md:text-xl lg:text-2xl space-y-2 sm:space-y-3">
+              <ul className="px-4 list-decimal list-inside text-xl md:text-2xl">
                 <li>Passagens aéreas</li>
                 <li>Passeios opcionais</li>
                 <li>Hospedagem e refeições em Palmas - TO</li>
@@ -141,37 +144,36 @@ export default function PackLayout({
           </div>
         </div>
 
-        <div className="flex flex-col w-full max-w-4xl gap-4 sm:gap-6 md:gap-8">
-          <h1 className="font-lemon-milk text-lg sm:text-xl md:text-2xl lg:text-3xl self-center font-bold">
+        <div className="flex flex-col w-full md:w-[60%] gap-5">
+          <h1 className="font-lemon-milk text-xl md:text-3xl self-center">
             Perguntas frequentes
           </h1>
           <div className="flex flex-col w-full">
-            {asks.map((ask, index) => (
-              <div key={index}>
+            {asks.map((ask) => (
+              <>
                 <CardDetails>
                   <CardDetails.Wrapper>
                     <CardDetails.Trigger className="w-full">
-                      <CardDetails.Title className="text-sm sm:text-base md:text-lg">
-                        {ask.ask}
-                      </CardDetails.Title>
+                      {/* <CardDetails.Icon icon={IconDescription} /> */}
+                      <CardDetails.Title>{ask.ask}</CardDetails.Title>
                     </CardDetails.Trigger>
 
                     <CardDetails.Content className="w-full">
-                      <p className="text-sm sm:text-base md:text-lg leading-relaxed">
-                        {ask.answer}
-                      </p>
+                      <p className="text-md">{ask.answer}</p>
                     </CardDetails.Content>
                   </CardDetails.Wrapper>
                 </CardDetails>
-                <div className="border mt-2 mb-2 border-[#0000000e] w-full" />
-              </div>
+                <div className="border mt-2 mb-2 border-[#0000000e] w-[full]" />
+              </>
             ))}
           </div>
         </div>
       </main>
-      <div className="w-full pt-4 sm:pt-6 md:pt-8">
+      <div className="w-full pt-5">
         <Footer />
       </div>
     </div>
   );
-}
+});
+
+export default PackLayout;

@@ -26,7 +26,6 @@ const nextConfig = {
   // Experimental features for performance - simplified
   experimental: {
     optimizePackageImports: ["react-icons", "react-responsive-carousel"],
-    optimizeCss: true,
   },
 
   // Webpack optimizations - simplified

@@ -74,7 +74,7 @@ export function NavBar({ drawer = false, ...rest }: NavBarProps) {
         onClick={() => onToggle(false)}
         data-drawer={drawer}
         className="w-full data-[drawer=true]:w-auto"
-        href="/gallery"
+        href="/#container-gallery"
       >
         <p className="pb-1 cursor-pointer select-none border-b border-b-[#00000022] md:border-none data-[drawer=true]:border-b-none">
           Galeria

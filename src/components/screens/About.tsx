@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { HTMLAttributes } from "react";
-import Fade from "react-awesome-reveal";
+// @ts-ignore
+import { Fade } from "react-awesome-reveal";
 
 type AboutType = HTMLAttributes<HTMLDivElement> & {};
 
@@ -51,7 +52,6 @@ export default function AboutScreen({ ...rest }: AboutType) {
                 memorável.
                 <br />
                 <br />
-                {/* <strong>Somos a Dunamis Expedições!</strong> */}
               </p>
             </div>
           </Fade>

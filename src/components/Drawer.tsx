@@ -1,20 +1,30 @@
-import { Drawer as DrawerMT } from '@/components/material-ui';
-import { useUtils } from '@/hooks/utils';
-import { NavBar } from './NavBar';
+import { Drawer as DrawerMT } from "@/components/material-ui";
+import { useUtils } from "@/hooks/utils";
+import { NavBar } from "./NavBar";
 
 export function Drawer() {
   const { isOpen, onToggle } = useUtils();
   return (
-    <DrawerMT open={isOpen} onClose={onToggle} size={1000} className='p-4 bg-[#112126ff] text-white flex flex-col items-center' placement='left' placeholder="">
-      <div className="mb-6 flex items-center ml-auto">
-        <div onClick={() => onToggle()}>
+    <DrawerMT
+      open={isOpen}
+      onClose={onToggle}
+      size={1000}
+      className="p-4 sm:p-6 md:p-8 bg-[#112126ff] text-white flex flex-col items-center"
+      placement="left"
+      placeholder=""
+    >
+      <div className="mb-6 sm:mb-8 flex items-center ml-auto">
+        <div
+          onClick={() => onToggle()}
+          className="cursor-pointer hover:scale-110 transition-transform duration-200"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="h-5 w-5"
+            className="h-6 w-6 sm:h-8 sm:w-8"
           >
             <path
               strokeLinecap="round"
@@ -24,13 +34,19 @@ export function Drawer() {
           </svg>
         </div>
       </div>
-      <div className='mt-8 h-[50%]'>
+      <div className="mt-8 sm:mt-12 md:mt-16 h-[50%] w-full">
         <NavBar drawer={true} />
       </div>
-      <div className='w-full mt-auto flex flex-col items-center gap-4'>
-        <img className='w-2/4' src="/assets/logo.png" alt="logo" />
-        <p className='font-bardon-stamp text-[0.5rem]'>© Todos os direitos reservados</p>
+      <div className="w-full mt-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
+        <img
+          className="w-1/2 sm:w-2/5 md:w-1/3 max-w-xs"
+          src="/assets/logo.png"
+          alt="Dunamis Expedições Logo"
+        />
+        <p className="font-bardon-stamp text-xs sm:text-sm md:text-base text-center">
+          © Todos os direitos reservados
+        </p>
       </div>
     </DrawerMT>
-  )
+  );
 }

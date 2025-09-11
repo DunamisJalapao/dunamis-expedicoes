@@ -34,12 +34,12 @@ export default function Packs({ ...rest }: PacksProps) {
   return (
     <div
       {...rest}
-      className="flex flex-col w-full px-[20px] lg:w-screen h-full 2xl:h-[90dvh] items-center justify-center py-10 gap-10"
+      className="flex flex-col w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 h-full min-h-screen items-center justify-center py-8 sm:py-12 md:py-16 gap-6 sm:gap-8 md:gap-10"
     >
-      <h1 className="mt-5 md:mt-0 mb-5 md:mb-0 text-2xl md:text-3xl text-[#112126ff] uppercase font-bold font-bardon-stamp">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#112126ff] uppercase font-bold font-bardon-stamp text-center">
         Pacotes
       </h1>
-      <div className="grid w-full grid-cols-resposive-fit justify-center gap-10">
+      <div className="grid w-full grid-cols-responsive-fit justify-center gap-6 sm:gap-8 md:gap-10 max-w-7xl">
         {roteirosData.map((roteiro, _) => (
           <CardPacks key={_} {...roteiro} />
         ))}

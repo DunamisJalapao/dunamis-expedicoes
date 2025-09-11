@@ -10,11 +10,17 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        md: "850px",
+        xs: "475px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
       gridTemplateColumns: {
-        "resposive-fit": "repeat(auto-fit, minmax(370px, 370px))",
-        "resposive-fit-two": "repeat(auto-fit, minmax(300px, 300px))",
+        "responsive-fit": "repeat(auto-fit, minmax(280px, 1fr))",
+        "responsive-fit-two": "repeat(auto-fit, minmax(250px, 1fr))",
+        "responsive-fit-large": "repeat(auto-fit, minmax(320px, 1fr))",
       },
       keyframes: {
         pulseBorder: {

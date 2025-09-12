@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="flex w-full h-full px-4 sm:px-6 md:px-8 py-8 sm:py-12 items-center justify-center flex-col gap-6 sm:gap-8 md:gap-10 lg:hidden">
         <div className="w-24 sm:w-32 relative">
           <Image
-            src="/assets/logo-green.png"
+            src="/assets/logo-green.webp"
             alt="Dunamis Expedições Logo"
             sizes="(max-width: 640px) 96px, 128px"
             style={{
@@ -114,7 +114,7 @@ export default function Footer() {
             <div className="flex flex-1 justify-center">
               <div className="flex relative items-center justify-center w-32 xl:w-40 2xl:w-48">
                 <Image
-                  src="/assets/logo-green.png"
+                  src="/assets/logo-green.webp"
                   alt="Dunamis Expedições Logo"
                   sizes="(max-width: 1280px) 160px, 192px"
                   style={{

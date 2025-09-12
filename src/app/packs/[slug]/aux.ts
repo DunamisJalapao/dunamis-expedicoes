@@ -19,7 +19,7 @@ type ObjPacks = {
 export const objPacks: ObjPacks = {
   "roteiro-3-dias": {
     title: "PACOTE DE 3 DIAS",
-    imgHome: "/pack3.jpg",
+    imgHome: "/pack3.webp",
     description: "Roteiro de 3 dias e 2 noites",
     days: [
       {
@@ -31,7 +31,7 @@ export const objPacks: ObjPacks = {
           "Recando das Dunas",
           "Dunas do Jalapão",
         ],
-        photo: "/assets/imgs/3dias/photo1.jpg",
+        photo: "/assets/imgs/photo1.webp",
       },
       {
         title: "2° Dia",
@@ -43,7 +43,7 @@ export const objPacks: ObjPacks = {
           "Fervedouro por enquanto",
           "Experiência com banho norturno em fervedouro",
         ],
-        photo: "/assets/imgs/3dias/photo2.jpg",
+        photo: "/assets/imgs/photo2.webp",
       },
       {
         title: "3° Dia",
@@ -52,20 +52,20 @@ export const objPacks: ObjPacks = {
           "Cachoeira das Araras",
           "Serra da Catedral (Contemplação e fotos)",
         ],
-        photo: "/assets/imgs/3dias/photo3.jpg",
+        photo: "/assets/imgs/photo3.webp",
       },
     ],
     optionalActivies: ["Rafting", "Boia Cross", "Trilha ao Nascer do Sol"],
   },
   "roteiro-4-dias": {
     title: "PACOTE DE 4 DIAS",
-    imgHome: "/pack4.jpg",
+    imgHome: "/pack4.webp",
     description: "Roteiro de 4 dias e 3 noites",
     days: [
       {
         title: "1° Dia",
         attractivies: ["Pedra Furada", "Lagoa do Japonês"],
-        photo: "/assets/imgs/4dias/photo1.jpg",
+        photo: "/assets/imgs/photo4.webp",
       },
       {
         title: "2° Dia",
@@ -76,7 +76,7 @@ export const objPacks: ObjPacks = {
           "Recanto das Dunas",
           "Dunas do Jalapão",
         ],
-        photo: "/assets/imgs/4dias/photo2.jpg",
+        photo: "/assets/imgs/photo5.webp",
       },
       {
         title: "3° Dia",
@@ -88,7 +88,7 @@ export const objPacks: ObjPacks = {
           "Fervedouro Por Enquanto",
           "Experiência com banho noturno em fervedouro",
         ],
-        photo: "/assets/imgs/4dias/photo3.jpg",
+        photo: "/assets/imgs/photo6.webp",
       },
       {
         title: "4° Dia",
@@ -97,20 +97,20 @@ export const objPacks: ObjPacks = {
           "Cachoeira das Araras",
           "Serra da Catedral (Contemplação e Fotos)",
         ],
-        photo: "/assets/imgs/4dias/photo4.jpg",
+        photo: "/assets/imgs/photo3.webp",
       },
     ],
     optionalActivies: ["Rafting", "Boia Cross", "Trilha ao Nascer do Sol"],
   },
   "roteiro-5-dias": {
     title: "PACOTE DE 5 DIAS",
-    imgHome: "/pack5.jpg",
+    imgHome: "/pack5.webp",
     description: "Roteiro de 5 dias e 4 noites",
     days: [
       {
         title: "1° Dia",
         attractivies: ["Pedra Furada", "Lagoa do Japonês"],
-        photo: "/assets/imgs/5dias/photo1.jpg",
+        photo: "/assets/imgs/photo7.webp",
       },
       {
         title: "2° Dia",
@@ -121,7 +121,7 @@ export const objPacks: ObjPacks = {
           "Recanto das Dunas",
           "Dunas do Jalapão",
         ],
-        photo: "/assets/imgs/5dias/photo2.jpg",
+        photo: "/assets/imgs/photo8.webp",
       },
       {
         title: "3° Dia",
@@ -133,7 +133,7 @@ export const objPacks: ObjPacks = {
           "Fervedouro Por Enquanto",
           "Experiência com banho noturno em fervedouro",
         ],
-        photo: "/assets/imgs/5dias/photo3.jpg",
+        photo: "/assets/imgs/photo9.webp",
       },
       {
         title: "4° Dia",
@@ -142,7 +142,7 @@ export const objPacks: ObjPacks = {
           "Cachoeira das Araras",
           "Serra da Catedral (Contemplação e Fotos) ",
         ],
-        photo: "/assets/imgs/5dias/photo4.jpg",
+        photo: "/assets/imgs/photo10.webp",
       },
       {
         title: "5° Dia",
@@ -151,7 +151,7 @@ export const objPacks: ObjPacks = {
           "Cachoeira Escorrega Macaco",
           "Fazenda Ecológica – Cachoeira das Araras",
         ],
-        photo: "/assets/imgs/5dias/photo5.jpg",
+        photo: "/assets/imgs/photo11.webp",
       },
     ],
     optionalActivies: [

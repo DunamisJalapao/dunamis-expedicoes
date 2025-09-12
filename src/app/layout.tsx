@@ -126,7 +126,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     images: [
       {
-        url: "/home1.jpeg",
+        url: "/home1.webp",
         width: 1200,
         height: 630,
         alt: "Dunamis Expedições - Jalapão",
@@ -138,7 +138,7 @@ export const metadata: Metadata = {
     title: "Dunamis Expedições | Melhor agência do Jalapão",
     description:
       "A melhor agência de turismo do Jalapão. Pacotes de 3, 4 e 5 dias com hospedagem, alimentação e transporte inclusos.",
-    images: ["/home1.jpeg"],
+    images: ["/home1.webp"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -172,19 +172,9 @@ export default function RootLayout({
         />
 
         {/* Critical preloads for LCP */}
-        <link rel="preload" href="/home1.jpeg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/home2.jpeg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/home1.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/home2.webp" as="image" type="image/webp" />
 
-        {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//api.whatsapp.com" />
-        <link rel="dns-prefetch" href="//www.instagram.com" />
-        <link rel="dns-prefetch" href="//www.tiktok.com" />
-        <link rel="dns-prefetch" href="//www.youtube.com" />
-
-        {/* Preconnect for critical external resources */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://api.whatsapp.com" />
         <Script
           strategy="lazyOnload"
           dangerouslySetInnerHTML={{

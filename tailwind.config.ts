@@ -31,6 +31,14 @@ const config: Config = {
             boxShadow: "0 0 0 25px rgba(255, 0, 0, 0)",
           },
         },
+        pulseBorderPack: {
+          "0%": {
+            boxShadow: "0 0 0 0 #FF5A00",
+          },
+          "100%": {
+            boxShadow: "0 0 0 25px rgba(255, 0, 0, 0)",
+          },
+        },
         opacityNormal: {
           "0%": { opacity: "0" },
           "50%": { opacity: "1" },
@@ -64,6 +72,7 @@ const config: Config = {
         opacity: "opacity 2s ease-in-out infinite",
         "opacity-normal": "opacityNormal 1s ease-in-out",
         "pulse-border": "pulseBorder 2s infinite",
+        "pulse-border-pack": "pulseBorderPack 2s infinite",
       },
     },
     fontFamily: {

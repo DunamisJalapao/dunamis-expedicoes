@@ -35,7 +35,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
           >
             <div className="h-screen">
               <Image
-                src="/home2.jpeg"
+                src="/home2.webp"
                 alt="Paisagem do Jalapão - Dunamis Expedições"
                 sizes="100vw"
                 style={{
@@ -54,7 +54,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
             </div>
             <div className="h-screen">
               <Image
-                src="/home1.jpeg"
+                src="/home1.webp"
                 alt="Fervedouro do Jalapão - Dunamis Expedições"
                 sizes="100vw"
                 style={{
@@ -73,7 +73,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
             </div>
             <div className="h-screen">
               <Image
-                src="/home3.png"
+                src="/home3.webp"
                 alt="Aventura no Jalapão - Dunamis Expedições"
                 sizes="100vw"
                 style={{

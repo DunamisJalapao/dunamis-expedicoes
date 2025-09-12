@@ -51,7 +51,7 @@ const Header = memo(function Header({ ...rest }: HeaderProps) {
     >
       <div className="flex flex-1 min-w-0">
         <Image
-          src="/assets/logo.png"
+          src="/assets/logo-white.webp"
           alt="Dunamis Expedições Logo"
           sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
           className="w-auto h-8 sm:h-10 lg:h-12 object-contain"

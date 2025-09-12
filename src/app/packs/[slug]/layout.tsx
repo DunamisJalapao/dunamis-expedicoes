@@ -55,7 +55,7 @@ const PackLayout = memo(function PackLayout({
 }) {
   return (
     <div className="flex flex-col overflow-x-hidden font-work-sans">
-      <nav className="w-full -mb-[5rem] z-50 fixed top-3  px-[20px] 2xl:px-[220px]">
+      <nav className="w-full -mb-16 sm:-mb-20 lg:-mb-24 z-50 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 fixed top-2 sm:top-3 lg:top-4">
         <Header />
       </nav>
       <main className="flex flex-col items-center px-4 md:px-auto">
@@ -145,6 +145,20 @@ const PackLayout = memo(function PackLayout({
             </div>
           </div>
         </div>
+
+        <a
+          href="https://api.whatsapp.com/send?phone=556392437096"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#FF5A00] animate-pulse-border-pack text-white  rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 mb-2 animate-fade-in`}
+        >
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className={`w-2 h-2 bg-white animate-ping rounded-full`}></div>
+            <p className="font-bardon-stamp">
+              Quero saber o valor deste roteiro
+            </p>
+          </div>
+        </a>
 
         <div className="flex flex-col w-full md:w-[60%] gap-5">
           <h1 className="font-lemon-milk text-xl md:text-3xl self-center">

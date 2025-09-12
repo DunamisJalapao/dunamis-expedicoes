@@ -24,7 +24,7 @@ export default function Home() {
     return (
       <div className="w-full h-screen flex flex-col items-center justify-center bg-[#112126]">
         <Image
-          src="/assets/logo.png"
+          src="/assets/logo-white.webp"
           alt="Dunamis Expedições Logo"
           sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
           className="w-auto h-8 sm:h-10 lg:h-12 object-contain animate-bounce"

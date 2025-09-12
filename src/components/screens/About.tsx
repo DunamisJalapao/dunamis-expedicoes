@@ -19,7 +19,7 @@ export default function AboutScreen({ ...rest }: AboutType) {
         <div className="flex z-10 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl h-64 sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <Fade className="w-full relative" triggerOnce>
             <Image
-              src={"/about.jpeg"}
+              src={"/about.webp"}
               alt="Equipe Dunamis Expedições - Ruty e Glauco"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
               style={{

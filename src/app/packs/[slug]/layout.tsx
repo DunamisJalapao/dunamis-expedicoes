@@ -7,11 +7,12 @@ import Image from "next/image";
 import { memo } from "react";
 import { objPacks } from "./aux";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const { slug } = params;
   const slugTyped = slug as keyof typeof objPacks;
   return {

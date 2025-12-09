@@ -176,6 +176,7 @@ export default function RootLayout({
         <link rel="preload" href="/home2.webp" as="image" type="image/webp" />
 
         <Script
+          id="gtm-script"
           strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function (w, d, s, l, i) {
@@ -187,8 +188,10 @@ export default function RootLayout({
                   'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
           }}
-        ></Script>
+        />
         <Script
+          id="fbq-script"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
             !function(f,b,e,v,n,t,s)
@@ -201,16 +204,23 @@ export default function RootLayout({
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '7037029349725824');
             fbq('track', 'PageView');
-            </script>
-            <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
-            /></noscript>`,
+            `,
           }}
-        ></Script>
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         <Script
+          id="fbq-script-2"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
-            <script>
               !(function (f, b, e, v, n, t, s) {
                 if (f.fbq) return;
                 n = f.fbq = function () {
@@ -236,18 +246,18 @@ export default function RootLayout({
               );
               fbq("init", "1119431815878981");
               fbq("track", "PageView");
-            </script>
-            <noscript>
-              <img
-                height="1"
-                width="1"
-                style="display: none"
-                src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
-              />
-            </noscript>
             `,
           }}
-        ></Script>
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </head>
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}

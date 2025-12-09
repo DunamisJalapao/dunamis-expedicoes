@@ -1,10 +1,10 @@
 "use client";
 import { Attractivie } from "@/types";
 import Color from "color-thief-react";
+import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
-import IconPin from "../../public/assets/icon-pin.svg";
 
 type CardPlacesType = {
   card: Attractivie;
@@ -46,7 +46,7 @@ const CardPlaces = memo(function CardPlaces({ card, ...rest }: CardPlacesType) {
         <div className="flex flex-col h-[15%] py-4 px-3 gap-3">
           <p className="font-bardon-stamp text-sm">{card.name}</p>
           <div className="flex items-center gap-2">
-            <IconPin className="w-4" />
+            <MapPin className="w-4" />
             <p className="text-[#7C7C7C] font-work-sans font-semibold text-lg">
               {card.region}
             </p>

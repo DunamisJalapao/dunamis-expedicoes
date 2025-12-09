@@ -3,12 +3,14 @@ const nextConfig = {
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
-  swcMinify: true,
 
   // Modern browser support - reduce polyfills
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+
+  // Turbopack configuration (Next.js 16+ uses Turbopack by default)
+  turbopack: {},
 
   // // Image optimization - fixed WebP support with fallbacks
   // images: {

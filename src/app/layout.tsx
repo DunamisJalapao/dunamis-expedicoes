@@ -1,10 +1,12 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
+import { StructuredData } from "@/components/StructuredData";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import { Providers } from "./providers";
 
+// Fontes otimizadas: preload apenas da fonte crítica (bardon-stamp para hero)
 const blueDream = localFont({
   src: [
     {
@@ -14,7 +16,7 @@ const blueDream = localFont({
     },
   ],
   variable: "--font-blue-dream",
-  display: "swap",
+  display: "swap", // Fonte secundária - não bloqueia renderização
   preload: false,
 });
 const bardonStamp = localFont({
@@ -26,8 +28,8 @@ const bardonStamp = localFont({
     },
   ],
   variable: "--font-bardon-stamp",
-  display: "swap",
-  preload: false,
+  display: "swap", // Fonte crítica do hero - preload habilitado
+  preload: true, // Preload da fonte crítica para melhor FCP
 });
 const bardonClean = localFont({
   src: [
@@ -155,6 +157,15 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        {/* Preload da fonte crítica para melhor FCP */}
+        <link
+          rel="preload"
+          href="/fonts/BardonStamp-Regular.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+
         {/* Critical CSS inline for faster FCP */}
         <style
           dangerouslySetInnerHTML={{
@@ -172,8 +183,8 @@ export default function RootLayout({
         />
 
         {/* Critical preloads for LCP */}
-        <link rel="preload" href="/home1.webp" as="image" type="image/webp" />
         <link rel="preload" href="/home2.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/home1.webp" as="image" type="image/webp" />
 
         <Script
           id="gtm-script"
@@ -258,6 +269,8 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        {/* Structured Data para SEO */}
+        <StructuredData type="home" />
       </head>
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}

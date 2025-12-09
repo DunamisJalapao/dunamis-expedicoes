@@ -1,17 +1,32 @@
+"use client";
+
 import { Drawer as DrawerMT } from "@/components/material-ui";
 import { useUtils } from "@/hooks/utils";
+import Image from "next/image";
 import { NavBar } from "./NavBar";
 
 export function Drawer() {
   const { isOpen, onToggle } = useUtils();
+
+  // Type assertion para contornar problemas de tipagem do Material Tailwind
+  const DrawerComponent = DrawerMT as unknown as React.ComponentType<{
+    open: boolean;
+    onClose: () => void;
+    size: number;
+    className: string;
+    placement: "left" | "right" | "top" | "bottom";
+    placeholder: null;
+    children: React.ReactNode;
+  }>;
+
   return (
-    <DrawerMT
+    <DrawerComponent
       open={isOpen}
       onClose={onToggle}
       size={1000}
       className="p-4 sm:p-6 md:p-8 bg-[#112126ff] text-white flex flex-col items-center"
       placement="left"
-      placeholder=""
+      placeholder={null}
     >
       <div className="mb-6 sm:mb-8 flex items-center ml-auto">
         <div
@@ -38,15 +53,20 @@ export function Drawer() {
         <NavBar drawer={true} />
       </div>
       <div className="w-full mt-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
-        <img
-          className="w-1/2 sm:w-2/5 md:w-1/3 max-w-xs"
+        <Image
+          className="w-1/2 sm:w-2/5 md:w-1/3 max-w-xs h-auto"
           src="/assets/logo.webp"
           alt="Dunamis Expedições Logo"
+          width={200}
+          height={60}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 33vw"
+          loading="lazy"
+          quality={85}
         />
         <p className="font-bardon-stamp text-xs sm:text-sm md:text-base text-center">
           © Todos os direitos reservados
         </p>
       </div>
-    </DrawerMT>
+    </DrawerComponent>
   );
 }

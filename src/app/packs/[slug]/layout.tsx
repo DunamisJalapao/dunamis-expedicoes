@@ -2,22 +2,55 @@
 import { CardDetails } from "@/components/CardDetails";
 import { Header } from "@/components/Header";
 import Footer from "@/components/screens/Footer";
+import { StructuredData } from "@/components/StructuredData";
 import { Metadata } from "next";
 import Image from "next/image";
-import { memo } from "react";
+import { Fragment } from "react";
 import { objPacks } from "./aux";
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const { slug } = params;
   const slugTyped = slug as keyof typeof objPacks;
+  const pack = objPacks[slugTyped];
+  const baseUrl = "https://dunamisexpedicoes.com.br";
+
   return {
-    title: objPacks[slugTyped].title,
-    description: objPacks[slugTyped].description,
+    title: `${pack.title} | Dunamis Expedições`,
+    description: `${pack.description}. ${pack.days
+      .map((d) => d.title)
+      .join(", ")}. A melhor agência de turismo do Jalapão.`,
+    openGraph: {
+      title: `${pack.title} | Dunamis Expedições`,
+      description: `${pack.description}. ${pack.days
+        .map((d) => d.title)
+        .join(", ")}.`,
+      url: `${baseUrl}/packs/${slug}`,
+      siteName: "Dunamis Expedições",
+      images: [
+        {
+          url: `${baseUrl}${pack.imgHome}`,
+          width: 1200,
+          height: 630,
+          alt: pack.title,
+        },
+      ],
+      locale: "pt_BR",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${pack.title} | Dunamis Expedições`,
+      description: `${pack.description}. ${pack.days
+        .map((d) => d.title)
+        .join(", ")}.`,
+      images: [`${baseUrl}${pack.imgHome}`],
+    },
+    alternates: {
+      canonical: `/packs/${slug}`,
+    },
   };
 }
 
@@ -49,13 +82,23 @@ const asks = [
   },
 ];
 
-const PackLayout = memo(function PackLayout({
+async function PackLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
+  const packSlug = slug as
+    | "roteiro-3-dias"
+    | "roteiro-4-dias"
+    | "roteiro-5-dias";
+
   return (
     <div className="flex flex-col overflow-x-hidden font-work-sans">
+      {/* Structured Data para SEO - TourPackage */}
+      <StructuredData type="pack" packSlug={packSlug} />
       <nav className="w-full -mb-16 sm:-mb-20 lg:-mb-24 z-50 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 fixed top-2 sm:top-3 lg:top-4">
         <Header />
       </nav>
@@ -167,7 +210,7 @@ const PackLayout = memo(function PackLayout({
           </h1>
           <div className="flex flex-col w-full">
             {asks.map((ask) => (
-              <>
+              <Fragment key={ask.ask}>
                 <CardDetails>
                   <CardDetails.Wrapper>
                     <CardDetails.Trigger className="w-full">
@@ -181,7 +224,7 @@ const PackLayout = memo(function PackLayout({
                   </CardDetails.Wrapper>
                 </CardDetails>
                 <div className="border mt-2 mb-2 border-[#0000000e] w-[full]" />
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
@@ -191,6 +234,6 @@ const PackLayout = memo(function PackLayout({
       </div>
     </div>
   );
-});
+}
 
 export default PackLayout;

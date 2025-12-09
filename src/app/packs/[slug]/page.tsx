@@ -1,13 +1,21 @@
 "use client";
 
 import { Drawer } from "@/components/Drawer";
-import Color from "color-thief-react";
 import Image from "next/image";
-import { memo } from "react";
+import { memo, use } from "react";
 import { objPacks } from "./aux";
 
-const Pack = memo(function Pack({ params }: { params: { slug: string } }) {
-  const slug = params.slug as
+// Cor padrão baseada no tema do Jalapão - substitui color-thief-react
+const DEFAULT_SHADOW_COLOR = "rgba(17, 33, 38, 0.3)";
+
+const Pack = memo(function Pack({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const pramsProcessed = use(params);
+  const { slug } = pramsProcessed;
+  const slugTyped = slug as
     | "roteiro-3-dias"
     | "roteiro-4-dias"
     | "roteiro-5-dias";
@@ -42,47 +50,41 @@ const Pack = memo(function Pack({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-col shadow-md w-[100%] md:w-[30%] bg-white px-4 py-5 md:p-10  rounded -mr-28 md:-mr-10 z-20 gap-5">
           <h1 className="text-2xl xl:text-[3rem] leading-normal uppercase text-[#ff5900] font-bardon-stamp">
-            {objPacks[slug].title}
+            {objPacks[slugTyped].title}
           </h1>
           <p className="uppercase text-sm font-bardon-clean">
-            {objPacks[slug].description}
+            {objPacks[slugTyped].description}
           </p>
         </div>
-        <Color src={"/pack3.webp"} format="rgbString" crossOrigin="anonymous">
-          {({ data, loading, error }) => (
-            <>
-              <div
-                style={{
-                  boxShadow: `0px 30px 40px -27px ${data}`,
-                }}
-                className={`w-full md:w-[28%] h-[70%] sm:h-auto overflow-hidden rounded-3xl z-10`}
-              >
-                <Image
-                  src={objPacks[slug].imgHome}
-                  alt="imagem home 01"
-                  sizes="(max-width: 768px) 100vw, 28%"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                  width={400}
-                  height={600}
-                  loading="lazy"
-                  quality={75}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                />
-              </div>
-            </>
-          )}
-        </Color>
+        <div
+          style={{
+            boxShadow: `0px 30px 40px -27px ${DEFAULT_SHADOW_COLOR}`,
+          }}
+          className="w-full md:w-[28%] h-[70%] sm:h-auto overflow-hidden rounded-3xl z-10"
+        >
+          <Image
+            src={objPacks[slugTyped].imgHome}
+            alt={`${objPacks[slugTyped].title} - Dunamis Expedições`}
+            sizes="(max-width: 768px) 100vw, 28%"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+            width={400}
+            height={600}
+            loading="lazy"
+            quality={70}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+          />
+        </div>
       </div>
 
       {/* DIAS */}
 
       <div className="flex flex-col w-screen h-full items-center justify-center font-bardon-clean">
-        {objPacks[slug].days.map((day, index) => (
+        {objPacks[slugTyped].days.map((day, index) => (
           <>
             <div
               key={`${index}-${day.attractivies.length}`}
@@ -132,7 +134,7 @@ const Pack = memo(function Pack({ params }: { params: { slug: string } }) {
                 />
               </div>
             </div>
-            {index === objPacks[slug].days.length - 1 && (
+            {index === objPacks[slugTyped].days.length - 1 && (
               <p
                 key={`${index}-${day.attractivies.length}`}
                 className="px-4 my-9 md:px-auto font-work-sans text-md w-[60%] text-justify"
@@ -158,7 +160,7 @@ const Pack = memo(function Pack({ params }: { params: { slug: string } }) {
               Atividades Opcionais - Não inclusos no Pacote
             </h1>
             <ul className="px-4 list-decimal list-inside text-2xl">
-              {objPacks[slug].optionalActivies.map((activies, _) => (
+              {objPacks[slugTyped].optionalActivies.map((activies, _) => (
                 <li key={_}>{activies}</li>
               ))}
             </ul>

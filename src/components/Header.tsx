@@ -39,18 +39,28 @@ function HeaderComponent({ ...rest }: HeaderProps) {
   );
 
   const handleScrollWindow = useCallback(() => {
-    // Use requestAnimationFrame to avoid forced reflows
-    requestAnimationFrame(() => {
+    // Throttle usando requestAnimationFrame para melhorar INP
+    let ticking = false;
+    const updateColor = () => {
       const position = window.scrollY;
-      return position <= 100 ? _setColor(true) : _setColor(false);
-    });
+      _setColor(position <= 100);
+      ticking = false;
+    };
+
+    return () => {
+      if (!ticking) {
+        requestAnimationFrame(updateColor);
+        ticking = true;
+      }
+    };
   }, []);
 
   useEffect(() => {
+    const throttledHandler = handleScrollWindow();
     // Use passive listener for better performance
-    window.addEventListener("scroll", handleScrollWindow, { passive: true });
+    window.addEventListener("scroll", throttledHandler, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScrollWindow);
+      window.removeEventListener("scroll", throttledHandler);
     };
   }, [handleScrollWindow]);
 

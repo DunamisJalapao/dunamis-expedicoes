@@ -2,7 +2,11 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { HTMLAttributes, memo } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+// Carregar CSS do carousel de forma assíncrona para não bloquear renderização
+if (typeof window !== "undefined") {
+  import("react-responsive-carousel/lib/styles/carousel.min.css");
+}
 
 // Dynamic import do carousel para reduzir bundle inicial
 const Carousel = dynamic(
@@ -45,7 +49,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
             swipeable={true}
             emulateTouch={true}
             useKeyboardArrows={false}
-            transitionTime={500}
+            transitionTime={300}
           >
             <div className="h-screen">
               <Image
@@ -62,7 +66,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
                 height={1080}
                 priority
                 fetchPriority="high"
-                quality={85}
+                quality={75}
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />

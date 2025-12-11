@@ -16,7 +16,7 @@ const blueDream = localFont({
     },
   ],
   variable: "--font-blue-dream",
-  display: "swap", // Fonte secundária - não bloqueia renderização
+  display: "optional", // Fonte secundária - não bloqueia renderização
   preload: false,
 });
 const bardonStamp = localFont({
@@ -40,7 +40,7 @@ const bardonClean = localFont({
     },
   ],
   variable: "--font-bardon-clean",
-  display: "swap",
+  display: "optional", // Não crítica - não bloqueia
   preload: false,
 });
 const workSans = localFont({
@@ -52,7 +52,7 @@ const workSans = localFont({
     },
   ],
   variable: "--font-work-sans",
-  display: "swap",
+  display: "optional", // Não crítica - não bloqueia
   preload: false,
 });
 
@@ -157,6 +157,20 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        {/* DNS prefetch para melhorar TTFB */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link
+          rel="preconnect"
+          href="https://www.googletagmanager.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://connect.facebook.net"
+          crossOrigin="anonymous"
+        />
+
         {/* Preload da fonte crítica para melhor FCP */}
         <link
           rel="preload"
@@ -194,7 +208,7 @@ export default function RootLayout({
         {/* Scripts otimizados - carregamento diferido para melhorar INP */}
         <Script
           id="gtm-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function (w, d, s, l, i) {
               w[l] = w[l] || []; w[l].push({
@@ -208,7 +222,7 @@ export default function RootLayout({
         />
         <Script
           id="fbq-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
             !function(f,b,e,v,n,t,s)
@@ -235,7 +249,7 @@ export default function RootLayout({
         </noscript>
         <Script
           id="fbq-script-2"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !(function (f, b, e, v, n, t, s) {

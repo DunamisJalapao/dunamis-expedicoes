@@ -157,9 +157,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* DNS prefetch para melhorar TTFB */}
+        {/* DNS prefetch e preconnect para melhorar TTFB */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://api.whatsapp.com" />
         <link
           rel="preconnect"
           href="https://www.googletagmanager.com"
@@ -170,6 +171,8 @@ export default function RootLayout({
           href="https://connect.facebook.net"
           crossOrigin="anonymous"
         />
+        {/* Prefetch para recursos críticos */}
+        <link rel="prefetch" href="/assets/logo-white.webp" as="image" />
 
         {/* Preload da fonte crítica para melhor FCP */}
         <link
@@ -180,7 +183,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* Critical CSS inline for faster FCP */}
+        {/* Critical CSS inline for faster FCP - otimizado */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -192,6 +195,10 @@ export default function RootLayout({
             .text-stroke-mobile { -webkit-text-stroke: 2px #fff; }
             .text-stroke { -webkit-text-stroke: 3px #fff; }
             @media (min-width: 1024px) { .text-stroke-mobile { -webkit-text-stroke: 3px #fff; } }
+            /* Otimizações de performance */
+            * { box-sizing: border-box; }
+            img { max-width: 100%; height: auto; }
+            [loading="lazy"] { content-visibility: auto; }
           `,
           }}
         />

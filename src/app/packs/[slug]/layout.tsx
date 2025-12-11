@@ -115,7 +115,7 @@ async function PackLayout({
         {children}
 
         <div className="flex flex-col w-full items-center justify-center">
-          <div className="flex flex-col md:flex-row py-10 justify-center h-full md:gap-10 font-lemon-milk">
+          <div className="flex flex-col md:flex-row py-10 justify-center h-full md:gap-10 font-work-sans">
             <div className="flex w-full md:w-[30%] h-full py-5 md:py-0 md:h-[25rem] flex-col gap-6 text-center">
               <div className="flex flex-col gap-5">
                 <h2 className="text-xl md:text-3xl">Simulação de veículo</h2>
@@ -161,7 +161,7 @@ async function PackLayout({
 
           <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
-          <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
+          <div className="flex w-full h-full py-20 justify-center font-work-sans">
             <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
               <h1 className="text-2xl md:text-4xl self-center">
                 O que está incluso?
@@ -182,7 +182,7 @@ async function PackLayout({
 
           <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
-          <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
+          <div className="flex w-full h-full py-20 justify-center font-work-sans">
             <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
               <h1 className="text-2xl md:text-4xl self-center">
                 O que não inclui:
@@ -203,7 +203,7 @@ async function PackLayout({
           href="https://api.whatsapp.com/send?phone=556392437096"
           target="_blank"
           rel="noopener noreferrer"
-          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#FF5A00] animate-pulse-border-pack text-white  rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 mb-2 animate-fade-in`}
+          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#FF5A00] animate-pulse-border-pack text-white rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 animate-fade-in`}
         >
           <div className="flex items-center gap-2 sm:gap-3">
             <div className={`w-2 h-2 bg-white animate-ping rounded-full`}></div>
@@ -214,7 +214,7 @@ async function PackLayout({
         </a>
 
         <div className="flex flex-col w-full md:w-[60%] gap-5">
-          <h1 className="font-lemon-milk text-xl md:text-3xl self-center">
+          <h1 className="font-work-sans text-xl md:text-3xl self-center font-bold">
             Perguntas frequentes
           </h1>
           <div className="flex flex-col w-full">

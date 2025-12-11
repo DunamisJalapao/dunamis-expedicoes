@@ -34,7 +34,6 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
           </h1>
         </div>
         <div className="w-full absolute top-0 left-0">
-          {/* @ts-ignore - Dynamic import type issue */}
           <Carousel
             infiniteLoop
             interval={10000}

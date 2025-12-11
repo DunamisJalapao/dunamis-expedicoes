@@ -77,12 +77,31 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Loading screen com delay para melhor UX
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const startTime = Date.now();
+    const MIN_LOADING_TIME = 1000; // Mínimo de 1 segundo
 
-    return () => clearTimeout(timer);
+    // Garantir que as fontes críticas sejam carregadas antes de finalizar o loading
+    const finishLoading = () => {
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, MIN_LOADING_TIME - elapsedTime);
+
+      // Aguardar o tempo restante para garantir mínimo de 1 segundo
+      setTimeout(() => {
+        setIsLoading(false);
+      }, remainingTime);
+    };
+
+    if (document.fonts && document.fonts.ready) {
+      // Aguardar as fontes carregarem e então garantir mínimo de 1 segundo
+      document.fonts.ready.then(() => {
+        finishLoading();
+      });
+    } else {
+      // Fallback: aguardar 1 segundo se document.fonts não estiver disponível
+      setTimeout(() => {
+        setIsLoading(false);
+      }, MIN_LOADING_TIME);
+    }
   }, []);
 
   if (isLoading) {
@@ -91,8 +110,8 @@ export default function Home() {
         <Image
           src="/assets/logo-white.webp"
           alt="Dunamis Expedições Logo"
-          sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
-          className="w-auto h-8 sm:h-10 lg:h-12 object-contain animate-bounce"
+          // sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
+          className=" h-8 sm:h-10 lg:h-24 object-contain animate-bounce"
           width={200}
           height={60}
           priority

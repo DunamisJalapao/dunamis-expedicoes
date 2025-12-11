@@ -40,8 +40,8 @@ const bardonClean = localFont({
     },
   ],
   variable: "--font-bardon-clean",
-  display: "optional", // Não crítica - não bloqueia
-  preload: false,
+  display: "swap", // Crítica para o hero - precisa renderizar antes do loading
+  preload: true, // Preload para garantir carregamento antes do loading terminar
 });
 const workSans = localFont({
   src: [
@@ -174,10 +174,17 @@ export default function RootLayout({
         {/* Prefetch para recursos críticos */}
         <link rel="prefetch" href="/assets/logo-white.webp" as="image" />
 
-        {/* Preload da fonte crítica para melhor FCP */}
+        {/* Preload das fontes críticas para melhor FCP e evitar FOIT */}
         <link
           rel="preload"
           href="/fonts/BardonStamp-Regular.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/BardonClean-Regular.otf"
           as="font"
           type="font/otf"
           crossOrigin="anonymous"

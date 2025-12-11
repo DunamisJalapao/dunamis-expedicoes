@@ -154,7 +154,7 @@ const Pack = memo(function Pack({
       </div>
 
       <div className="flex flex-col w-full items-center justify-center">
-        <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
+        <div className="flex w-full h-full py-20 justify-center font-work-sans">
           <div className="flex flex-col w-full md:w-[60%] px-4 md:px-auto justify-center gap-8">
             <h1 className="text-2xl md:text-4xl">
               Atividades Opcionais - Não inclusos no Pacote

@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // GitHub Pages configuration
+  output: "export",
+  images: {
+    unoptimized: true, // Required for static export
+  },
+
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
@@ -13,17 +19,8 @@ const nextConfig = {
   turbopack: {},
 
   // Image optimization - AVIF e WebP para melhor performance
-  images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 86400, // 1 day cache
-    dangerouslyAllowSVG: true,
-    unoptimized: false,
-    loader: "default",
-    domains: [],
-    remotePatterns: [],
-  },
+  // Nota: unoptimized está definido acima para GitHub Pages
+  // Se não usar GitHub Pages, remova output: "export" e images.unoptimized acima
 
   // Experimental features for performance - simplified
   experimental: {
@@ -57,51 +54,8 @@ const nextConfig = {
     return config;
   },
 
-  // Headers for better caching - otimizado para performance
-  async headers() {
-    return [
-      {
-        source: "/assets/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/_next/static/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/fonts/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/:path*\\.(webp|avif|jpg|jpeg|png|gif)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-          {
-            key: "Accept-Ranges",
-            value: "bytes",
-          },
-        ],
-      },
-    ];
-  },
+  // Headers não funcionam com static export (GitHub Pages)
+  // Cache é gerenciado pelo GitHub Pages automaticamente
 };
 
 module.exports = nextConfig;

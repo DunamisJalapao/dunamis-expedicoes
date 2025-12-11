@@ -1,4 +1,5 @@
 "use client";
+import { throttleRAF } from "@/lib/performance-utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,7 +15,8 @@ export function ButtonWhats() {
   const isPackPage = pathname?.startsWith("/packs/");
 
   useEffect(() => {
-    const handleScroll = () => {
+    // Otimizado com throttleRAF para reduzir INP
+    const handleScroll = throttleRAF(() => {
       const scrollPosition = window.scrollY;
 
       // Mostra o popup mais cedo (150px) para melhor conversão - otimização CRO
@@ -23,9 +25,9 @@ export function ButtonWhats() {
         setHasScrolled(true);
         setValueScroll(scrollPosition);
       }
-    };
+    });
 
-    // Adiciona listener de scroll com passive para melhor performance
+    // Passive listener para scroll não bloqueante
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {

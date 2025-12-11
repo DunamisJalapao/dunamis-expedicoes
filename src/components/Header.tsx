@@ -11,6 +11,7 @@ import { CgMenuRight } from "react-icons/cg";
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 // import { DraweComponent } from "./DrawerComponent";
 import { useUtils } from "@/hooks/utils";
+import { throttleRAF } from "@/lib/performance-utils";
 import Image from "next/image";
 import { NavBar } from "./NavBar";
 
@@ -38,29 +39,21 @@ function HeaderComponent({ ...rest }: HeaderProps) {
     []
   );
 
-  const handleScrollWindow = useCallback(() => {
-    // Throttle usando requestAnimationFrame para melhorar INP
-    let ticking = false;
-    const updateColor = () => {
+  // Scroll handler otimizado com throttleRAF
+  // Executa no máximo 1x por frame (~16ms @ 60fps)
+  const handleScrollWindow = useCallback(
+    throttleRAF(() => {
       const position = window.scrollY;
       _setColor(position <= 100);
-      ticking = false;
-    };
-
-    return () => {
-      if (!ticking) {
-        requestAnimationFrame(updateColor);
-        ticking = true;
-      }
-    };
-  }, []);
+    }),
+    []
+  );
 
   useEffect(() => {
-    const throttledHandler = handleScrollWindow();
-    // Use passive listener for better performance
-    window.addEventListener("scroll", throttledHandler, { passive: true });
+    // Passive listener para scroll não bloqueante
+    window.addEventListener("scroll", handleScrollWindow, { passive: true });
     return () => {
-      window.removeEventListener("scroll", throttledHandler);
+      window.removeEventListener("scroll", handleScrollWindow);
     };
   }, [handleScrollWindow]);
 
@@ -82,12 +75,14 @@ function HeaderComponent({ ...rest }: HeaderProps) {
         />
       </div>
 
-      <div
-        className="flex lg:hidden flex-1 justify-end"
+      <button
+        className="flex lg:hidden flex-1 justify-end cursor-pointer"
         onClick={() => onToggle()}
+        aria-label="Abrir menu"
+        type="button"
       >
-        <CgMenuRight className="text-white text-2xl sm:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200" />
-      </div>
+        <CgMenuRight className="text-white text-2xl sm:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 active:scale-95" />
+      </button>
       <div className="w-full hidden lg:flex flex-[5]">
         <div className="w-full pt-1">
           <NavBar className="text-sm xl:text-base text-center justify-center" />

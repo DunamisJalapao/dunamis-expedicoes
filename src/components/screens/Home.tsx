@@ -1,24 +1,53 @@
 "use client";
+import { runWhenIdle } from "@/lib/performance-utils";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { HTMLAttributes, memo } from "react";
-// CSS será carregado junto com o componente dinâmico
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {
+  HTMLAttributes,
+  memo,
+  startTransition,
+  useEffect,
+  useState,
+} from "react";
 
-// Dynamic import do carousel para reduzir bundle inicial
+// Dynamic import do carousel - CSS será carregado quando componente for importado
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Carousel = dynamic(
   () => import("react-responsive-carousel").then((mod) => mod.Carousel),
   {
     ssr: false,
-    loading: () => (
-      <div className="h-screen w-full bg-[#112126] animate-pulse" />
-    ),
+    loading: () => null, // Não mostrar loading - primeira imagem já está visível
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ) as any;
 
 type HomeScreenType = HTMLAttributes<HTMLDivElement> & {};
 
 const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
+  const [showCarousel, setShowCarousel] = useState(false);
+
+  // Carregar carousel apenas após LCP (primeira imagem já renderizada)
+  useEffect(() => {
+    // Usa requestIdleCallback para não impactar INP durante load
+    const idleId = runWhenIdle(() => {
+      // Aguardar LCP estimado (primeira imagem) antes de carregar carousel
+      // Use startTransition para não bloquear interações do usuário
+      const timer = setTimeout(() => {
+        startTransition(() => {
+          setShowCarousel(true);
+        });
+      }, 200); // Delay para garantir que LCP seja a primeira imagem estática
+
+      return () => clearTimeout(timer);
+    }, 500); // Espera 500ms idle ou timeout
+
+    return () => {
+      if (typeof cancelIdleCallback !== "undefined") {
+        cancelIdleCallback(idleId);
+      }
+    };
+  }, []);
+
   return (
     <div {...rest} className="flex w-screen h-screen relative overflow-hidden">
       <div className="flex w-full h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-4 sm:py-6 md:py-8 relative">
@@ -34,77 +63,95 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
           </h1>
         </div>
         <div className="w-full absolute top-0 left-0">
-          <Carousel
-            infiniteLoop
-            interval={10000}
-            showArrows={false}
-            showIndicators={false}
-            showThumbs={false}
-            autoPlay
-            stopOnHover={false}
-            swipeable={true}
-            emulateTouch={true}
-            useKeyboardArrows={false}
-            transitionTime={300}
-          >
-            <div className="h-screen">
-              <Image
-                src="/images/home2-1920x1080.avif"
-                alt="Paisagem do Jalapão - Dunamis Expedições"
-                sizes="100vw"
-                fill
-                priority
-                fetchPriority="high"
-                quality={48}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
+          {/* Primeira imagem LCP renderizada imediatamente no HTML - SEM carousel */}
+          <div className="h-screen w-full absolute top-0 left-0">
+            <Image
+              src="/images/home2-1920x1080.avif"
+              alt="Paisagem do Jalapão - Dunamis Expedições"
+              sizes="100vw"
+              fill
+              priority
+              fetchPriority="high"
+              quality={48}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+          </div>
+
+          {/* Carousel carregado após LCP - sobrepõe primeira imagem quando pronto */}
+          {showCarousel && (
+            <div className="w-full absolute top-0 left-0">
+              <Carousel
+                infiniteLoop
+                interval={10000}
+                showArrows={false}
+                showIndicators={false}
+                showThumbs={false}
+                autoPlay
+                stopOnHover={false}
+                swipeable={true}
+                emulateTouch={true}
+                useKeyboardArrows={false}
+                transitionTime={300}
+              >
+                <div className="h-screen">
+                  <Image
+                    src="/images/home2-1920x1080.avif"
+                    alt="Paisagem do Jalapão - Dunamis Expedições"
+                    sizes="100vw"
+                    fill
+                    loading="lazy"
+                    fetchPriority="low"
+                    quality={48}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "center",
+                    }}
+                  />
+                </div>
+                <div className="h-screen">
+                  <Image
+                    src="/images/home1-1920x1080.avif"
+                    alt="Fervedouro do Jalapão - Dunamis Expedições"
+                    sizes="100vw"
+                    fill
+                    loading="lazy"
+                    fetchPriority="low"
+                    quality={48}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "center",
+                    }}
+                  />
+                </div>
+                <div className="h-screen">
+                  <Image
+                    src="/images/home3-1920x1080.avif"
+                    alt="Aventura no Jalapão - Dunamis Expedições"
+                    sizes="100vw"
+                    fill
+                    loading="lazy"
+                    fetchPriority="low"
+                    quality={48}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "center",
+                    }}
+                  />
+                </div>
+              </Carousel>
             </div>
-            <div className="h-screen">
-              <Image
-                src="/images/home1-1920x1080.avif"
-                alt="Fervedouro do Jalapão - Dunamis Expedições"
-                sizes="100vw"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-                width={1920}
-                height={1080}
-                loading="lazy"
-                fetchPriority="low"
-                quality={75}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              />
-            </div>
-            <div className="h-screen">
-              <Image
-                src="/images/home3-1920x1080.avif"
-                alt="Aventura no Jalapão - Dunamis Expedições"
-                sizes="100vw"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-                width={1920}
-                height={1080}
-                loading="lazy"
-                fetchPriority="low"
-                quality={75}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              />
-            </div>
-          </Carousel>
+          )}
         </div>
         <div className="absolute top-0 left-0 w-full h-full bg-[#11212671]" />
       </div>

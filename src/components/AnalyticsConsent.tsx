@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { startTransition, useCallback, useEffect, useState } from "react";
 
 const CONSENT_KEY = "analytics-consent";
 const GTM_ID = "GTM-W8PHTL9X";
@@ -23,17 +23,28 @@ export function AnalyticsConsent() {
     }
   }, []);
 
-  const handleAccept = () => {
-    localStorage.setItem(CONSENT_KEY, "true");
-    setConsentGiven(true);
+  // Otimizado para INP: feedback visual imediato + storage assíncrono
+  const handleAccept = useCallback(() => {
+    // Feedback visual IMEDIATO - fecha banner
     setShowBanner(false);
-  };
 
-  const handleReject = () => {
-    localStorage.setItem(CONSENT_KEY, "false");
-    setConsentGiven(false);
+    // Storage e carregamento de scripts como trabalho não urgente
+    startTransition(() => {
+      localStorage.setItem(CONSENT_KEY, "true");
+      setConsentGiven(true);
+    });
+  }, []);
+
+  const handleReject = useCallback(() => {
+    // Feedback visual IMEDIATO - fecha banner
     setShowBanner(false);
-  };
+
+    // Storage como trabalho não urgente
+    startTransition(() => {
+      localStorage.setItem(CONSENT_KEY, "false");
+      setConsentGiven(false);
+    });
+  }, []);
 
   return (
     <>

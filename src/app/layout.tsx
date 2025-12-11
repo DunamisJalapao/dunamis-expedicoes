@@ -156,12 +156,30 @@ export default function RootLayout({
           }}
         />
 
-        {/* Preload da imagem LCP - herói único (tamanho médio para melhor compatibilidade) */}
+        {/* Preload da imagem LCP - múltiplos tamanhos para srcset responsivo */}
+        {/* Mobile primeiro (768px) - menor delay */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/home2-768x432.avif"
+          fetchPriority="high"
+          media="(max-width: 768px)"
+        />
+        {/* Tablet/Desktop (1280px) */}
         <link
           rel="preload"
           as="image"
           href="/images/home2-1280x720.avif"
           fetchPriority="high"
+          media="(min-width: 769px) and (max-width: 1280px)"
+        />
+        {/* Desktop grande (1920px) */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/home2-1920x1080.avif"
+          fetchPriority="high"
+          media="(min-width: 1281px)"
         />
 
         {/* Structured Data para SEO */}

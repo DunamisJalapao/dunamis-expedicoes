@@ -8,6 +8,15 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { objPacks } from "./aux";
 
+// Generate static params for static export (GitHub Pages)
+export function generateStaticParams() {
+  return [
+    { slug: "roteiro-3-dias" },
+    { slug: "roteiro-4-dias" },
+    { slug: "roteiro-5-dias" },
+  ];
+}
+
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {

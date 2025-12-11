@@ -2,11 +2,8 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { HTMLAttributes, memo } from "react";
-
-// Carregar CSS do carousel de forma assíncrona para não bloquear renderização
-if (typeof window !== "undefined") {
-  import("react-responsive-carousel/lib/styles/carousel.min.css");
-}
+// CSS será carregado junto com o componente dinâmico
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // Dynamic import do carousel para reduzir bundle inicial
 const Carousel = dynamic(

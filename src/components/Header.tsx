@@ -1,5 +1,12 @@
 "use client";
-import { HTMLAttributes, memo, useCallback, useEffect, useState } from "react";
+import {
+  HTMLAttributes,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 // import { DraweComponent } from "./DrawerComponent";
@@ -9,23 +16,27 @@ import { NavBar } from "./NavBar";
 
 type HeaderProps = HTMLAttributes<HTMLDivElement> & {};
 
-const listIcons = [
-  {
-    icon: <FaWhatsapp />,
-    route: "https://api.whatsapp.com/send?phone=556392437096",
-  },
-  {
-    icon: <FaInstagram />,
-    route: "https://www.instagram.com/dunamis_expedicoes/",
-  },
-  { icon: <FaTiktok />, route: "https://www.tiktok.com/@dunamis_expedicoes" },
-  { icon: <FaYoutube />, route: "https://www.youtube.com/@dunamis_expedicoes" },
-];
-
-const Header = memo(function Header({ ...rest }: HeaderProps) {
+function HeaderComponent({ ...rest }: HeaderProps) {
   const [color, _setColor] = useState(true);
 
   const { onToggle } = useUtils();
+
+  // Usar useMemo para estabilizar a referência dos ícones
+  const listIcons = useMemo(
+    () => [
+      {
+        Icon: FaWhatsapp,
+        route: "https://api.whatsapp.com/send?phone=556392437096",
+      },
+      {
+        Icon: FaInstagram,
+        route: "https://www.instagram.com/dunamis_expedicoes/",
+      },
+      { Icon: FaTiktok, route: "https://www.tiktok.com/@dunamis_expedicoes" },
+      { Icon: FaYoutube, route: "https://www.youtube.com/@dunamis_expedicoes" },
+    ],
+    []
+  );
 
   const handleScrollWindow = useCallback(() => {
     // Use requestAnimationFrame to avoid forced reflows
@@ -72,15 +83,15 @@ const Header = memo(function Header({ ...rest }: HeaderProps) {
           <NavBar className="text-sm xl:text-base text-center justify-center" />
         </div>
         <div className="flex w-full items-center flex-1 justify-end gap-1 xl:gap-2">
-          {listIcons.map((buttons, _) => (
+          {listIcons.map((buttons, index) => (
             <a
               href={buttons.route}
               target="_blank"
-              key={_}
+              key={index}
               rel="noopener noreferrer"
             >
               <div className="flex cursor-pointer p-1 sm:p-2 text-white text-lg xl:text-xl rounded-full hover:scale-110 transition-all duration-200 hover:bg-white/10">
-                {buttons.icon}
+                <buttons.Icon />
               </div>
             </a>
           ))}
@@ -88,6 +99,10 @@ const Header = memo(function Header({ ...rest }: HeaderProps) {
       </div>
     </div>
   );
-});
+}
+
+const Header = memo(HeaderComponent);
+
+Header.displayName = "Header";
 
 export { Header };

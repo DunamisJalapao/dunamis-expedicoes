@@ -1,8 +1,19 @@
 "use client";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { HTMLAttributes, memo } from "react";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+// Dynamic import do carousel para reduzir bundle inicial
+const Carousel = dynamic(
+  () => import("react-responsive-carousel").then((mod) => mod.Carousel),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-screen w-full bg-[#112126] animate-pulse" />
+    ),
+  }
+) as any;
 
 type HomeScreenType = HTMLAttributes<HTMLDivElement> & {};
 
@@ -22,6 +33,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
           </h1>
         </div>
         <div className="w-full absolute top-0 left-0">
+          {/* @ts-ignore - Dynamic import type issue */}
           <Carousel
             infiniteLoop
             interval={10000}
@@ -32,6 +44,8 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
             stopOnHover={false}
             swipeable={true}
             emulateTouch={true}
+            useKeyboardArrows={false}
+            transitionTime={500}
           >
             <div className="h-screen">
               <Image
@@ -48,7 +62,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
                 height={1080}
                 priority
                 fetchPriority="high"
-                quality={80}
+                quality={85}
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
@@ -67,7 +81,8 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
                 width={1920}
                 height={1080}
                 loading="lazy"
-                quality={70}
+                fetchPriority="low"
+                quality={75}
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
@@ -86,7 +101,8 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
                 width={1920}
                 height={1080}
                 loading="lazy"
-                quality={70}
+                fetchPriority="low"
+                quality={75}
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
@@ -98,5 +114,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
     </div>
   );
 });
+
+HomeScreen.displayName = "HomeScreen";
 
 export default HomeScreen;

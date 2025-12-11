@@ -2,7 +2,7 @@
 
 import { Drawer } from "@/components/Drawer";
 import Image from "next/image";
-import { memo, use } from "react";
+import { Fragment, memo, use } from "react";
 import { objPacks } from "./aux";
 
 // Cor padrão baseada no tema do Jalapão - substitui color-thief-react
@@ -85,7 +85,7 @@ const Pack = memo(function Pack({
 
       <div className="flex flex-col w-screen h-full items-center justify-center font-bardon-clean">
         {objPacks[slugTyped].days.map((day, index) => (
-          <>
+          <Fragment key={`${index}-${day.attractivies.length}`}>
             <div
               key={`${index}-${day.attractivies.length}`}
               className="flex flex-col md:flex-row py-10 px-4 md:px-auto w-full justify-center h-full md:gap-20"
@@ -146,10 +146,10 @@ const Pack = memo(function Pack({
               </p>
             )}
             <div
-              key={`${index}-${day.attractivies.length}`}
+              key={`${index}-${day.attractivies.length}-${() => new Date()}`}
               className="border border-[#0000000e] w-full md:w-[60%]"
             />
-          </>
+          </Fragment>
         ))}
       </div>
 

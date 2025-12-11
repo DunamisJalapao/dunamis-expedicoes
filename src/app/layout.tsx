@@ -182,13 +182,19 @@ export default function RootLayout({
           }}
         />
 
-        {/* Critical preloads for LCP */}
-        <link rel="preload" href="/home2.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/home1.webp" as="image" type="image/webp" />
+        {/* Preload da imagem LCP - primeira imagem do hero */}
+        <link
+          rel="preload"
+          href="/home2.webp"
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
 
+        {/* Scripts otimizados - carregamento diferido para melhorar INP */}
         <Script
           id="gtm-script"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function (w, d, s, l, i) {
               w[l] = w[l] || []; w[l].push({
@@ -202,7 +208,7 @@ export default function RootLayout({
         />
         <Script
           id="fbq-script"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
             !function(f,b,e,v,n,t,s)
@@ -229,7 +235,7 @@ export default function RootLayout({
         </noscript>
         <Script
           id="fbq-script-2"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               !(function (f, b, e, v, n, t, s) {
@@ -275,7 +281,6 @@ export default function RootLayout({
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
-        {/* <SpeedInsights /> */}
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"

@@ -35,6 +35,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Optimize images
+        run: pnpm ts-node --project scripts/tsconfig.json scripts/optimize-images.ts
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:

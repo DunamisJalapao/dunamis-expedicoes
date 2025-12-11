@@ -10,7 +10,7 @@ const roteirosData = [
     foods: "Alimento incluso",
     hotel: "Hospedagem inclusa",
     doc: "/packs/roteiro-3-dias",
-    img: "/pack3.webp",
+    img: "/images/pack3.avif",
   },
   {
     title: "ROTEIRO 4 DIAS",
@@ -18,7 +18,7 @@ const roteirosData = [
     foods: "Alimento incluso",
     hotel: "Hospedagem inclusa",
     doc: "/packs/roteiro-4-dias",
-    img: "/pack4.webp",
+    img: "/images/pack4.avif",
   },
   {
     title: "ROTEIRO 5 DIAS",
@@ -26,7 +26,7 @@ const roteirosData = [
     foods: "Alimento incluso",
     hotel: "Hospedagem inclusa",
     doc: "/packs/roteiro-5-dias",
-    img: "/pack5.webp",
+    img: "/images/pack5.avif",
   },
 ];
 

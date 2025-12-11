@@ -31,8 +31,8 @@ const Pack = memo(function Pack({
               className={`w-full h-full backdrop-filter backdrop-blur absolute top-0 left-0`}
             />
             <Image
-              src="/home-pack.webp"
-              alt="imagem home 01"
+              src="/images/bg.avif"
+              alt="Paisagem do Jalapão - Dunamis Expedições"
               sizes="100vw"
               style={{
                 width: "100%",

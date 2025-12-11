@@ -35,19 +35,31 @@
 /* Keyframes */
 @keyframes pulseBorder {
   0% {
-    box-shadow: 0 0 0 0 #25d366;
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
   }
   100% {
-    box-shadow: 0 0 0 25px rgba(255, 0, 0, 0);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
 @keyframes pulseBorderPack {
   0% {
-    box-shadow: 0 0 0 0 #ff5a00;
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
   }
   100% {
-    box-shadow: 0 0 0 25px rgba(255, 0, 0, 0);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -186,10 +198,12 @@
 
   .animate-pulse-border {
     animation: pulseBorder 2s infinite;
+    will-change: transform, opacity;
   }
 
   .animate-pulse-border-pack {
     animation: pulseBorderPack 2s infinite;
+    will-change: transform, opacity;
   }
 }
 

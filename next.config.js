@@ -5,7 +5,7 @@ const nextConfig = {
   ...(process.env.NODE_ENV === "production" && { output: "export" }),
   images: {
     unoptimized: true, // Required for static export
-    // Configurar qualidades de imagem para evitar warnings
+    formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
@@ -14,33 +14,38 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
 
-  // Headers de segurança e performance (não funcionam com static export, mas documentado)
-  // Para produção com servidor, descomente:
-  // async headers() {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       headers: [
-  //         {
-  //           key: 'X-DNS-Prefetch-Control',
-  //           value: 'on'
-  //         },
-  //         {
-  //           key: 'X-Frame-Options',
-  //           value: 'SAMEORIGIN'
-  //         },
-  //         {
-  //           key: 'X-Content-Type-Options',
-  //           value: 'nosniff'
-  //         },
-  //         {
-  //           key: 'Referrer-Policy',
-  //           value: 'strict-origin-when-cross-origin'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // },
+  // Headers de cache para arquivos estáticos (aplicados via middleware)
+  async headers() {
+    return [
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
 
   // Modern browser support - reduce polyfills
   compiler: {
@@ -60,7 +65,8 @@ const nextConfig = {
       // react-icons removido para evitar problemas com HMR
     ],
     // Otimizações de bundle
-    optimizeCss: true,
+    // optimizeCss desabilitado temporariamente - requer critters
+    // optimizeCss: true,
   },
 
   // Webpack optimizations - kept for production builds (when not using Turbopack)

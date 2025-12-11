@@ -1,60 +1,10 @@
+import { AnalyticsConsent } from "@/components/AnalyticsConsent";
 import { ButtonWhats } from "@/components/ButtonWhats";
 import { StructuredData } from "@/components/StructuredData";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import Script from "next/script";
+import { bardonClean, bardonStamp, blueDream, workSans } from "./fonts";
 import "./globals.css";
 import { Providers } from "./providers";
-
-// Fontes otimizadas: preload apenas da fonte crítica (bardon-stamp para hero)
-const blueDream = localFont({
-  src: [
-    {
-      path: "../../public/fonts/BLUEDREAM-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-blue-dream",
-  display: "optional", // Fonte secundária - não bloqueia renderização
-  preload: false,
-});
-const bardonStamp = localFont({
-  src: [
-    {
-      path: "../../public/fonts/BardonStamp-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-bardon-stamp",
-  display: "swap", // Fonte crítica do hero - preload habilitado
-  preload: true, // Preload da fonte crítica para melhor FCP
-});
-const bardonClean = localFont({
-  src: [
-    {
-      path: "../../public/fonts/BardonClean-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-bardon-clean",
-  display: "swap", // Crítica para o hero - precisa renderizar antes do loading
-  preload: true, // Preload para garantir carregamento antes do loading terminar
-});
-const workSans = localFont({
-  src: [
-    {
-      path: "../../public/fonts/WorkSans-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-work-sans",
-  display: "optional", // Não crítica - não bloqueia
-  preload: false,
-});
 
 export const metadata: Metadata = {
   title: {
@@ -174,19 +124,19 @@ export default function RootLayout({
         {/* Prefetch para recursos críticos */}
         <link rel="prefetch" href="/assets/logo-white.webp" as="image" />
 
-        {/* Preload das fontes críticas para melhor FCP e evitar FOIT */}
+        {/* Preload das fontes críticas WOFF2 para melhor FCP */}
         <link
           rel="preload"
-          href="/fonts/BardonStamp-Regular.otf"
+          href="/fonts/BardonStamp-Regular.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/BardonClean-Regular.otf"
+          href="/fonts/BardonClean-Regular.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
 
@@ -210,112 +160,30 @@ export default function RootLayout({
           }}
         />
 
-        {/* Preload da imagem LCP - primeira imagem do hero */}
+        {/* Preload da imagem LCP - primeira imagem do hero (AVIF com fallback WebP) */}
         <link
           rel="preload"
-          href="/home2.webp"
+          href="/images/home2-1920x1080.avif"
+          as="image"
+          type="image/avif"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          href="/images/home2-1920x1080.webp"
           as="image"
           type="image/webp"
           fetchPriority="high"
         />
 
-        {/* Scripts otimizados - carregamento diferido para melhorar INP */}
-        <Script
-          id="gtm-script"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `(function (w, d, s, l, i) {
-              w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                  new Date().getTime(), event: 'gtm.js'
-              }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                  'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
-          }}
-        />
-        <Script
-          id="fbq-script"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '7037029349725824');
-            fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
-        <Script
-          id="fbq-script-2"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !(function (f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function () {
-                  n.callMethod
-                    ? n.callMethod.apply(n, arguments)
-                    : n.queue.push(arguments);
-                };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = "2.0";
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s);
-              })(
-                window,
-                document,
-                "script",
-                "https://connect.facebook.net/en_US/fbevents.js"
-              );
-              fbq("init", "1119431815878981");
-              fbq("track", "PageView");
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
         {/* Structured Data para SEO */}
         <StructuredData type="home" />
       </head>
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
-            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>`,
-          }}
-        />
         <Providers>{children}</Providers>
+        <AnalyticsConsent />
         <ButtonWhats />
       </body>
     </html>

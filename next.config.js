@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages configuration
+  // GitHub Pages configuration (domínio customizado - sem basePath)
   output: "export",
-  basePath: process.env.GITHUB_PAGES_BASE_PATH || "",
-  assetPrefix: process.env.GITHUB_PAGES_BASE_PATH || "",
   images: {
     unoptimized: true, // Required for static export
   },

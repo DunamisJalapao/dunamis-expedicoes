@@ -15,7 +15,7 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
             Conheça as
           </h1>
           <h1 className="text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bardon-clean text-stroke-mobile lg:text-stroke text-center lg:text-left leading-none">
-            TEST NO GITHUB PAGES
+            MARAVILHAS
           </h1>
           <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center lg:text-left lg:ml-auto leading-tight">
             do Jalapão conosco

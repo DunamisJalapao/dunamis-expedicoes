@@ -46,12 +46,12 @@ export function AnalyticsConsent() {
         >
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="flex-1">
-              <h3
+              <h2
                 id="consent-title"
                 className="font-bardon-stamp text-lg sm:text-xl mb-2 text-[#112126]"
               >
                 Cookies e Privacidade
-              </h3>
+              </h2>
               <p
                 id="consent-description"
                 className="font-work-sans text-sm sm:text-base text-gray-700"
@@ -71,7 +71,7 @@ export function AnalyticsConsent() {
               </button>
               <button
                 onClick={handleAccept}
-                className="px-4 py-2 sm:px-6 sm:py-3 font-work-sans text-sm sm:text-base bg-[#FF5A00] text-white rounded-lg hover:bg-[#E64A00] transition-colors"
+                className="px-4 py-2 sm:px-6 sm:py-3 font-work-sans text-sm sm:text-base bg-[#E64A00] text-white rounded-lg hover:bg-[#CC3F00] transition-colors"
                 aria-label="Aceitar cookies"
               >
                 Aceitar

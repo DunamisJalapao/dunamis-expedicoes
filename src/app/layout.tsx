@@ -107,24 +107,20 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* DNS prefetch e preconnect para melhorar TTFB */}
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        {/* DNS prefetch apenas para recursos sempre carregados */}
         <link rel="dns-prefetch" href="https://api.whatsapp.com" />
-        <link
-          rel="preconnect"
-          href="https://www.googletagmanager.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://connect.facebook.net"
-          crossOrigin="anonymous"
-        />
+        {/* Preconnect removido para GTM/FB pois scripts são carregados apenas após consent */}
         {/* Prefetch para recursos críticos */}
         <link rel="prefetch" href="/assets/logo-white.webp" as="image" />
 
-        {/* Preload das fontes críticas WOFF2 para melhor FCP */}
+        {/* Preload das fontes críticas do hero (WorkSans, BardonStamp, BardonClean) */}
+        <link
+          rel="preload"
+          href="/fonts/WorkSans-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link
           rel="preload"
           href="/fonts/BardonStamp-Regular.woff2"
@@ -160,19 +156,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* Preload da imagem LCP - primeira imagem do hero (AVIF com fallback WebP) */}
+        {/* Preload da imagem LCP - herói único (tamanho médio para melhor compatibilidade) */}
         <link
           rel="preload"
-          href="/images/home2-1920x1080.avif"
           as="image"
-          type="image/avif"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          href="/images/home2-1920x1080.webp"
-          as="image"
-          type="image/webp"
+          href="/images/home2-1280x720.avif"
           fetchPriority="high"
         />
 

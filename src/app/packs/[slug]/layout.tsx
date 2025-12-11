@@ -203,7 +203,7 @@ async function PackLayout({
           href="https://api.whatsapp.com/send?phone=556392437096"
           target="_blank"
           rel="noopener noreferrer"
-          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#FF5A00] animate-pulse-border-pack text-white rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 animate-fade-in`}
+          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#E64A00] animate-pulse-border-pack text-white rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 animate-fade-in`}
         >
           <div className="flex items-center gap-2 sm:gap-3">
             <div className={`w-2 h-2 bg-white animate-ping rounded-full`}></div>

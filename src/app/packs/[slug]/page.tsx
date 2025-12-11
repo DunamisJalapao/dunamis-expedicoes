@@ -49,7 +49,7 @@ const Pack = memo(function Pack({
           </div>
         </div>
         <div className="flex flex-col shadow-md w-[100%] md:w-[30%] bg-white px-4 py-5 md:p-10  rounded -mr-28 md:-mr-10 z-20 gap-5">
-          <h1 className="text-2xl xl:text-[3rem] leading-normal uppercase text-[#ff5900] font-bardon-stamp">
+          <h1 className="text-2xl xl:text-[3rem] leading-normal uppercase text-[#E64A00] font-bardon-stamp">
             {objPacks[slugTyped].title}
           </h1>
           <p className="uppercase text-sm font-bardon-clean">

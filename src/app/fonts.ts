@@ -1,6 +1,21 @@
 import localFont from "next/font/local";
 
-// Fontes WOFF2 otimizadas - convertidas automaticamente
+// Fontes WOFF2 otimizadas - fontes críticas acima da dobra
+export const workSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/WorkSans-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-work-sans",
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "-apple-system", "sans-serif"],
+});
+
+// Fontes do hero - críticas para primeira renderização, mas não bloqueiam
 export const bardonStamp = localFont({
   src: [
     {
@@ -29,20 +44,7 @@ export const bardonClean = localFont({
   fallback: ["system-ui", "-apple-system", "sans-serif"],
 });
 
-export const workSans = localFont({
-  src: [
-    {
-      path: "../../public/fonts/WorkSans-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-work-sans",
-  display: "swap",
-  preload: false,
-  fallback: ["system-ui", "-apple-system", "sans-serif"],
-});
-
+// Fonte decorativa - carregada como optional (não está no hero)
 export const blueDream = localFont({
   src: [
     {
@@ -52,7 +54,7 @@ export const blueDream = localFont({
     },
   ],
   variable: "--font-blue-dream",
-  display: "swap",
+  display: "optional",
   preload: false,
   fallback: ["system-ui", "-apple-system", "sans-serif"],
 });

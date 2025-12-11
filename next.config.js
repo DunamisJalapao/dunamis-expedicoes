@@ -14,7 +14,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
 
-  // Headers de cache para arquivos estáticos (aplicados via middleware)
+  // Headers de cache para arquivos estáticos imutáveis
   async headers() {
     return [
       {

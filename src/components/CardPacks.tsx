@@ -50,7 +50,7 @@ const CardPacks = memo(function CardPacks({
         <div className="flex px-4 h-[10rem] pt-4 pb-4 flex-col justify-between">
           <div>
             <div className="flex">
-              <p className="text-[#FF5A00] text-lg font-bold font-bardon-clean">
+              <p className="text-[#E64A00] text-lg font-bold font-bardon-clean">
                 {title}
               </p>
             </div>
@@ -59,7 +59,7 @@ const CardPacks = memo(function CardPacks({
               <p className="font-work-sans">{duration}</p>
             </div>
           </div>
-          <p className="text-[#FF5A00] text-sm font-bardon-stamp text-center justify-self-end">
+          <p className="text-[#E64A00] text-sm font-bardon-stamp text-center justify-self-end">
             Saiba mais+
           </p>
         </div>

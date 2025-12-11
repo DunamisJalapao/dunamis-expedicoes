@@ -110,8 +110,8 @@ export default function Home() {
         <Image
           src="/assets/logo-white.webp"
           alt="Dunamis Expedições Logo"
-          // sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
-          className=" h-8 sm:h-10 lg:h-24 object-contain animate-bounce"
+          sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
+          className="h-8 sm:h-10 lg:h-24 object-contain"
           width={200}
           height={60}
           priority

@@ -36,13 +36,16 @@ export function ButtonWhats() {
   // Mensagem pré-formatada para melhor conversão
   const getWhatsAppMessage = () => {
     if (isPackPage) {
-      const packName = pathname?.split("/").pop()?.replace(/-/g, " ") || "roteiro";
+      const packName =
+        pathname?.split("/").pop()?.replace(/-/g, " ") || "roteiro";
       return `Olá! Gostaria de saber mais informações sobre o ${packName}.`;
     }
     return "Olá! Gostaria de solicitar um orçamento para uma viagem ao Jalapão.";
   };
 
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=556392437096&text=${encodeURIComponent(getWhatsAppMessage())}`;
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=556392437096&text=${encodeURIComponent(
+    getWhatsAppMessage()
+  )}`;
 
   return (
     <div className="fixed right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 bottom-4 sm:bottom-6 md:bottom-8 z-50">
@@ -50,7 +53,7 @@ export function ButtonWhats() {
       {showPopup && (
         <div
           className={`absolute bottom-16 sm:bottom-18 md:bottom-20 lg:bottom-24 right-0 sm:-right-2 md:-right-4 lg:-right-6 xl:-right-8 text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap ${
-            isPackPage ? "bg-[#FF5A00] text-white" : "bg-[#25D366] text-white"
+            isPackPage ? "bg-[#E64A00] text-white" : "bg-[#25D366] text-white"
           } rounded-lg shadow-2xl border-2 border-white p-2 sm:p-3 md:p-4 mb-2 animate-fade-in ${
             isPackPage
               ? "max-w-none"
@@ -82,7 +85,11 @@ export function ButtonWhats() {
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center p-2 sm:p-3 md:p-4 bg-[#25D366] rounded-full border-2 sm:border-4 border-white shadow-2xl hover:scale-110 transition-all duration-300 hover:shadow-3xl"
-        aria-label="Contato via WhatsApp"
+        aria-label={
+          isPackPage
+            ? "Solicitar orçamento deste roteiro via WhatsApp"
+            : "Solicitar orçamento via WhatsApp"
+        }
       >
         <FaWhatsapp className="text-white text-3xl sm:text-4xl md:text-5xl" />
       </Link>

@@ -64,7 +64,8 @@ const IMAGE_CONFIGS: ImageConfig[] = [
 ];
 
 const OUTPUT_DIR = "public/images";
-const AVIF_QUALITY = 55;
+const AVIF_QUALITY = 48;
+const AVIF_EFFORT = 6;
 const WEBP_QUALITY = 70;
 
 async function optimizeImage(
@@ -82,7 +83,7 @@ async function optimizeImage(
   for (const size of sizes) {
     const sizeSuffix = sizes.length > 1 ? `-${size.width}x${size.height}` : "";
 
-    // Generate AVIF
+    // Generate AVIF com qualidade otimizada
     const avifPath = join(OUTPUT_DIR, `${name}${sizeSuffix}.avif`);
     try {
       await sharp(sourcePath)
@@ -90,7 +91,7 @@ async function optimizeImage(
           fit: "cover",
           position: "center",
         })
-        .avif({ quality: AVIF_QUALITY })
+        .avif({ quality: AVIF_QUALITY, effort: AVIF_EFFORT })
         .toFile(avifPath);
       console.log(`  ✅ Generated: ${basename(avifPath)}`);
     } catch (error) {

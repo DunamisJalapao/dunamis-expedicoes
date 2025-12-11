@@ -52,7 +52,6 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
                 src="/images/home2-1920x1080.avif"
                 alt="Paisagem do Jalapão - Dunamis Expedições"
                 sizes="100vw"
-                srcSet="/images/home2-768x432.avif 768w, /images/home2-1280x720.avif 1280w, /images/home2-1920x1080.avif 1920w"
                 fill
                 priority
                 fetchPriority="high"

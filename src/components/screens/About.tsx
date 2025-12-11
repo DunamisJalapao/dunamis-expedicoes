@@ -1,12 +1,16 @@
 "use client";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { HTMLAttributes } from "react";
-// @ts-ignore
-import { Fade } from "react-awesome-reveal";
+
+const Fade = dynamic(
+  () => import("react-awesome-reveal").then((mod) => mod.Fade),
+  { ssr: false }
+);
 
 type AboutType = HTMLAttributes<HTMLDivElement> & {};
 
-export default function AboutScreen({ ...rest }: AboutType) {
+function AboutScreen({ ...rest }: AboutType) {
   return (
     <div
       {...rest}
@@ -58,3 +62,7 @@ export default function AboutScreen({ ...rest }: AboutType) {
     </div>
   );
 }
+
+AboutScreen.displayName = "AboutScreen";
+
+export default AboutScreen;

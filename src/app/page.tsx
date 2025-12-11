@@ -1,16 +1,15 @@
 "use client";
 import { Drawer } from "@/components/Drawer";
 import { Header } from "@/components/Header";
+import AboutScreen from "@/components/screens/About";
+import Contact from "@/components/screens/Contact";
+import Footer from "@/components/screens/Footer";
+import Gallery from "@/components/screens/Gallery";
+import HomeScreen from "@/components/screens/Home";
+import Packs from "@/components/screens/Packs";
+import Places from "@/components/screens/Places";
 import Image from "next/image";
-import { lazy, useEffect, useState } from "react";
-
-const AboutScreen = lazy(() => import("@/components/screens/About"));
-const HomeScreen = lazy(() => import("@/components/screens/Home"));
-const Contact = lazy(() => import("@/components/screens/Contact"));
-const Footer = lazy(() => import("@/components/screens/Footer"));
-const Gallery = lazy(() => import("@/components/screens/Gallery"));
-const Packs = lazy(() => import("@/components/screens/Packs"));
-const Places = lazy(() => import("@/components/screens/Places"));
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);

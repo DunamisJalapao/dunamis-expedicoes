@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // GitHub Pages configuration (domínio customizado - sem basePath)
-  output: "export",
+  // output: "export" only for production builds (causes issues with Turbopack in dev)
+  ...(process.env.NODE_ENV === "production" && { output: "export" }),
   images: {
     unoptimized: true, // Required for static export
   },
@@ -16,6 +17,7 @@ const nextConfig = {
   },
 
   // Turbopack configuration (Next.js 16+ uses Turbopack by default)
+  // Empty config to silence the warning - webpack config is kept for production builds
   turbopack: {},
 
   // Image optimization - AVIF e WebP para melhor performance
@@ -24,10 +26,13 @@ const nextConfig = {
 
   // Experimental features for performance - simplified
   experimental: {
-    optimizePackageImports: ["react-icons", "react-responsive-carousel"],
+    optimizePackageImports: [
+      "react-responsive-carousel",
+      "react-awesome-reveal",
+    ],
   },
 
-  // Webpack optimizations - simplified
+  // Webpack optimizations - kept for production builds (when not using Turbopack)
   webpack(config, { dev, isServer }) {
     // SVG handling
     config.module.rules.push({

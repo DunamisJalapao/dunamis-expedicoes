@@ -63,15 +63,14 @@ function HeaderComponent({ ...rest }: HeaderProps) {
         color ? "bg-[rgba(255,255,255,0.2)]" : "bg-[#112126a8]"
       } flex w-full h-16 sm:h-20 lg:h-24 shadow-lg rounded-xl sm:rounded-2xl backdrop-filter backdrop-blur px-2 sm:px-4 lg:px-8 xl:px-16 2xl:px-20 items-center transition-all duration-300`}
     >
-      <div className="flex flex-1 min-w-0">
+      <div className="flex flex-1 min-w-0 items-center">
         <Image
           src="/assets/logo-white.webp"
           alt="Dunamis Expedições Logo"
-          sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 200px"
-          className="w-auto h-8 sm:h-10 lg:h-12 object-contain"
+          className="w-[100px] sm:w-[150px]  lg:w-[200px]  object-contain"
+          priority
           width={200}
           height={60}
-          priority
         />
       </div>
 

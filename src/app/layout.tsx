@@ -134,7 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.sr
         {/* Prefetch para recursos críticos */}
         <link rel="prefetch" href="/assets/logo-white.webp" as="image" />
 
-        {/* Preload das fontes críticas do hero (WorkSans, BardonStamp, BardonClean) */}
+        {/* Preload das fontes críticas (WorkSans, BardonStamp, BardonClean, BlueDream) */}
         <link
           rel="preload"
           href="/fonts/WorkSans-Regular.woff2"
@@ -152,6 +152,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.sr
         <link
           rel="preload"
           href="/fonts/BardonClean-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/BLUEDREAM-Regular.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"

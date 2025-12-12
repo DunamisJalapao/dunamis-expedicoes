@@ -44,7 +44,7 @@ export const bardonClean = localFont({
   fallback: ["system-ui", "-apple-system", "sans-serif"],
 });
 
-// Fonte decorativa - carregada como optional (não está no hero)
+// Fonte decorativa - pré-carregada junto com as outras fontes críticas
 export const blueDream = localFont({
   src: [
     {
@@ -54,7 +54,7 @@ export const blueDream = localFont({
     },
   ],
   variable: "--font-blue-dream",
-  display: "optional",
-  preload: false,
+  display: "swap",
+  preload: true,
   fallback: ["system-ui", "-apple-system", "sans-serif"],
 });

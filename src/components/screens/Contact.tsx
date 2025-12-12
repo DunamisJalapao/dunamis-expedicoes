@@ -1,28 +1,11 @@
-"use client";
 import { LazyFaWhatsapp } from "@/components/LazyIcon";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { useLazyFont } from "@/hooks/useLazyFont";
 import { HTMLAttributes } from "react";
 
 type ContactType = HTMLAttributes<HTMLDivElement> & {};
 
 export default function Contact({ ...rest }: ContactType) {
-  // Lazy load da fonte blueDream apenas quando componente fica visível
-  const [ref, isIntersecting] = useIntersectionObserver({
-    rootMargin: "100px",
-    threshold: 0.1,
-  });
-
-  const fontLoaded = useLazyFont(
-    "BLUEDREAM",
-    "/fonts/BLUEDREAM-Regular.woff2",
-    { enabled: isIntersecting }
-  );
   return (
-    <div
-      ref={ref}
-      className="flex w-screen h-[40vh] sm:h-[70vh] md:h-[80vh] flex-col relative"
-    >
+    <div className="flex w-screen h-[40vh] sm:h-[70vh] md:h-[80vh] flex-col relative">
       <div
         {...rest}
         className="flex w-full h-full bg-green-100 bg-[url(/bg.webp)] bg-cover bg-center lg:bg-fixed bg-no-repeat"

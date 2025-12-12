@@ -1,9 +1,9 @@
 "use client";
 
-import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { HTMLAttributes, memo } from "react";
+import IconChecked from "../../public/assets/icon-checked.svg";
 
 type CardPacksType = HTMLAttributes<HTMLDivElement> & {
   title: string;
@@ -50,16 +50,16 @@ const CardPacks = memo(function CardPacks({
         <div className="flex px-4 h-[10rem] pt-4 pb-4 flex-col justify-between">
           <div>
             <div className="flex">
-              <p className="text-[#E64A00] text-lg font-bold font-bardon-clean">
+              <p className="text-[#FF5A00] text-lg font-bold font-bardon-clean">
                 {title}
               </p>
             </div>
             <div className="flex items-center gap-2 text-xl mt-2">
-              <CheckCircle width="1rem" />
+              <IconChecked width="1rem" />
               <p className="font-work-sans">{duration}</p>
             </div>
           </div>
-          <p className="text-[#E64A00] text-sm font-bardon-stamp text-center justify-self-end">
+          <p className="text-[#FF5A00] text-sm font-bardon-stamp text-center justify-self-end">
             Saiba mais+
           </p>
         </div>

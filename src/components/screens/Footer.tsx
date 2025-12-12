@@ -50,30 +50,18 @@ export default function Footer() {
         </div>
 
         <div className="flex w-full max-w-xs text-lg sm:text-xl justify-between">
-          {listIcons.map((buttons, _) => {
-            const labels: Record<string, string> = {
-              "https://api.whatsapp.com/send?phone=556392437096":
-                "Contato via WhatsApp",
-              "https://www.instagram.com/dunamis_expedicoes/":
-                "Seguir no Instagram",
-              "https://www.tiktok.com/@dunamis_expedicoes": "Seguir no TikTok",
-              "https://www.youtube.com/@dunamis_expedicoes":
-                "Inscrever-se no YouTube",
-            };
-            return (
-              <a
-                href={buttons.route}
-                target="_blank"
-                key={_}
-                rel="noopener noreferrer"
-                aria-label={labels[buttons.route] || "Link para rede social"}
-              >
-                <div className="flex cursor-pointer p-2 sm:p-3 border-2 border-[#112126ff] rounded-full hover:scale-110 hover:bg-[#112126ff] hover:text-white transition-all duration-300">
-                  {buttons.icon}
-                </div>
-              </a>
-            );
-          })}
+          {listIcons.map((buttons, _) => (
+            <a
+              href={buttons.route}
+              target="_blank"
+              key={_}
+              rel="noopener noreferrer"
+            >
+              <div className="flex cursor-pointer p-2 sm:p-3 border-2 border-[#112126ff] rounded-full hover:scale-110 hover:bg-[#112126ff] hover:text-white transition-all duration-300">
+                {buttons.icon}
+              </div>
+            </a>
+          ))}
         </div>
 
         <div className="flex flex-col text-center text-xs sm:text-sm">
@@ -100,33 +88,18 @@ export default function Footer() {
             <NavBar className="flex flex-[2] text-black text-base xl:text-lg 2xl:text-xl" />
 
             <div className="flex flex-1 w-full justify-end">
-              {listIcons.map((buttons, _) => {
-                const labels: Record<string, string> = {
-                  "https://api.whatsapp.com/send?phone=556392437096":
-                    "Contato via WhatsApp",
-                  "https://www.instagram.com/dunamis_expedicoes/":
-                    "Seguir no Instagram",
-                  "https://www.tiktok.com/@dunamis_expedicoes":
-                    "Seguir no TikTok",
-                  "https://www.youtube.com/@dunamis_expedicoes":
-                    "Inscrever-se no YouTube",
-                };
-                return (
-                  <a
-                    href={buttons.route}
-                    target="_blank"
-                    key={_}
-                    rel="noopener noreferrer"
-                    aria-label={
-                      labels[buttons.route] || "Link para rede social"
-                    }
-                  >
-                    <div className="flex cursor-pointer items-center justify-center text-xl xl:text-2xl 2xl:text-3xl p-2 xl:p-3 ml-4 xl:ml-6 border border-[#112126ff] rounded-full hover:scale-110 hover:bg-[#112126ff] hover:text-white transition-all duration-300">
-                      {buttons.icon}
-                    </div>
-                  </a>
-                );
-              })}
+              {listIcons.map((buttons, _) => (
+                <a
+                  href={buttons.route}
+                  target="_blank"
+                  key={_}
+                  rel="noopener noreferrer"
+                >
+                  <div className="flex cursor-pointer items-center justify-center text-xl xl:text-2xl 2xl:text-3xl p-2 xl:p-3 ml-4 xl:ml-6 border border-[#112126ff] rounded-full hover:scale-110 hover:bg-[#112126ff] hover:text-white transition-all duration-300">
+                    {buttons.icon}
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
 

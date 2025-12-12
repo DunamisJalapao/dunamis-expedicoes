@@ -13,7 +13,7 @@ export default function Places({ ...rest }: PackType) {
       <div className="flex w-full h-full py-5 md:py-[4rem] justify-center flex-col gap-8">
         <h1 className="text-center text-[1.5rem] text-[#112126ff] font-bold font-bardon-clean">
           Confira o que te <br />{" "}
-          <span className="font-blue-dream text-[6rem] leading-[6.5rem] text-[#E64A00]">
+          <span className="font-blue-dream text-[6rem] leading-[6.5rem] text-[#FF5A00]">
             AGUARDA!
           </span>
         </h1>

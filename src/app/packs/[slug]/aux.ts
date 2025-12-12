@@ -19,7 +19,7 @@ type ObjPacks = {
 export const objPacks: ObjPacks = {
   "roteiro-3-dias": {
     title: "PACOTE DE 3 DIAS",
-    imgHome: "/images/pack3.avif",
+    imgHome: "/pack3.webp",
     description: "Roteiro de 3 dias e 2 noites",
     days: [
       {
@@ -59,7 +59,7 @@ export const objPacks: ObjPacks = {
   },
   "roteiro-4-dias": {
     title: "PACOTE DE 4 DIAS",
-    imgHome: "/images/pack4.avif",
+    imgHome: "/pack4.webp",
     description: "Roteiro de 4 dias e 3 noites",
     days: [
       {
@@ -104,7 +104,7 @@ export const objPacks: ObjPacks = {
   },
   "roteiro-5-dias": {
     title: "PACOTE DE 5 DIAS",
-    imgHome: "/images/pack5.avif",
+    imgHome: "/pack5.webp",
     description: "Roteiro de 5 dias e 4 noites",
     days: [
       {

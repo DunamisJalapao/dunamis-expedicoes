@@ -1,19 +1,12 @@
-"use client";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useTransition,
-} from "react";
+"use client"
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface UtilsProps {
   children: ReactNode;
 }
 
 type UtilsContextData = {
-  isOpen: boolean;
-  isPending: boolean;
+  isOpen: boolean,
   onToggle(value?: boolean): void;
 };
 
@@ -21,32 +14,20 @@ const UtilsContext = createContext({} as UtilsContextData);
 
 export function UtilsProvider({ children }: UtilsProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isPending, startTransitionLocal] = useTransition();
 
-  /**
-   * Otimizado para INP:
-   * - Feedback visual imediato (setIsOpen síncrono)
-   * - Work pesado em startTransition (não urgente)
-   */
   function onToggle(value = undefined) {
-    // Feedback visual IMEDIATO - não bloqueia paint
-    const newValue = value === undefined ? !isOpen : value;
-
-    // Atualização síncrona para feedback visual imediato
-    setIsOpen(newValue);
+    if (value === undefined) setIsOpen(!isOpen);
+    else setIsOpen(value);
   }
 
   return (
-    <UtilsContext.Provider
-      value={{
-        isOpen,
-        isPending,
-        onToggle,
-      }}
-    >
+    <UtilsContext.Provider value={{
+      isOpen,
+      onToggle,
+    }}>
       {children}
     </UtilsContext.Provider>
-  );
-}
+  )
+};
 
-export const useUtils = () => useContext(UtilsContext);
+export const useUtils = () => useContext(UtilsContext)

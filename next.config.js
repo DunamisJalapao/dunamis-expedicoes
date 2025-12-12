@@ -1,78 +1,34 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Vercel configuration - otimizações automáticas habilitadas
-  images: {
-    // Vercel otimiza automaticamente - formatos preferidos
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Otimizações adicionais para Vercel
-    minimumCacheTTL: 60,
-    dangerouslyAllowSVG: false,
-    contentDispositionType: "attachment",
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
-
-  // Headers de cache para arquivos estáticos imutáveis
-  async headers() {
-    return [
-      {
-        source: "/images/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/fonts/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/assets/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
-  },
+  swcMinify: true,
 
   // Modern browser support - reduce polyfills
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
-  // Turbopack configuration (Next.js 16+ uses Turbopack by default)
-  // Empty config to silence the warning - webpack config is kept for production builds
-  turbopack: {},
+  // // Image optimization - fixed WebP support with fallbacks
+  // images: {
+  //   formats: ["image/webp", "image/avif"],
+  //   deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+  //   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  //   // minimumCacheTTL: 86400, // 1 day to avoid cache issues
+  //   dangerouslyAllowSVG: true,
+  //   unoptimized: false,
+  //   loader: "default",
+  //   domains: [],
+  //   remotePatterns: [],
+  // },
 
-  // Experimental features for performance
+  // Experimental features for performance - simplified
   experimental: {
-    optimizePackageImports: [
-      "react-awesome-reveal",
-      "lucide-react",
-      "embla-carousel-react",
-      // react-icons removido para evitar problemas com HMR
-    ],
-    // Otimizações de bundle
-    // optimizeCss desabilitado temporariamente - requer critters
-    // optimizeCss: true,
+    optimizePackageImports: ["react-icons", "react-responsive-carousel"],
   },
 
-  // Webpack optimizations - kept for production builds (when not using Turbopack)
+  // Webpack optimizations - simplified
   webpack(config, { dev, isServer }) {
     // SVG handling
     config.module.rules.push({
@@ -81,56 +37,69 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    // Advanced production optimizations
+    // Basic production optimizations
     if (!dev && !isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: "all",
-          cacheGroups: {
-            default: false,
-            vendors: false,
-            // Vendor chunk
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: "vendors",
-              chunks: "all",
-              priority: 20,
-            },
-            // React e React-DOM separados
-            react: {
-              test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-              name: "react",
-              chunks: "all",
-              priority: 30,
-            },
-            // Embla carousel separado (otimizado)
-            carousel: {
-              test: /[\\/]node_modules[\\/]embla-carousel-react[\\/]/,
-              name: "carousel",
-              chunks: "async",
-              priority: 25,
-            },
-            // Common chunk para código compartilhado
-            common: {
-              minChunks: 2,
-              chunks: "async",
-              priority: 10,
-              reuseExistingChunk: true,
-            },
+      config.optimization.splitChunks = {
+        chunks: "all",
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+            priority: 10,
           },
         },
-        // Otimizações adicionais
-        moduleIds: "deterministic",
-        runtimeChunk: "single",
       };
     }
 
     return config;
   },
 
-  // Headers funcionam perfeitamente na Vercel
-  // Cache é otimizado automaticamente pela Edge Network
+  // Headers for better caching - fixed syntax
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/assets/:path*",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       source: "/_next/static/:path*",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       source: "/fonts/:path*",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       source: "/:path*\\.(webp|avif|jpg|jpeg|png|gif)",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //         {
+  //           key: "Accept-Ranges",
+  //           value: "bytes",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;

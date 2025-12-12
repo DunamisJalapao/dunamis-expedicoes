@@ -2,64 +2,21 @@
 import { CardDetails } from "@/components/CardDetails";
 import { Header } from "@/components/Header";
 import Footer from "@/components/screens/Footer";
-import { StructuredData } from "@/components/StructuredData";
 import { Metadata } from "next";
 import Image from "next/image";
-import { Fragment } from "react";
+import { memo } from "react";
 import { objPacks } from "./aux";
 
-// Generate static params for static export (GitHub Pages)
-export function generateStaticParams() {
-  return [
-    { slug: "roteiro-3-dias" },
-    { slug: "roteiro-4-dias" },
-    { slug: "roteiro-5-dias" },
-  ];
-}
-
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
 }): Promise<Metadata> {
-  const params = await props.params;
   const { slug } = params;
   const slugTyped = slug as keyof typeof objPacks;
-  const pack = objPacks[slugTyped];
-  const baseUrl = "https://dunamisexpedicoes.com.br";
-
   return {
-    title: `${pack.title} | Dunamis Expedições`,
-    description: `${pack.description}. ${pack.days
-      .map((d) => d.title)
-      .join(", ")}. A melhor agência de turismo do Jalapão.`,
-    openGraph: {
-      title: `${pack.title} | Dunamis Expedições`,
-      description: `${pack.description}. ${pack.days
-        .map((d) => d.title)
-        .join(", ")}.`,
-      url: `${baseUrl}/packs/${slug}`,
-      siteName: "Dunamis Expedições",
-      images: [
-        {
-          url: `${baseUrl}${pack.imgHome}`,
-          width: 1200,
-          height: 630,
-          alt: pack.title,
-        },
-      ],
-      locale: "pt_BR",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${pack.title} | Dunamis Expedições`,
-      description: `${pack.description}. ${pack.days
-        .map((d) => d.title)
-        .join(", ")}.`,
-      images: [`${baseUrl}${pack.imgHome}`],
-    },
-    alternates: {
-      canonical: `/packs/${slug}`,
-    },
+    title: objPacks[slugTyped].title,
+    description: objPacks[slugTyped].description,
   };
 }
 
@@ -91,23 +48,13 @@ const asks = [
   },
 ];
 
-async function PackLayout({
+const PackLayout = memo(function PackLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
-  const packSlug = slug as
-    | "roteiro-3-dias"
-    | "roteiro-4-dias"
-    | "roteiro-5-dias";
-
   return (
     <div className="flex flex-col overflow-x-hidden font-work-sans">
-      {/* Structured Data para SEO - TourPackage */}
-      <StructuredData type="pack" packSlug={packSlug} />
       <nav className="w-full -mb-16 sm:-mb-20 lg:-mb-24 z-50 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 fixed top-2 sm:top-3 lg:top-4">
         <Header />
       </nav>
@@ -115,7 +62,7 @@ async function PackLayout({
         {children}
 
         <div className="flex flex-col w-full items-center justify-center">
-          <div className="flex flex-col md:flex-row py-10 justify-center h-full md:gap-10 font-work-sans">
+          <div className="flex flex-col md:flex-row py-10 justify-center h-full md:gap-10 font-lemon-milk">
             <div className="flex w-full md:w-[30%] h-full py-5 md:py-0 md:h-[25rem] flex-col gap-6 text-center">
               <div className="flex flex-col gap-5">
                 <h2 className="text-xl md:text-3xl">Simulação de veículo</h2>
@@ -161,7 +108,7 @@ async function PackLayout({
 
           <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
-          <div className="flex w-full h-full py-20 justify-center font-work-sans">
+          <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
             <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
               <h1 className="text-2xl md:text-4xl self-center">
                 O que está incluso?
@@ -182,7 +129,7 @@ async function PackLayout({
 
           <div className="border border-[#0000000e] w-full md:w-[60%]" />
 
-          <div className="flex w-full h-full py-20 justify-center font-work-sans">
+          <div className="flex w-full h-full py-20 justify-center font-lemon-milk">
             <div className="flex flex-col w-full md:w-[60%] justify-center gap-8">
               <h1 className="text-2xl md:text-4xl self-center">
                 O que não inclui:
@@ -203,7 +150,7 @@ async function PackLayout({
           href="https://api.whatsapp.com/send?phone=556392437096"
           target="_blank"
           rel="noopener noreferrer"
-          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#E64A00] animate-pulse-border-pack text-white rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 animate-fade-in`}
+          className={`text-sm mt-10 mb-20 sm:text-base font-semibold whitespace-nowrap bg-[#FF5A00] animate-pulse-border-pack text-white  rounded-lg shadow-lg border-2 border-white p-3 sm:p-4 mb-2 animate-fade-in`}
         >
           <div className="flex items-center gap-2 sm:gap-3">
             <div className={`w-2 h-2 bg-white animate-ping rounded-full`}></div>
@@ -214,12 +161,12 @@ async function PackLayout({
         </a>
 
         <div className="flex flex-col w-full md:w-[60%] gap-5">
-          <h1 className="font-work-sans text-xl md:text-3xl self-center font-bold">
+          <h1 className="font-lemon-milk text-xl md:text-3xl self-center">
             Perguntas frequentes
           </h1>
           <div className="flex flex-col w-full">
             {asks.map((ask) => (
-              <Fragment key={ask.ask}>
+              <>
                 <CardDetails>
                   <CardDetails.Wrapper>
                     <CardDetails.Trigger className="w-full">
@@ -233,7 +180,7 @@ async function PackLayout({
                   </CardDetails.Wrapper>
                 </CardDetails>
                 <div className="border mt-2 mb-2 border-[#0000000e] w-[full]" />
-              </Fragment>
+              </>
             ))}
           </div>
         </div>
@@ -243,6 +190,6 @@ async function PackLayout({
       </div>
     </div>
   );
-}
+});
 
 export default PackLayout;

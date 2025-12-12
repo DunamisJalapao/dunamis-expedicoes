@@ -1,9 +1,58 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
-import { StructuredData } from "@/components/StructuredData";
 import type { Metadata } from "next";
-import { bardonClean, bardonStamp, blueDream, workSans } from "./fonts";
+import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import { Providers } from "./providers";
+
+const blueDream = localFont({
+  src: [
+    {
+      path: "../../public/fonts/BLUEDREAM-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-blue-dream",
+  display: "swap",
+  preload: false,
+});
+const bardonStamp = localFont({
+  src: [
+    {
+      path: "../../public/fonts/BardonStamp-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-bardon-stamp",
+  display: "swap",
+  preload: false,
+});
+const bardonClean = localFont({
+  src: [
+    {
+      path: "../../public/fonts/BardonClean-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-bardon-clean",
+  display: "swap",
+  preload: false,
+});
+const workSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/WorkSans-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-work-sans",
+  display: "swap",
+  preload: false,
+});
 
 export const metadata: Metadata = {
   title: {
@@ -106,65 +155,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Scripts críticos adiados para melhorar FCP e LCP */}
-        {/* Google Tag Manager - carregado após interação do usuário */}
-        <script
-          defer
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W8PHTL9X');`,
-          }}
-        />
-        {/* End Google Tag Manager */}
-
-        {/* Meta Pixel Code - carregado após interação do usuário */}
-        <script
-          defer
-          dangerouslySetInnerHTML={{
-            __html: `!(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.defer=true;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'));fbq('init','1119431815878981');fbq('track','PageView');`,
-          }}
-        />
-        {/* End Meta Pixel Code */}
-
-        {/* DNS prefetch apenas para recursos sempre carregados */}
-        <link rel="dns-prefetch" href="https://api.whatsapp.com" />
-        {/* Prefetch para recursos críticos */}
-        <link rel="prefetch" href="/assets/logo-white.webp" as="image" />
-
-        {/* Preload das fontes críticas (WorkSans, BardonStamp, BardonClean, BlueDream) */}
-        <link
-          rel="preload"
-          href="/fonts/WorkSans-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/BardonStamp-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/BardonClean-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/BLUEDREAM-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-
-        {/* Critical CSS inline for faster FCP - otimizado */}
+        {/* Critical CSS inline for faster FCP */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -176,61 +167,98 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.sr
             .text-stroke-mobile { -webkit-text-stroke: 2px #fff; }
             .text-stroke { -webkit-text-stroke: 3px #fff; }
             @media (min-width: 1024px) { .text-stroke-mobile { -webkit-text-stroke: 3px #fff; } }
-            /* Otimizações de performance */
-            * { box-sizing: border-box; }
-            img { max-width: 100%; height: auto; }
-            [loading="lazy"] { content-visibility: auto; }
-            /* Otimização LCP - imagem hero */
-            img[fetchpriority="high"] { content-visibility: auto; }
           `,
           }}
         />
 
-        {/* Preload da imagem LCP otimizado - mobile primeiro para melhor LCP */}
-        <link
-          rel="preload"
-          as="image"
-          href="/images/home2-768x432.avif"
-          fetchPriority="high"
-          media="(max-width: 768px)"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/home2-1920x1080.avif"
-          fetchPriority="high"
-          media="(min-width: 769px)"
-        />
+        {/* Critical preloads for LCP */}
+        <link rel="preload" href="/home1.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/home2.webp" as="image" type="image/webp" />
 
-        {/* Structured Data para SEO */}
-        <StructuredData type="home" />
+        <Script
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `(function (w, d, s, l, i) {
+              w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                  new Date().getTime(), event: 'gtm.js'
+              }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                  'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
+          }}
+        ></Script>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '7037029349725824');
+            fbq('track', 'PageView');
+            </script>
+            <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
+            /></noscript>`,
+          }}
+        ></Script>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
+            <script>
+              !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                  n.callMethod
+                    ? n.callMethod.apply(n, arguments)
+                    : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = "2.0";
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+              })(
+                window,
+                document,
+                "script",
+                "https://connect.facebook.net/en_US/fbevents.js"
+              );
+              fbq("init", "1119431815878981");
+              fbq("track", "PageView");
+            </script>
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style="display: none"
+                src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
+              />
+            </noscript>
+            `,
+          }}
+        ></Script>
       </head>
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
-        {/* Google Tag Manager (noscript) - imediatamente após abertura do <body> */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
-
-        {/* Meta Pixel Code (noscript) */}
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
-        {/* End Meta Pixel Code (noscript) */}
-
+        {/* <SpeedInsights /> */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
+            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>`,
+          }}
+        />
         <Providers>{children}</Providers>
         <ButtonWhats />
       </body>

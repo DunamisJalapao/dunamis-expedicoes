@@ -15,7 +15,7 @@ const blueDream = localFont({
   ],
   variable: "--font-blue-dream",
   display: "swap",
-  preload: false,
+  preload: true, // Preload critical font
 });
 const bardonStamp = localFont({
   src: [
@@ -27,7 +27,7 @@ const bardonStamp = localFont({
   ],
   variable: "--font-bardon-stamp",
   display: "swap",
-  preload: false,
+  preload: true, // Preload critical font
 });
 const bardonClean = localFont({
   src: [
@@ -39,7 +39,7 @@ const bardonClean = localFont({
   ],
   variable: "--font-bardon-clean",
   display: "swap",
-  preload: false,
+  preload: true, // Preload critical font
 });
 const workSans = localFont({
   src: [
@@ -51,7 +51,7 @@ const workSans = localFont({
   ],
   variable: "--font-work-sans",
   display: "swap",
-  preload: false,
+  preload: false, // Less critical, can load later
 });
 
 export const metadata: Metadata = {
@@ -171,12 +171,13 @@ export default function RootLayout({
           }}
         />
 
-        {/* Critical preloads for LCP */}
-        <link rel="preload" href="/home1.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/home2.webp" as="image" type="image/webp" />
+        {/* Critical preloads for LCP - only first image */}
+        <link rel="preload" href="/home2.webp" as="image" type="image/webp" fetchPriority="high" />
 
+        {/* GTM - Load after page is interactive */}
         <Script
-          strategy="lazyOnload"
+          id="gtm-script"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function (w, d, s, l, i) {
               w[l] = w[l] || []; w[l].push({
@@ -187,8 +188,12 @@ export default function RootLayout({
                   'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
           }}
-        ></Script>
+        />
+        
+        {/* Facebook Pixel - Load after page is interactive, consolidated */}
         <Script
+          id="fb-pixel"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
             !function(f,b,e,v,n,t,s)
@@ -200,65 +205,40 @@ export default function RootLayout({
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '7037029349725824');
+            fbq('init', '1119431815878981');
             fbq('track', 'PageView');
-            </script>
-            <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
-            /></noscript>`,
-          }}
-        ></Script>
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `
-            <script>
-              !(function (f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function () {
-                  n.callMethod
-                    ? n.callMethod.apply(n, arguments)
-                    : n.queue.push(arguments);
-                };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = "2.0";
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s);
-              })(
-                window,
-                document,
-                "script",
-                "https://connect.facebook.net/en_US/fbevents.js"
-              );
-              fbq("init", "1119431815878981");
-              fbq("track", "PageView");
-            </script>
-            <noscript>
-              <img
-                height="1"
-                width="1"
-                style="display: none"
-                src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
-              />
-            </noscript>
             `,
           }}
-        ></Script>
+        />
       </head>
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
         {/* <SpeedInsights /> */}
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
-            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>`,
-          }}
-        />
+        <noscript>
+          <iframe 
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
+            alt=""
+          />
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         <Providers>{children}</Providers>
         <ButtonWhats />
       </body>

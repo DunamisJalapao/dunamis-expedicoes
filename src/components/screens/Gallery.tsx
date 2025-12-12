@@ -1,10 +1,51 @@
 import { photos } from "@/database/photos";
 import Image from "next/image";
-import { HTMLAttributes, memo } from "react";
+import { HTMLAttributes, memo, useMemo } from "react";
 
 type ItinerariesType = HTMLAttributes<HTMLDivElement> & {};
 
+// Memoized image component for better performance
+const GalleryImage = memo(function GalleryImage({
+  photo,
+  index,
+  direction,
+}: {
+  photo: string;
+  index: number;
+  direction: "left" | "right";
+}) {
+  return (
+    <div
+      className="flex min-w-[120px] sm:min-w-[150px] md:min-w-[200px] lg:min-w-[250px] xl:min-w-[300px] h-[120px] sm:h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px] bg-cover rounded-lg sm:rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+    >
+      <Image
+        src={photo}
+        alt={`Galeria Dunamis Expedições - Foto ${index + 1}`}
+        sizes="(max-width: 640px) 120px, (max-width: 1024px) 200px, 300px"
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        }}
+        width={300}
+        height={300}
+        loading="lazy"
+        quality={95}
+        placeholder="blur"
+        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+        className="hover:scale-110 transition-transform duration-300"
+      />
+    </div>
+  );
+});
+
+GalleryImage.displayName = "GalleryImage";
+
 const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
+  // Memoize photo arrays to avoid recreating on every render
+  const rightPhotos = useMemo(() => photos, []);
+  const leftPhotos = useMemo(() => [...photos].reverse(), []);
+
   return (
     <div
       {...rest}
@@ -18,55 +59,23 @@ const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
         </div>
         <div className="flex h-full justify-center flex-col gap-2 sm:gap-3 md:gap-4 overflow-hidden">
           <div className="flex w-full gap-2 sm:gap-3 md:gap-4 animate-right-roll">
-            {photos.map((photo, index) => (
-              <div
+            {rightPhotos.map((photo, index) => (
+              <GalleryImage
                 key={`right-${index}`}
-                className="flex min-w-[120px] sm:min-w-[150px] md:min-w-[200px] lg:min-w-[250px] xl:min-w-[300px] h-[120px] sm:h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px] bg-cover rounded-lg sm:rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <Image
-                  src={photo}
-                  alt={`Galeria Dunamis Expedições - Foto ${index + 1}`}
-                  sizes="(max-width: 640px) 120px, (max-width: 1024px) 200px, 300px"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                  width={300}
-                  height={300}
-                  loading="lazy"
-                  quality={75}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  className="hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+                photo={photo}
+                index={index}
+                direction="right"
+              />
             ))}
           </div>
           <div className="flex w-full gap-2 sm:gap-3 md:gap-4 animate-left-roll">
-            {photos.map((photo, index) => (
-              <div
+            {leftPhotos.map((photo, index) => (
+              <GalleryImage
                 key={`left-${index}`}
-                className="flex min-w-[120px] sm:min-w-[150px] md:min-w-[200px] lg:min-w-[250px] xl:min-w-[300px] h-[120px] sm:h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px] bg-cover rounded-lg sm:rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <Image
-                  src={photo}
-                  alt={`Galeria Dunamis Expedições - Foto ${index + 1}`}
-                  sizes="(max-width: 640px) 120px, (max-width: 1024px) 200px, 300px"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                  width={300}
-                  height={300}
-                  loading="lazy"
-                  quality={75}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  className="hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+                photo={photo}
+                index={index}
+                direction="left"
+              />
             ))}
           </div>
         </div>

@@ -10,22 +10,24 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
-  // // Image optimization - fixed WebP support with fallbacks
-  // images: {
-  //   formats: ["image/webp", "image/avif"],
-  //   deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-  //   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  //   // minimumCacheTTL: 86400, // 1 day to avoid cache issues
-  //   dangerouslyAllowSVG: true,
-  //   unoptimized: false,
-  //   loader: "default",
-  //   domains: [],
-  //   remotePatterns: [],
-  // },
+  // Image optimization - WebP and AVIF support
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000, // 1 year cache for static images
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: false,
+    loader: "default",
+    domains: [],
+    remotePatterns: [],
+  },
 
-  // Experimental features for performance - simplified
+  // Experimental features for performance
   experimental: {
-    optimizePackageImports: ["react-icons"],
+    optimizePackageImports: ["react-icons", "lucide-react", "react-awesome-reveal"],
+    optimizeCss: true,
   },
 
   // Webpack optimizations - simplified
@@ -37,16 +39,45 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    // Basic production optimizations
+    // Advanced production optimizations
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
         chunks: "all",
+        maxInitialRequests: 25,
+        minSize: 20000,
         cacheGroups: {
+          default: false,
+          vendors: false,
+          // Vendor chunks
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: "vendors",
             chunks: "all",
+            priority: 20,
+            reuseExistingChunk: true,
+          },
+          // React and React-DOM separate
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+            name: "react",
+            chunks: "all",
+            priority: 30,
+            reuseExistingChunk: true,
+          },
+          // Icons separate
+          icons: {
+            test: /[\\/]node_modules[\\/](react-icons|lucide-react)[\\/]/,
+            name: "icons",
+            chunks: "all",
+            priority: 25,
+            reuseExistingChunk: true,
+          },
+          // Common chunks
+          common: {
+            minChunks: 2,
+            chunks: "all",
             priority: 10,
+            reuseExistingChunk: true,
           },
         },
       };

@@ -21,7 +21,7 @@ export default function Contact({ ...rest }: ContactType) {
           href="https://api.whatsapp.com/send?phone=556392437096"
           target="_blank"
           rel="noopener noreferrer"
-          className={` text-sm sm:text-base font-semibold whitespace-nowrap bg-[#112126ff] animate-pulse-border text-white  rounded-lg  p-3 sm:p-4 mb-2 animate-fade-in hover:bg-[#0f1a1c] hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl`}
+          className={` text-sm sm:text-base font-semibold whitespace-nowrap bg-[#112126ff] animate-pulse-border text-white  rounded-lg  p-3 sm:p-4 mb-2 animate-fade-in hover:bg-[#0f1a1c] hover:scale-105 transition-all duration-1000 shadow-lg hover:shadow-xl`}
         >
           <div className="flex items-center gap-2 sm:gap-3">
             <FaWhatsapp className="text-white text-2xl " />

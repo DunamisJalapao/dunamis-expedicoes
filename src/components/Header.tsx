@@ -27,21 +27,26 @@ const Header = memo(function Header({ ...rest }: HeaderProps) {
 
   const { onToggle } = useUtils();
 
-  const handleScrollWindow = useCallback(() => {
-    // Use requestAnimationFrame to avoid forced reflows
-    requestAnimationFrame(() => {
-      const position = window.scrollY;
-      return position <= 100 ? _setColor(true) : _setColor(false);
-    });
-  }, []);
-
   useEffect(() => {
-    // Use passive listener for better performance
-    window.addEventListener("scroll", handleScrollWindow, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScrollWindow);
+    // Throttle scroll events using requestAnimationFrame for better performance
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const position = window.scrollY;
+          _setColor(position <= 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-  }, [handleScrollWindow]);
+
+    // Use passive listener for better performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div

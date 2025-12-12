@@ -1,6 +1,6 @@
 "use client";
 import { Attractivie } from "@/types";
-import Color from "color-thief-react";
+import { LazyColorThief } from "./LazyColorThief";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
@@ -14,8 +14,8 @@ const CardPlaces = memo(function CardPlaces({ card, ...rest }: CardPlacesType) {
   return (
     <Link href={card.link} target={"_blank"} rel="noopener noreferrer">
       <div className="flex w-full md:w-[300px] h-full bg-white shadow-lg flex-col overflow-hidden rounded-[15px]">
-        <Color src={card.img} format="rgbString" crossOrigin="anonymous">
-          {({ data, loading, error }) => (
+        <LazyColorThief src={card.img} format="rgbString" crossOrigin="anonymous">
+          {({ data, loading }) => (
             <div
               style={{
                 boxShadow: `0px 30px 40px -27px ${data}`,
@@ -35,13 +35,13 @@ const CardPlaces = memo(function CardPlaces({ card, ...rest }: CardPlacesType) {
                 width={400}
                 height={300}
                 loading="lazy"
-                quality={75}
+                quality={95}
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
             </div>
           )}
-        </Color>
+        </LazyColorThief>
 
         <div className="flex flex-col h-[15%] py-4 px-3 gap-3">
           <p className="font-bardon-stamp text-sm">{card.name}</p>

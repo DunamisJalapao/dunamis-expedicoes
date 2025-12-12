@@ -158,27 +158,13 @@ export default function RootLayout({
           }}
         />
 
-        {/* Preload da imagem LCP - mobile primeiro para melhor LCP */}
-        <link
-          rel="preload"
-          as="image"
-          href="/images/home2-768x432.avif"
-          fetchPriority="high"
-          media="(max-width: 768px)"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/home2-1280x720.avif"
-          fetchPriority="high"
-          media="(min-width: 769px) and (max-width: 1280px)"
-        />
+        {/* Preload da imagem LCP - Vercel otimiza automaticamente via next/image */}
+        {/* Preload mantido para garantir melhor LCP inicial */}
         <link
           rel="preload"
           as="image"
           href="/images/home2-1920x1080.avif"
           fetchPriority="high"
-          media="(min-width: 1281px)"
         />
 
         {/* Structured Data para SEO */}

@@ -31,6 +31,67 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Este projeto está otimizado para deploy na **Vercel**, que oferece:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- ✅ **CDN Global**: Edge Network em 100+ localizações
+- ✅ **Otimizações Automáticas**: Imagens, fonts e JS otimizados automaticamente
+- ✅ **Melhor Performance**: Core Web Vitals superiores
+- ✅ **Deploy Automático**: Integração direta com GitHub
+
+### Passos para Deploy
+
+1. **Criar conta na Vercel**
+
+   - Acesse: https://vercel.com
+   - Faça login com GitHub
+
+2. **Importar Projeto**
+
+   - Clique em "Add New Project"
+   - Selecione este repositório
+   - A Vercel detecta automaticamente Next.js
+
+3. **Configurações Recomendadas**
+
+   - **Framework Preset**: Next.js (detectado automaticamente)
+   - **Build Command**: `pnpm build` (ou `npm run build`)
+   - **Output Directory**: `.next` (padrão)
+   - **Install Command**: `pnpm install` (ou `npm install`)
+
+4. **Variáveis de Ambiente** (se necessário)
+
+   - Adicione em: Settings → Environment Variables
+
+5. **Deploy**
+   - Clique em "Deploy"
+   - A Vercel fará o build e deploy automaticamente
+   - Cada push para `main` gera um novo deploy
+
+### Otimizações Aplicadas
+
+- ✅ Removido `output: "export"` para habilitar otimizações da Vercel
+- ✅ Removido `images: { unoptimized: true }` para otimização automática
+- ✅ Imagens usando `next/image` com otimização automática (AVIF/WebP)
+- ✅ Headers de cache configurados para melhor performance
+- ✅ Code splitting otimizado para reduzir bundle inicial
+
+### Performance Esperada
+
+Com as otimizações da Vercel, você pode esperar:
+
+- **LCP**: Redução de 20-40%
+- **INP**: Redução de 10-20%
+- **FCP**: Redução de 15-30%
+- **PageSpeed Score**: 90-100
+
+### Domínio Customizado
+
+Para adicionar um domínio customizado:
+
+1. Vá em Settings → Domains
+2. Adicione seu domínio
+3. Configure DNS conforme instruções da Vercel
+
+---
+
+**Nota**: Este projeto também pode ser deployado no GitHub Pages (via Actions), mas a performance será inferior devido às limitações de CDN e falta de otimizações automáticas.

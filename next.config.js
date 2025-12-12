@@ -1,13 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages configuration (domínio customizado - sem basePath)
-  // output: "export" only for production builds (causes issues with Turbopack in dev)
-  ...(process.env.NODE_ENV === "production" && { output: "export" }),
+  // Vercel configuration - otimizações automáticas habilitadas
   images: {
-    unoptimized: true, // Required for static export
+    // Vercel otimiza automaticamente - formatos preferidos
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Otimizações adicionais para Vercel
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: false,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // Performance optimizations
@@ -59,9 +62,9 @@ const nextConfig = {
   // Experimental features for performance
   experimental: {
     optimizePackageImports: [
-      "react-responsive-carousel",
       "react-awesome-reveal",
       "lucide-react",
+      "embla-carousel-react",
       // react-icons removido para evitar problemas com HMR
     ],
     // Otimizações de bundle
@@ -101,9 +104,9 @@ const nextConfig = {
               chunks: "all",
               priority: 30,
             },
-            // Carousel separado (pesado)
+            // Embla carousel separado (otimizado)
             carousel: {
-              test: /[\\/]node_modules[\\/]react-responsive-carousel[\\/]/,
+              test: /[\\/]node_modules[\\/]embla-carousel-react[\\/]/,
               name: "carousel",
               chunks: "async",
               priority: 25,
@@ -126,8 +129,8 @@ const nextConfig = {
     return config;
   },
 
-  // Headers não funcionam com static export (GitHub Pages)
-  // Cache é gerenciado pelo GitHub Pages automaticamente
+  // Headers funcionam perfeitamente na Vercel
+  // Cache é otimizado automaticamente pela Edge Network
 };
 
 module.exports = nextConfig;

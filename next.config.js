@@ -27,7 +27,6 @@ const nextConfig = {
   // Experimental features for performance
   experimental: {
     optimizePackageImports: ["react-icons", "lucide-react", "react-awesome-reveal"],
-    optimizeCss: true,
   },
 
   // Webpack optimizations - simplified

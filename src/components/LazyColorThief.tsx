@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface LazyColorThiefProps {
   src: string;
-  format?: "hexString" | "rgbString" | "rgbArray";
+  format?: string;
   crossOrigin?: "anonymous" | "use-credentials";
   children: (props: {
     data: string;
@@ -60,8 +60,8 @@ export function LazyColorThief({
   }
 
   return (
-    <Color src={src} format={format} crossOrigin={crossOrigin}>
-      {children}
+    <Color src={src} format={format as any} crossOrigin={crossOrigin}>
+      {children as any}
     </Color>
   );
 }

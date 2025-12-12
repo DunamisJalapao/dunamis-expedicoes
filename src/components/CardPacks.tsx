@@ -29,7 +29,7 @@ const CardPacks = memo(function CardPacks({
         {...rest}
         className="flex rounded-xl flex-col overflow-hidden bg-white shadow-xl cursor-pointer duration-100 hover:scale-105"
       >
-        <div className="w-full h-[23rem] overflow-hidden">
+        <div className="w-full h-[420px] overflow-hidden">
           <Image
             src={img}
             alt={`${title} - Dunamis Expedições`}

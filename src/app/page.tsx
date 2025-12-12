@@ -3,7 +3,6 @@ import { Drawer } from "@/components/Drawer";
 import { Header } from "@/components/Header";
 import HomeScreen from "@/components/screens/Home";
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 
 // Dynamic imports para componentes abaixo do fold - melhora LCP e INP
 const Packs = dynamic(
@@ -79,24 +78,13 @@ export default function Home() {
         <Header />
       </nav>
       <HomeScreen id="container-home" />
-      <Suspense fallback={<div className="min-h-screen bg-[#f8f8f8]" />}>
-        <Packs id="container-pack" />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}>
-        <AboutScreen id="container-about" />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}>
-        <Places id="container-places" />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}>
-        <Gallery id="container-gallery" />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}>
-        <Contact id="container-contact" />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[200px] bg-[#112126]" />}>
-        <Footer />
-      </Suspense>
+      {/* Componentes abaixo do fold carregados apenas quando visíveis */}
+      <Packs id="container-pack" />
+      <AboutScreen id="container-about" />
+      <Places id="container-places" />
+      <Gallery id="container-gallery" />
+      <Contact id="container-contact" />
+      <Footer />
       <Drawer />
     </main>
   );

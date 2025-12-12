@@ -68,20 +68,20 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
         <div className="w-full absolute top-0 left-0">
           {/* Primeira imagem LCP renderizada imediatamente no HTML - SEM carousel */}
           <div className="h-screen w-full absolute top-0 left-0">
-            <Image
+            {/* Imagem nativa com srcset para melhor controle e qualidade - mobile primeiro para LCP */}
+            <img
               src="/images/home2-768x432.avif"
+              srcSet="/images/home2-768x432.avif 768w, /images/home2-1280x720.avif 1280w, /images/home2-1920x1080.avif 1920w"
+              sizes="100vw"
               alt="Paisagem do Jalapão - Dunamis Expedições"
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 100vw"
-              fill
-              priority
               fetchPriority="high"
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               style={{
+                width: "100%",
+                height: "100%",
                 objectFit: "cover",
                 objectPosition: "center",
               }}
+              loading="eager"
             />
           </div>
 

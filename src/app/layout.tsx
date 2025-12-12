@@ -152,6 +152,8 @@ export default function RootLayout({
             * { box-sizing: border-box; }
             img { max-width: 100%; height: auto; }
             [loading="lazy"] { content-visibility: auto; }
+            /* Otimização LCP - imagem hero */
+            img[fetchpriority="high"] { content-visibility: auto; }
           `,
           }}
         />
@@ -162,6 +164,21 @@ export default function RootLayout({
           as="image"
           href="/images/home2-768x432.avif"
           fetchPriority="high"
+          media="(max-width: 768px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/home2-1280x720.avif"
+          fetchPriority="high"
+          media="(min-width: 769px) and (max-width: 1280px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/home2-1920x1080.avif"
+          fetchPriority="high"
+          media="(min-width: 1281px)"
         />
 
         {/* Structured Data para SEO */}

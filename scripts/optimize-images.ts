@@ -64,7 +64,9 @@ const IMAGE_CONFIGS: ImageConfig[] = [
 ];
 
 const OUTPUT_DIR = "public/images";
-const AVIF_QUALITY = 48;
+// Qualidade mais alta para mobile (LCP crítico) e qualidade padrão para desktop
+const AVIF_QUALITY_MOBILE = 85; // Alta qualidade para mobile (768x432)
+const AVIF_QUALITY_DESKTOP = 48; // Qualidade padrão para desktop
 const AVIF_EFFORT = 6;
 const WEBP_QUALITY = 70;
 
@@ -83,6 +85,10 @@ async function optimizeImage(
   for (const size of sizes) {
     const sizeSuffix = sizes.length > 1 ? `-${size.width}x${size.height}` : "";
 
+    // Usa qualidade alta para mobile (768x432) - crítico para LCP
+    const isMobile = size.width === 768;
+    const avifQuality = isMobile ? AVIF_QUALITY_MOBILE : AVIF_QUALITY_DESKTOP;
+
     // Generate AVIF com qualidade otimizada
     const avifPath = join(OUTPUT_DIR, `${name}${sizeSuffix}.avif`);
     try {
@@ -91,9 +97,11 @@ async function optimizeImage(
           fit: "cover",
           position: "center",
         })
-        .avif({ quality: AVIF_QUALITY, effort: AVIF_EFFORT })
+        .avif({ quality: avifQuality, effort: AVIF_EFFORT })
         .toFile(avifPath);
-      console.log(`  ✅ Generated: ${basename(avifPath)}`);
+      console.log(
+        `  ✅ Generated: ${basename(avifPath)} (quality: ${avifQuality})`
+      );
     } catch (error) {
       console.error(`  ❌ Failed to generate AVIF for ${name}:`, error);
     }

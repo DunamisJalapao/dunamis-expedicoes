@@ -70,7 +70,7 @@ export function ButtonWhats() {
         href={"https://api.whatsapp.com/send?phone=556392437096"}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center p-2 sm:p-3 md:p-4 bg-[#25D366] rounded-full border-2 sm:border-4 border-white shadow-2xl hover:scale-110 transition-all duration-300 animate-pulse-border hover:shadow-3xl"
+        className="flex items-center justify-center p-2 sm:p-3 md:p-4 bg-[#25D366] rounded-full border-2 sm:border-4 border-white shadow-2xl hover:scale-110 transition-all duration-1000 animate-pulse-border hover:shadow-3xl"
         aria-label="Contato via WhatsApp"
       >
         <FaWhatsapp className="text-white text-3xl sm:text-4xl md:text-5xl" />

@@ -87,14 +87,15 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
         <div className="w-full absolute top-0 left-0">
           {/* Primeira imagem LCP renderizada imediatamente no HTML - SEM carousel */}
           {/* Vercel otimiza automaticamente esta imagem (AVIF/WebP) */}
+          {/* Usando imagem menor para mobile para melhorar LCP */}
           <div className="h-screen w-full absolute top-0 left-0">
             <Image
-              src="/images/home2-1920x1080.avif"
+              src="/images/home2-768x432.avif"
               alt="Paisagem do Jalapão - Dunamis Expedições"
               fill
               priority
-              quality={85}
-              sizes="100vw"
+              quality={70}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
               style={{
                 objectFit: "cover",
                 objectPosition: "center",

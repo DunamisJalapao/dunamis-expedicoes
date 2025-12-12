@@ -1,30 +1,27 @@
 "use client";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { runWhenIdle } from "@/lib/performance-utils";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import {
   HTMLAttributes,
   memo,
   startTransition,
   useEffect,
+  useRef,
   useState,
 } from "react";
-
-// Dynamic import do carousel - CSS será carregado quando componente for importado
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Carousel = dynamic(
-  () => import("react-responsive-carousel").then((mod) => mod.Carousel),
-  {
-    ssr: false,
-    loading: () => null, // Não mostrar loading - primeira imagem já está visível
-  }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-) as any;
 
 type HomeScreenType = HTMLAttributes<HTMLDivElement> & {};
 
 const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
   const [showCarousel, setShowCarousel] = useState(false);
+  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const carouselApiRef = useRef<CarouselApi | null>(null);
 
   // Carregar carousel apenas após LCP (primeira imagem já renderizada)
   useEffect(() => {
@@ -50,6 +47,28 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
       }
     };
   }, []);
+
+  // Autoplay para o carousel customizado
+  useEffect(() => {
+    if (!showCarousel || !carouselApiRef.current) return;
+
+    const api = carouselApiRef.current;
+
+    // Autoplay a cada 10 segundos
+    autoplayIntervalRef.current = setInterval(() => {
+      if (api.canScrollNext()) {
+        api.scrollNext();
+      } else {
+        api.scrollTo(0); // Volta ao início quando chega ao fim
+      }
+    }, 10000);
+
+    return () => {
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
+      }
+    };
+  }, [showCarousel]);
 
   return (
     <div {...rest} className="flex w-screen h-screen relative overflow-hidden">
@@ -89,69 +108,75 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
           {showCarousel && (
             <div className="w-full absolute top-0 left-0">
               <Carousel
-                infiniteLoop
-                interval={10000}
-                showArrows={false}
-                showIndicators={false}
-                showThumbs={false}
-                autoPlay
-                stopOnHover={false}
-                swipeable={true}
-                emulateTouch={true}
-                useKeyboardArrows={false}
-                transitionTime={300}
+                opts={{
+                  align: "start",
+                  loop: true,
+                  dragFree: false,
+                }}
+                setApi={(api) => {
+                  carouselApiRef.current = api;
+                }}
+                className="w-full h-screen"
               >
-                <div className="h-screen">
-                  <Image
-                    src="/images/home2-1920x1080.avif"
-                    alt="Paisagem do Jalapão - Dunamis Expedições"
-                    sizes="100vw"
-                    fill
-                    loading="lazy"
-                    fetchPriority="low"
-                    quality={48}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                    style={{
-                      objectFit: "cover",
-                      objectPosition: "center",
-                    }}
-                  />
-                </div>
-                <div className="h-screen">
-                  <Image
-                    src="/images/home1-1920x1080.avif"
-                    alt="Fervedouro do Jalapão - Dunamis Expedições"
-                    sizes="100vw"
-                    fill
-                    loading="lazy"
-                    fetchPriority="low"
-                    quality={48}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                    style={{
-                      objectFit: "cover",
-                      objectPosition: "center",
-                    }}
-                  />
-                </div>
-                <div className="h-screen">
-                  <Image
-                    src="/images/home3-1920x1080.avif"
-                    alt="Aventura no Jalapão - Dunamis Expedições"
-                    sizes="100vw"
-                    fill
-                    loading="lazy"
-                    fetchPriority="low"
-                    quality={48}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                    style={{
-                      objectFit: "cover",
-                      objectPosition: "center",
-                    }}
-                  />
-                </div>
+                <CarouselContent className="h-screen">
+                  <CarouselItem className="h-screen pl-0">
+                    <div className="relative h-screen w-full">
+                      <Image
+                        src="/images/home2-1920x1080.avif"
+                        alt="Paisagem do Jalapão - Dunamis Expedições"
+                        sizes="100vw"
+                        fill
+                        loading="lazy"
+                        fetchPriority="low"
+                        quality={48}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: "center",
+                        }}
+                      />
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem className="h-screen pl-0">
+                    <div className="relative h-screen w-full">
+                      <Image
+                        src="/images/home1-1920x1080.avif"
+                        alt="Fervedouro do Jalapão - Dunamis Expedições"
+                        sizes="100vw"
+                        fill
+                        loading="lazy"
+                        fetchPriority="low"
+                        quality={48}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: "center",
+                        }}
+                      />
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem className="h-screen pl-0">
+                    <div className="relative h-screen w-full">
+                      <Image
+                        src="/images/home3-1920x1080.avif"
+                        alt="Aventura no Jalapão - Dunamis Expedições"
+                        sizes="100vw"
+                        fill
+                        loading="lazy"
+                        fetchPriority="low"
+                        quality={48}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: "center",
+                        }}
+                      />
+                    </div>
+                  </CarouselItem>
+                </CarouselContent>
               </Carousel>
             </div>
           )}

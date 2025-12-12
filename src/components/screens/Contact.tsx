@@ -1,11 +1,28 @@
+"use client";
+import { LazyFaWhatsapp } from "@/components/LazyIcon";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useLazyFont } from "@/hooks/useLazyFont";
 import { HTMLAttributes } from "react";
-import { FaWhatsapp } from "react-icons/fa";
 
 type ContactType = HTMLAttributes<HTMLDivElement> & {};
 
 export default function Contact({ ...rest }: ContactType) {
+  // Lazy load da fonte blueDream apenas quando componente fica visível
+  const [ref, isIntersecting] = useIntersectionObserver({
+    rootMargin: "100px",
+    threshold: 0.1,
+  });
+
+  const fontLoaded = useLazyFont(
+    "BLUEDREAM",
+    "/fonts/BLUEDREAM-Regular.woff2",
+    { enabled: isIntersecting }
+  );
   return (
-    <div className="flex w-screen h-[40vh] sm:h-[70vh] md:h-[80vh] flex-col relative">
+    <div
+      ref={ref}
+      className="flex w-screen h-[40vh] sm:h-[70vh] md:h-[80vh] flex-col relative"
+    >
       <div
         {...rest}
         className="flex w-full h-full bg-green-100 bg-[url(/bg.webp)] bg-cover bg-center lg:bg-fixed bg-no-repeat"
@@ -24,7 +41,7 @@ export default function Contact({ ...rest }: ContactType) {
           className={` text-sm sm:text-base font-semibold whitespace-nowrap bg-[#112126ff] animate-pulse-border text-white  rounded-lg  p-3 sm:p-4 mb-2 animate-fade-in hover:bg-[#0f1a1c] hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl`}
         >
           <div className="flex items-center gap-2 sm:gap-3">
-            <FaWhatsapp className="text-white text-2xl " />
+            <LazyFaWhatsapp className="text-white text-2xl " />
             <p className="font-bardon-stamp">Enviar mensagem</p>
           </div>
         </a>

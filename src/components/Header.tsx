@@ -1,5 +1,12 @@
 "use client";
 import {
+  LazyCgMenuRight,
+  LazyFaInstagram,
+  LazyFaTiktok,
+  LazyFaWhatsapp,
+  LazyFaYoutube,
+} from "@/components/LazyIcon";
+import {
   HTMLAttributes,
   memo,
   startTransition,
@@ -8,8 +15,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import { CgMenuRight } from "react-icons/cg";
-import { FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 // import { DraweComponent } from "./DrawerComponent";
 import { useUtils } from "@/hooks/utils";
 import { throttleRAF } from "@/lib/performance-utils";
@@ -23,19 +28,25 @@ function HeaderComponent({ ...rest }: HeaderProps) {
 
   const { onToggle } = useUtils();
 
-  // Usar useMemo para estabilizar a referência dos ícones
+  // Usar useMemo para estabilizar a referência dos ícones lazy-loaded
   const listIcons = useMemo(
     () => [
       {
-        Icon: FaWhatsapp,
+        Icon: LazyFaWhatsapp,
         route: "https://api.whatsapp.com/send?phone=556392437096",
       },
       {
-        Icon: FaInstagram,
+        Icon: LazyFaInstagram,
         route: "https://www.instagram.com/dunamis_expedicoes/",
       },
-      { Icon: FaTiktok, route: "https://www.tiktok.com/@dunamis_expedicoes" },
-      { Icon: FaYoutube, route: "https://www.youtube.com/@dunamis_expedicoes" },
+      {
+        Icon: LazyFaTiktok,
+        route: "https://www.tiktok.com/@dunamis_expedicoes",
+      },
+      {
+        Icon: LazyFaYoutube,
+        route: "https://www.youtube.com/@dunamis_expedicoes",
+      },
     ],
     []
   );
@@ -84,7 +95,7 @@ function HeaderComponent({ ...rest }: HeaderProps) {
         aria-label="Abrir menu"
         type="button"
       >
-        <CgMenuRight className="text-white text-2xl sm:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 active:scale-95" />
+        <LazyCgMenuRight className="text-white text-2xl sm:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 active:scale-95" />
       </button>
       <div className="w-full hidden lg:flex flex-5">
         <div className="w-full pt-1">

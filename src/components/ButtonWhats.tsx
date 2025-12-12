@@ -1,9 +1,9 @@
 "use client";
+import { LazyFaWhatsapp } from "@/components/LazyIcon";
 import { throttleRAF } from "@/lib/performance-utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
-import { FaWhatsapp } from "react-icons/fa";
 
 export function ButtonWhats() {
   const [showPopup, setShowPopup] = useState(false);
@@ -97,7 +97,7 @@ export function ButtonWhats() {
             : "Solicitar orçamento via WhatsApp"
         }
       >
-        <FaWhatsapp className="text-white text-3xl sm:text-4xl md:text-5xl" />
+        <LazyFaWhatsapp className="text-white text-3xl sm:text-4xl md:text-5xl" />
       </Link>
     </div>
   );

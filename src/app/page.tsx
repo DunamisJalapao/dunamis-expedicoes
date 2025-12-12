@@ -1,6 +1,7 @@
 "use client";
 import { Drawer } from "@/components/Drawer";
 import { Header } from "@/components/Header";
+import { LazySection } from "@/components/LazySection";
 import HomeScreen from "@/components/screens/Home";
 import dynamic from "next/dynamic";
 
@@ -77,14 +78,42 @@ export default function Home() {
       <nav className="w-full -mb-16 sm:-mb-20 lg:-mb-24 z-50 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 fixed top-2 sm:top-3 lg:top-4">
         <Header />
       </nav>
+      {/* Primeiras duas seções carregadas imediatamente */}
       <HomeScreen id="container-home" />
-      {/* Componentes abaixo do fold carregados apenas quando visíveis */}
-      <Packs id="container-pack" />
-      <AboutScreen id="container-about" />
-      <Places id="container-places" />
-      <Gallery id="container-gallery" />
-      <Contact id="container-contact" />
-      <Footer />
+      <LazySection
+        id="container-pack"
+        fallback={<div className="min-h-screen bg-[#f8f8f8]" />}
+      >
+        <Packs />
+      </LazySection>
+      {/* Demais seções carregadas apenas quando visíveis no scroll */}
+      <LazySection
+        id="container-about"
+        fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}
+      >
+        <AboutScreen />
+      </LazySection>
+      <LazySection
+        id="container-places"
+        fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}
+      >
+        <Places />
+      </LazySection>
+      <LazySection
+        id="container-gallery"
+        fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}
+      >
+        <Gallery />
+      </LazySection>
+      <LazySection
+        id="container-contact"
+        fallback={<div className="min-h-[400px] bg-[#f8f8f8]" />}
+      >
+        <Contact />
+      </LazySection>
+      <LazySection fallback={<div className="min-h-[200px] bg-[#112126]" />}>
+        <Footer />
+      </LazySection>
       <Drawer />
     </main>
   );

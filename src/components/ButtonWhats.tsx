@@ -2,7 +2,7 @@
 import { throttleRAF } from "@/lib/performance-utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 export function ButtonWhats() {
@@ -21,9 +21,13 @@ export function ButtonWhats() {
 
       // Mostra o popup mais cedo (150px) para melhor conversão - otimização CRO
       if (scrollPosition > 150 && !hasScrolled) {
+        // Feedback visual imediato
         setShowPopup(true);
         setHasScrolled(true);
-        setValueScroll(scrollPosition);
+        // State update não crítico em startTransition
+        startTransition(() => {
+          setValueScroll(scrollPosition);
+        });
       }
     });
 
@@ -64,7 +68,7 @@ export function ButtonWhats() {
         >
           <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
             <div
-              className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white animate-ping rounded-full flex-shrink-0`}
+              className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white animate-ping rounded-full shrink-0`}
             ></div>
             <p
               className={`text-xs sm:text-sm md:text-base ${

@@ -2,6 +2,7 @@
 import {
   HTMLAttributes,
   memo,
+  startTransition,
   useCallback,
   useEffect,
   useMemo,
@@ -44,7 +45,10 @@ function HeaderComponent({ ...rest }: HeaderProps) {
   const handleScrollWindow = useCallback(
     throttleRAF(() => {
       const position = window.scrollY;
-      _setColor(position <= 100);
+      // Usa startTransition para não bloquear interações
+      startTransition(() => {
+        _setColor(position <= 100);
+      });
     }),
     []
   );
@@ -82,7 +86,7 @@ function HeaderComponent({ ...rest }: HeaderProps) {
       >
         <CgMenuRight className="text-white text-2xl sm:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 active:scale-95" />
       </button>
-      <div className="w-full hidden lg:flex flex-[5]">
+      <div className="w-full hidden lg:flex flex-5">
         <div className="w-full pt-1">
           <NavBar className="text-sm xl:text-base text-center justify-center" />
         </div>

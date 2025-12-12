@@ -3,13 +3,21 @@
 import { Sheet, SheetClose, SheetContent } from "@/components/ui/sheet";
 import { useUtils } from "@/hooks/utils";
 import Image from "next/image";
+import { startTransition } from "react";
 import { NavBar } from "./NavBar";
 
 export function Drawer() {
   const { isOpen, onToggle } = useUtils();
 
+  // Otimiza INP: feedback visual imediato
+  const handleOpenChange = (open: boolean) => {
+    startTransition(() => {
+      onToggle(open);
+    });
+  };
+
   return (
-    <Sheet open={isOpen} onOpenChange={onToggle}>
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetContent
         side="left"
         className="p-4 sm:p-6 md:p-8 bg-[#112126ff] text-white flex flex-col items-center w-full sm:max-w-[1000px] border-r border-[#112126ff]"

@@ -42,8 +42,11 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
     }, 500); // Espera 500ms idle ou timeout
 
     return () => {
+      // Cancela o callback idle se ainda não executou
       if (typeof cancelIdleCallback !== "undefined") {
         cancelIdleCallback(idleId);
+      } else {
+        clearTimeout(idleId);
       }
     };
   }, []);
@@ -66,13 +69,13 @@ const HomeScreen = memo(function HomeScreen({ ...rest }: HomeScreenType) {
           {/* Primeira imagem LCP renderizada imediatamente no HTML - SEM carousel */}
           <div className="h-screen w-full absolute top-0 left-0">
             <Image
-              src="/images/home2-1920x1080.avif"
+              src="/images/home2-768x432.avif"
               alt="Paisagem do Jalapão - Dunamis Expedições"
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 100vw"
               fill
               priority
               fetchPriority="high"
-              quality={48}
+              quality={85}
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               style={{

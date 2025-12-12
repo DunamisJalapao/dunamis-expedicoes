@@ -12,7 +12,7 @@ const Packs = dynamic(
       default: mod.default,
     })),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <div className="min-h-screen bg-[#f8f8f8]" />,
   }
 );
@@ -23,7 +23,7 @@ const AboutScreen = dynamic(
       default: mod.default,
     })),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <div className="min-h-[400px] bg-[#f8f8f8]" />,
   }
 );
@@ -34,7 +34,7 @@ const Places = dynamic(
       default: mod.default,
     })),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <div className="min-h-[400px] bg-[#f8f8f8]" />,
   }
 );
@@ -45,7 +45,7 @@ const Gallery = dynamic(
       default: mod.default,
     })),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <div className="min-h-[400px] bg-[#f8f8f8]" />,
   }
 );
@@ -56,7 +56,7 @@ const Contact = dynamic(
       default: mod.default,
     })),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <div className="min-h-[400px] bg-[#f8f8f8]" />,
   }
 );
@@ -67,7 +67,7 @@ const Footer = dynamic(
       default: mod.default,
     })),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <div className="min-h-[200px] bg-[#112126]" />,
   }
 );

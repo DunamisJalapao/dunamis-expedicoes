@@ -96,7 +96,7 @@ export function AnalyticsConsent() {
         <>
           <Script
             id="gtm-script"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `(function (w, d, s, l, i) {
                 w[l] = w[l] || []; w[l].push({
@@ -119,7 +119,7 @@ export function AnalyticsConsent() {
           </noscript>
           <Script
             id="gtag-config"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -134,12 +134,12 @@ export function AnalyticsConsent() {
           />
           <Script
             id="gtag-script"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           />
           <Script
             id="fbq-script"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
                 !function(f,b,e,v,n,t,s)

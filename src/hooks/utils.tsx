@@ -2,7 +2,6 @@
 import {
   createContext,
   ReactNode,
-  startTransition,
   useContext,
   useState,
   useTransition,
@@ -33,11 +32,8 @@ export function UtilsProvider({ children }: UtilsProps) {
     // Feedback visual IMEDIATO - não bloqueia paint
     const newValue = value === undefined ? !isOpen : value;
 
-    // Use startTransition para state update não urgente
-    // Isso permite que o navegador renderize o feedback visual primeiro
-    startTransition(() => {
-      setIsOpen(newValue);
-    });
+    // Atualização síncrona para feedback visual imediato
+    setIsOpen(newValue);
   }
 
   return (

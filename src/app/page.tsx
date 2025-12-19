@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { lazy, Suspense } from "react";
 
 // Lazy load components with proper code splitting
+// Error handling is done by ErrorBoundary in layout.tsx
 const HomeScreen = lazy(() => import("@/components/screens/Home"));
 const Packs = lazy(() => import("@/components/screens/Packs"));
 const AboutScreen = lazy(() => import("@/components/screens/About"));

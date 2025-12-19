@@ -1,4 +1,5 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -190,7 +191,7 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
-        {/* GTM - Load after page is interactive with error handling for iOS 26 */}
+        {/* GTM - Load after page is interactive with improved error handling */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -198,26 +199,38 @@ export default function RootLayout({
             __html: `(function (w, d, s, l, i) {
               try {
                 if (typeof w === 'undefined' || typeof d === 'undefined') return;
-                w[l] = w[l] || []; w[l].push({
-                  'gtm.start': new Date().getTime(), event: 'gtm.js'
+                // Verifica se GTM já foi inicializado para evitar duplicação
+                if (w[l] && w[l].length > 0 && w[l][0]['gtm.start']) {
+                  return;
+                }
+                w[l] = w[l] || []; 
+                w[l].push({
+                  'gtm.start': new Date().getTime(), 
+                  event: 'gtm.js'
                 }); 
                 var f = d.getElementsByTagName(s)[0],
                     j = d.createElement(s), 
                     dl = l != 'dataLayer' ? '&l=' + l : ''; 
                 j.async = true; 
                 j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                j.onerror = function() { console.warn('GTM script load failed'); };
+                j.onerror = function() { 
+                  if (typeof console !== 'undefined' && console.error) {
+                    console.error('GTM script load failed');
+                  }
+                };
                 if (f && f.parentNode) {
                   f.parentNode.insertBefore(j, f);
                 }
               } catch (e) {
-                console.warn('GTM initialization error:', e);
+                if (typeof console !== 'undefined' && console.error) {
+                  console.error('GTM initialization error:', e);
+                }
               }
             })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
           }}
         />
 
-        {/* Facebook Pixel - Load after page is interactive with error handling for iOS 26 */}
+        {/* Facebook Pixel - Load after page is interactive with improved error handling */}
         <Script
           id="fb-pixel"
           strategy="afterInteractive"
@@ -225,7 +238,8 @@ export default function RootLayout({
             __html: `
             !function(f,b,e,v,n,t,s){
               try {
-                if(f.fbq)return;
+                // Verifica se Facebook Pixel já foi inicializado
+                if(f.fbq && f.fbq.loaded) return;
                 n=f.fbq=function(){
                   n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)
                 };
@@ -235,18 +249,47 @@ export default function RootLayout({
                 t=b.createElement(e);
                 t.async=!0;
                 t.src=v;
-                t.onerror=function(){console.warn('Facebook Pixel script load failed');};
+                t.onerror=function(){
+                  if (typeof console !== 'undefined' && console.error) {
+                    console.error('Facebook Pixel script load failed');
+                  }
+                };
                 s=b.getElementsByTagName(e)[0];
                 if(s&&s.parentNode){
                   s.parentNode.insertBefore(t,s);
                 }
-                if(typeof fbq!=='undefined'){
-                  fbq('init', '7037029349725824');
-                  fbq('init', '1119431815878981');
-                  fbq('track', 'PageView');
-                }
+                // Aguarda o script carregar antes de inicializar
+                t.onload = function() {
+                  if(typeof f.fbq !== 'undefined'){
+                    try {
+                      f.fbq('init', '7037029349725824');
+                      f.fbq('init', '1119431815878981');
+                      f.fbq('track', 'PageView');
+                    } catch(initErr) {
+                      if (typeof console !== 'undefined' && console.error) {
+                        console.error('Facebook Pixel init error:', initErr);
+                      }
+                    }
+                  }
+                };
+                // Fallback: tenta inicializar após um delay se onload não funcionar
+                setTimeout(function() {
+                  if(typeof f.fbq !== 'undefined' && !f.fbq.loaded){
+                    try {
+                      f.fbq('init', '7037029349725824');
+                      f.fbq('init', '1119431815878981');
+                      f.fbq('track', 'PageView');
+                    } catch(initErr) {
+                      if (typeof console !== 'undefined' && console.error) {
+                        console.error('Facebook Pixel delayed init error:', initErr);
+                      }
+                    }
+                  }
+                }, 1000);
               } catch(err) {
-                console.warn('Facebook Pixel initialization error:', err);
+                if (typeof console !== 'undefined' && console.error) {
+                  console.error('Facebook Pixel initialization error:', err);
+                }
               }
             }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
             `,
@@ -282,8 +325,10 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
-        <Providers>{children}</Providers>
-        <ButtonWhats />
+        <ErrorBoundary>
+          <Providers>{children}</Providers>
+          <ButtonWhats />
+        </ErrorBoundary>
       </body>
     </html>
   );

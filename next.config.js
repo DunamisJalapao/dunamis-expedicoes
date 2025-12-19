@@ -7,7 +7,10 @@ const nextConfig = {
 
   // Modern browser support - reduce polyfills
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    // Mantém console.error em produção para debug, remove apenas console.log e console.warn
+    removeConsole: process.env.NODE_ENV === "production" ? {
+      exclude: ["error"],
+    } : false,
   },
 
   // Image optimization - WebP and AVIF support with iOS 26 compatibility

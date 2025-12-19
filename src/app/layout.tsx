@@ -1,4 +1,6 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -172,7 +174,13 @@ export default function RootLayout({
         />
 
         {/* Critical preloads for LCP - only first image */}
-        <link rel="preload" href="/home2.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link
+          rel="preload"
+          href="/home2.webp"
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
 
         {/* GTM - Load after page is interactive */}
         <Script
@@ -189,7 +197,7 @@ export default function RootLayout({
             })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
           }}
         />
-        
+
         {/* Facebook Pixel - Load after page is interactive, consolidated */}
         <Script
           id="fb-pixel"
@@ -214,27 +222,28 @@ export default function RootLayout({
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
-        {/* <SpeedInsights /> */}
+        <Analytics />
+        <SpeedInsights />
         <noscript>
-          <iframe 
+          <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"
-            height="0" 
-            width="0" 
-            style={{ display: 'none', visibility: 'hidden' }}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
         <noscript>
           <img
             height="1"
             width="1"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=7037029349725824&ev=PageView&noscript=1"
             alt=""
           />
           <img
             height="1"
             width="1"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=1119431815878981&ev=PageView&noscript=1"
             alt=""
           />

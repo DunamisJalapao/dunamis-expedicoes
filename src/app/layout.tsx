@@ -149,6 +149,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -162,10 +170,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
             body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-            .font-bardon-stamp { font-family: var(--font-bardon-stamp), system-ui, sans-serif; }
-            .font-bardon-clean { font-family: var(--font-bardon-clean), system-ui, sans-serif; }
-            .font-blue-dream { font-family: var(--font-blue-dream), system-ui, sans-serif; }
-            .font-work-sans { font-family: var(--font-work-sans), system-ui, sans-serif; }
+            .font-bardon-stamp { font-family: var(--font-bardon-stamp), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+            .font-bardon-clean { font-family: var(--font-bardon-clean), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+            .font-blue-dream { font-family: var(--font-blue-dream), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+            .font-work-sans { font-family: var(--font-work-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
             .text-stroke-mobile { -webkit-text-stroke: 2px #fff; }
             .text-stroke { -webkit-text-stroke: 3px #fff; }
             @media (min-width: 1024px) { .text-stroke-mobile { -webkit-text-stroke: 3px #fff; } }
@@ -182,39 +190,65 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
-        {/* GTM - Load after page is interactive */}
+        {/* GTM - Load after page is interactive with error handling for iOS 26 */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function (w, d, s, l, i) {
-              w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                  new Date().getTime(), event: 'gtm.js'
-              }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                  'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+              try {
+                if (typeof w === 'undefined' || typeof d === 'undefined') return;
+                w[l] = w[l] || []; w[l].push({
+                  'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); 
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), 
+                    dl = l != 'dataLayer' ? '&l=' + l : ''; 
+                j.async = true; 
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                j.onerror = function() { console.warn('GTM script load failed'); };
+                if (f && f.parentNode) {
+                  f.parentNode.insertBefore(j, f);
+                }
+              } catch (e) {
+                console.warn('GTM initialization error:', e);
+              }
             })(window, document, 'script', 'dataLayer', 'GTM-W8PHTL9X');`,
           }}
         />
 
-        {/* Facebook Pixel - Load after page is interactive, consolidated */}
+        {/* Facebook Pixel - Load after page is interactive with error handling for iOS 26 */}
         <Script
           id="fb-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '7037029349725824');
-            fbq('init', '1119431815878981');
-            fbq('track', 'PageView');
+            !function(f,b,e,v,n,t,s){
+              try {
+                if(f.fbq)return;
+                n=f.fbq=function(){
+                  n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)
+                };
+                if(!f._fbq)f._fbq=n;
+                n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];
+                t=b.createElement(e);
+                t.async=!0;
+                t.src=v;
+                t.onerror=function(){console.warn('Facebook Pixel script load failed');};
+                s=b.getElementsByTagName(e)[0];
+                if(s&&s.parentNode){
+                  s.parentNode.insertBefore(t,s);
+                }
+                if(typeof fbq!=='undefined'){
+                  fbq('init', '7037029349725824');
+                  fbq('init', '1119431815878981');
+                  fbq('track', 'PageView');
+                }
+              } catch(err) {
+                console.warn('Facebook Pixel initialization error:', err);
+              }
+            }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
             `,
           }}
         />

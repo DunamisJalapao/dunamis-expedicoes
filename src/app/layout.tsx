@@ -1,6 +1,5 @@
 import { ButtonWhats } from "@/components/ButtonWhats";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -298,7 +297,6 @@ export default function RootLayout({
       <body
         className={`${bardonStamp.variable} ${blueDream.variable} ${workSans.variable} ${bardonClean.variable}`}
       >
-        <Analytics />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-W8PHTL9X"

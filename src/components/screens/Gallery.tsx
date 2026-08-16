@@ -1,6 +1,6 @@
 import { photos } from "@/database/photos";
 import Image from "next/image";
-import { HTMLAttributes, memo, useMemo } from "react";
+import { HTMLAttributes, memo, useEffect, useMemo, useRef, useState } from "react";
 
 type ItinerariesType = HTMLAttributes<HTMLDivElement> & {};
 
@@ -41,14 +41,41 @@ const GalleryImage = memo(function GalleryImage({
 
 GalleryImage.displayName = "GalleryImage";
 
+const gallerySkeletonClass =
+  "h-[120px] sm:h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px] w-full bg-[#eaeaea] rounded-lg sm:rounded-xl animate-pulse";
+
 const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
   // Memoize photo arrays to avoid recreating on every render
   const rightPhotos = useMemo(() => photos, []);
   const leftPhotos = useMemo(() => [...photos].reverse(), []);
 
+  // Only mount the 20 gallery images once the section scrolls near the
+  // viewport, instead of loading all of them right after the page loads.
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
       {...rest}
+      ref={containerRef}
       className="flex w-full h-full md:min-h-screen py-8 sm:py-12 md:py-16"
     >
       <div className="flex w-full h-full pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-8 sm:pb-10 md:pb-12 lg:pb-16 flex-col bg-[#F8F8F8] gap-4 sm:gap-6 md:gap-8">
@@ -58,26 +85,35 @@ const Gallery = memo(function Gallery({ ...rest }: ItinerariesType) {
           </p>
         </div>
         <div className="flex h-full justify-center flex-col gap-2 sm:gap-3 md:gap-4 overflow-hidden">
-          <div className="flex w-full gap-2 sm:gap-3 md:gap-4 animate-right-roll">
-            {rightPhotos.map((photo, index) => (
-              <GalleryImage
-                key={`right-${index}`}
-                photo={photo}
-                index={index}
-                direction="right"
-              />
-            ))}
-          </div>
-          <div className="flex w-full gap-2 sm:gap-3 md:gap-4 animate-left-roll">
-            {leftPhotos.map((photo, index) => (
-              <GalleryImage
-                key={`left-${index}`}
-                photo={photo}
-                index={index}
-                direction="left"
-              />
-            ))}
-          </div>
+          {isVisible ? (
+            <>
+              <div className="flex w-full gap-2 sm:gap-3 md:gap-4 animate-right-roll">
+                {rightPhotos.map((photo, index) => (
+                  <GalleryImage
+                    key={`right-${index}`}
+                    photo={photo}
+                    index={index}
+                    direction="right"
+                  />
+                ))}
+              </div>
+              <div className="flex w-full gap-2 sm:gap-3 md:gap-4 animate-left-roll">
+                {leftPhotos.map((photo, index) => (
+                  <GalleryImage
+                    key={`left-${index}`}
+                    photo={photo}
+                    index={index}
+                    direction="left"
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={gallerySkeletonClass} />
+              <div className={gallerySkeletonClass} />
+            </>
+          )}
         </div>
       </div>
     </div>

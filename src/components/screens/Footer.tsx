@@ -37,6 +37,7 @@ export default function Footer() {
             }}
             width={128}
             height={64}
+            unoptimized
           />
         </div>
 
@@ -124,6 +125,7 @@ export default function Footer() {
                   }}
                   width={192}
                   height={96}
+                  unoptimized
                 />
               </div>
             </div>

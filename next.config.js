@@ -16,9 +16,9 @@ const nextConfig = {
   // Image optimization - WebP and AVIF support with iOS 26 compatibility
   images: {
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year cache for static images
+    deviceSizes: [640, 828, 1200, 1920],
+    imageSizes: [64, 128, 256],
+    minimumCacheTTL: 2678400, // 31 dias
     dangerouslyAllowSVG: true,
     // Relaxed CSP for iOS 26 compatibility - allows necessary scripts while maintaining security
     contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://*.facebook.com; frame-src 'self' https://www.googletagmanager.com;",

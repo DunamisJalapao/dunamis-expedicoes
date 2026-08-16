@@ -63,6 +63,7 @@ const Header = memo(function Header({ ...rest }: HeaderProps) {
           width={200}
           height={60}
           priority
+          unoptimized
         />
       </div>
 
